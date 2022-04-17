@@ -5,3 +5,14 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+.login-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login-btn {
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+}
