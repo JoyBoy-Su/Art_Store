@@ -2,3 +2,15 @@
 	margin: 0;
 	padding: 0;
 }
+
+.buy-btn {
+	background-color: aqua;
+}
+
+.delete-btn {
+	background-color: red;
+}
+
+.apply-btn {
+	background-color: rgb(28, 255, 28);
+}

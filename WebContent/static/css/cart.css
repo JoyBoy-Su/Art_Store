@@ -1,0 +1,48 @@
+.cart {
+    width: 100%;
+    position: relative;
+    margin: auto;
+    margin-left: 10px;
+    margin: 0;
+    border: 1px black solid;
+    background-color: rgb(231, 229, 229);
+    float: left;
+}
+
+.cart-item {
+    height: 130px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: rgb(255, 255, 185);
+}
+
+.item-introduction {
+    margin-top: 10px;
+}
+
+.item-introduction {
+    float: left;
+}
+
+img {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 150px;
+    height: 100px;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+    margin-left: 50px;
+}
+
+.apply-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 100px;
+    float: right;
+}

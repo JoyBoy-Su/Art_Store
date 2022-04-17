@@ -6,13 +6,6 @@ body {
     background-attachment: fixed;
 }
 
-.container {
-    height: 70px;
-    width: 800px;
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
 .parent {
     position: relative;
 }

@@ -1,0 +1,23 @@
+.headers {
+    padding: 0, 24px;
+    font-size: 14px;
+    background-color: azure;
+    float:left;
+    border:1px;
+    width:100%;
+}
+.logo {
+    width: 300px;
+    margin-top: 10px;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.search {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+}

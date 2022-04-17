@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/global.css">    
+    <link rel="stylesheet" href="../static/css/global.css">
     <link rel="stylesheet" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="../static/css/headers.css">
+    <link rel="stylesheet" href="../static/css/opeartion-navbar.css">
     <link rel="stylesheet" href="../static/css/search.css">
     <link rel="stylesheet" href="../static/css/page.css">
     <title>Serach</title>
@@ -25,12 +27,21 @@
             </ul>
         </div>
     </nav>
-    <!-- 搜索页面的头部区域 -->
-    <div class="container">
-        <form action="" class="parent">
-            <input type="text" class="search" placeholder="搜索">
-            <input type="button" name="" id="" class="btn">
-        </form>
+    <!-- logo与搜索栏 -->
+    <div class="headers">
+        <div class="logo">
+            <h1>Art Trading</h1>
+        </div>
+        <!-- 搜索框 -->
+        <div class="container">
+            <input type="text" class="search" placeholder="搜索艺术品">
+        </div>
+    </div>
+    <!-- 操作导航栏 -->
+    <div class="opeartion-navbar">
+        <div class="opeartion">首页</div>
+        <div class="opeartion">搜索</div>
+        <div class="opeartion">详情</div>
     </div>
     <!-- 查询到的艺术品数据 -->
     <h3 class="text">搜索结果</h3>
@@ -101,23 +112,23 @@
         </div>
     </div>
     <div class="page">
-    <div class="page-normal">
-        <span class="page-prev">&lt;</span>
-        <!-- 数字1 代表当前页面-->
-        <span class="page-current">1</span>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">7</a>
-        <a href="#">8</a>
-        <a href="#">9</a>
-        ……
-        <a href="#">199</a>
-        <a href="#">200</a>
-        <a href="#">&gt;</a>
-    </div>
+        <div class="page-normal">
+            <span class="page-prev">&lt;</span>
+            <!-- 数字1 代表当前页面-->
+            <span class="page-current">1</span>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">7</a>
+            <a href="#">8</a>
+            <a href="#">9</a>
+            ……
+            <a href="#">199</a>
+            <a href="#">200</a>
+            <a href="#">&gt;</a>
+        </div>
     </div>
 </body>
 
