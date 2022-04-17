@@ -1,0 +1,115 @@
+.item {
+    float: left;
+    margin: 5px;
+    width: 80%;
+    height: 600px;
+}
+
+.basic-info {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    font-size: 20px;
+    font: oblique;
+}
+
+.item .item-pic {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 600px;
+    height: 450px;
+}
+
+.item-introduction {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.item-resume {
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.item-operation {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+    background-color: #09fcf4;
+    margin-left: 50px;
+}
+
+.item-info {
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.item-info-table {
+	border-collapse: collapse;
+}
+
+table{
+    width: 350px;
+    border-collapse: collapse;
+    border: solid;
+}
+th,td{
+    padding: 20px;
+    text-align: center;
+    width: 80px;
+}
+caption{
+    height: 100px;
+    margin-bottom: 20px;
+}
+p{
+    padding: 0;
+    margin: 0;
+}
+tr td,tr th{
+    border-bottom: 1px solid #221e1f;
+}
+table tr th:first-of-type{
+    border-bottom: 3px solid #221e1f;
+}
+tbody tr:last-of-type th{
+    border-bottom: none;
+}
+tbody tr:last-of-type td{
+    border-bottom: none;
+}
+thead tr th:nth-of-type(2n){
+    background-color: #e2ddda;
+}
+tbody tr td:nth-of-type(2n+1){
+    background-color: #e2ddda;
+}
+
+aside {
+    border: 1px solid;
+    text-align: center;
+    background-color: #cee9fd;
+    float: right;
+    font-size: 20px;
+    margin-top: 50px;
+    margin-right: 30px;
+}
+
+.aside-item {
+    border-bottom: 1px solid #1e2022;
+    height: 40px;
+}
+
+aside h4 {
+    width: 200px;
+    background-color: #09fcf4;
+}
