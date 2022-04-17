@@ -1,29 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/global.css">    
     <link rel="stylesheet" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <link rel="stylesheet" href="../static/css/page.css">
     <title>Serach</title>
 </head>
+
 <body>
     <!-- 导航栏 -->
     <nav>
         <div class="top">
-        <ul>
-            <li><a href="index.html">主页</a></li>
-            <li><a href="serach.html">搜索</a></li>
-            <li><a href="login.html">登录</a></li>
-            <li><a href="register.html">注册</a></li>
-            <li><a href="detail.html">商品详情</a></li>
-        </ul>
+            <ul>
+                <li><a href="index.html">主页</a></li>
+                <li><a href="serach.html">搜索</a></li>
+                <li><a href="login.html">登录</a></li>
+                <li><a href="register.html">注册</a></li>
+                <li><a href="detail.html">商品详情</a></li>
+            </ul>
         </div>
     </nav>
     <!-- 搜索页面的头部区域 -->
-    <div class="headers">
-        <!-- 搜索框 -->
-        <input type="text"> <i></i>
+    <div class="container">
+        <form action="" class="parent">
+            <input type="text" class="search" placeholder="搜索">
+            <input type="button" name="" id="" class="btn">
+        </form>
+    </div>
+    <!-- 查询到的艺术品数据 -->
+    <h3 class="text">搜索结果</h3>
+    <div class="serach-result">
+        <div class="search-item">
+            <img class="search-item-pic" src="../static/img/rotation6.webp" alt="艺术品1">
+            <div class="search-item-introduction">作者：xxx</div>
+            <div class="search-item-introduction">介绍：xxx</div>
+            <br>
+            <button class="serach-item-btn">查看</button>
+            <button class="search-item-btn">热度0</button>
+        </div>
+        <div class="search-item">
+            <img class="search-item-pic" src="../static/img/rotation5.webp" alt="艺术品1">
+            <div class="search-item-introduction">作者：xxx</div>
+            <div class="search-item-introduction">介绍：xxx</div>
+            <br>
+            <button class="serach-item-btn">查看</button>
+            <button class="search-item-btn">热度0</button>
+        </div>
+        <div class="search-item">
+            <img class="search-item-pic" src="../static/img/rotation4.webp" alt="艺术品1">
+            <div class="search-item-introduction">作者：xxx</div>
+            <div class="search-item-introduction">介绍：xxx</div>
+            <br>
+            <button class="serach-item-btn">查看</button>
+            <button class="search-item-btn">热度0</button>
+        </div>
+        <div class="search-item">
+            <img class="search-item-pic" src="../static/img/rotation3.webp" alt="艺术品1">
+            <div class="search-item-introduction">作者：xxx</div>
+            <div class="search-item-introduction">介绍：xxx</div>
+            <br>
+            <button class="serach-item-btn">查看</button>
+            <button class="search-item-btn">热度0</button>
+        </div>
+        <div class="search-item">
+            <img class="search-item-pic" src="../static/img/rotation2.webp" alt="艺术品1">
+            <div class="search-item-introduction">作者：xxx</div>
+            <div class="search-item-introduction">介绍：xxx</div>
+            <br>
+            <button class="serach-item-btn">查看</button>
+            <button class="search-item-btn">热度0</button>
+        </div>
+        <div class="search-item">
+            <img class="search-item-pic" src="../static/img/rotation1.webp" alt="艺术品1">
+            <div class="search-item-introduction">作者：xxx</div>
+            <div class="search-item-introduction">介绍：xxx</div>
+            <br>
+            <button class="serach-item-btn">查看</button>
+            <button class="search-item-btn">热度0</button>
+        </div>
+        <div class="search-item">
+            <img class="search-item-pic" src="../static/img/rotation7.webp" alt="艺术品1">
+            <div class="search-item-introduction">作者：xxx</div>
+            <div class="search-item-introduction">介绍：xxx</div>
+            <br>
+            <button class="serach-item-btn">查看</button>
+            <button class="search-item-btn">热度0</button>
+        </div>
+        <div class="search-item">
+            <img class="search-item-pic" src="../static/img/rotation8.webp" alt="艺术品1">
+            <div class="search-item-introduction">作者：xxx</div>
+            <div class="search-item-introduction">介绍：xxx</div>
+            <br>
+            <button class="serach-item-btn">查看</button>
+            <button class="search-item-btn">热度0</button>
+        </div>
+    </div>
+    <div class="page">
+    <div class="page-normal">
+        <span class="page-prev">&lt;</span>
+        <!-- 数字1 代表当前页面-->
+        <span class="page-current">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">6</a>
+        <a href="#">7</a>
+        <a href="#">8</a>
+        <a href="#">9</a>
+        ……
+        <a href="#">199</a>
+        <a href="#">200</a>
+        <a href="#">&gt;</a>
+    </div>
     </div>
 </body>
+
 </html>

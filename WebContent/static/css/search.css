@@ -1,0 +1,74 @@
+body {
+    background: url(../img/rotation2.webp);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    height: 70px;
+    width: 800px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.parent {
+    position: relative;
+}
+
+.search {
+    width: 300px;
+    height: 40px;
+    border-radius: 18px;
+    outline: none;
+    border: 1px solid #ccc;
+    padding-left: 20px;
+    position: absolute;
+}
+
+.btn {
+    height: 35px;
+    width: 35px;
+    position: absolute;
+    background: url("images/topbar.png") no-repeat -2px -99px;
+    top: 6px;
+    left: 285px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.text{
+    margin-left: 20px;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+.serach-result {
+    width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.search-item {
+    float: left;
+    border: solid black 1px;
+    margin: 5px;
+    background-color: antiquewhite;
+    height: 200px;
+    width: 330px;
+}
+
+.search-item .search-item-pic {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 200px;
+    height: 150px;
+}
+
+.search-item-introduction {
+    margin-top: 10px;
+    margin-left: 5px;
+}
