@@ -4,9 +4,79 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/global.css">
+    <link rel="stylesheet" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="../static/css/headers.css">
+    <link rel="stylesheet" href="../static/css/profile.css">
     <title>Profile</title>
 </head>
 <body>
-    <h2>Profile</h2>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="top">
+            <ul>
+                <li><a href="profile.html">个人中心</a></li>
+                <li><a href="cart.html">购物车</a></li>
+                <li><a href="#">登出</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- logo与搜索栏 -->
+    <div class="headers">
+        <div class="logo">
+            <h1>Art Trading</h1>
+        </div>
+        <!-- 搜索框 -->
+        <div class="container">
+            <input type="text" class="search" placeholder="搜索">
+        </div>
+    </div>
+    <!-- 操作导航栏 -->
+    <div class="opeartion-navbar">
+        <div class="opeartion">首页</div>
+        <div class="opeartion">搜索</div>
+        <div class="opeartion">详情</div>
+        <div class="opeartion">发布艺术品</div>
+    </div>
+    <!-- 个人信息 -->
+    <div class="user-info">
+        <h4>用户:xxx</h4>
+        <h4>电话:xxx</h4>
+        <h4>邮箱:xxx</h4>
+        <h4>地址:xxx</h4>
+        <h4>余额:xxx</h4>
+        <button class="buy-btn">修改</button>
+        <button class="apply-btn">充值</button>
+    </div>
+    <!-- 商品信息 -->
+    <div class="upload commodity">
+        我上传的艺术品：
+    </div>
+    <div class="buy commodity">  
+        我购买的艺术品：
+        <table class="commodity-table">
+            <tr>
+                <th>订单编号</th>
+                <th>订单名称</th>
+                <th>订单时间</th>
+                <th>订单金额</th>
+            </tr>
+            <tr>
+                <td>xxx</td>
+                <td>xxx</td>
+                <td>xxx</td>
+                <td>xxx</td>
+            </tr>
+            <tr>
+                <td>xxx</td>
+                <td>xxx</td>
+                <td>xxx</td>
+                <td>xxx</td>
+            </tr>
+        </table>
+    </div>
+    <div class="sell commodity">
+        我卖出的艺术品：
+    </div>
 </body>
 </html>

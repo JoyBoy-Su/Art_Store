@@ -1,0 +1,44 @@
+.user-info {
+    float: left;
+    margin: auto;
+    background-color: aquamarine;
+    width: 150px;
+    height: auto;
+    text-align: center;
+    border: 1px solid;
+    font-size: 18px;
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+.commodity {
+    margin-left: 300px;
+    margin-top: 10px;
+    height: 200px;
+}
+
+.upload {
+    background-color: antiquewhite;
+}
+
+.buy {
+    background-color: aquamarine;
+}
+
+.sell {
+    background-color: chartreuse;
+}
+
+.commodity-table {
+    margin-left: 30px;
+    margin-top: 30px;
+    text-align: center;
+    border: 1px solid;
+    font-size: 18px;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}

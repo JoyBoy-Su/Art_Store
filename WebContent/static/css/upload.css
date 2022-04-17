@@ -1,0 +1,31 @@
+.upload {
+    border: 1px solid;
+}
+
+img {
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    top: 25%;
+    left: 40%;
+    margin-top: -50px;
+    margin-left: -50px;
+}   
+
+.upload-form {
+    margin-top: 35%;
+    margin-left: 10%;
+}
+
+th,
+td {
+    width: 100px;
+    text-align: center;
+}
+
+.buy-btn {
+    margin-left: 45%;
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+}
