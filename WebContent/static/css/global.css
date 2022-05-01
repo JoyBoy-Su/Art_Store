@@ -3,18 +3,16 @@
 	padding: 0;
 }
 
-.buy-btn {
-	background-color: aqua;
+/* 按钮样式 */
+.submit-btn {
+    background-color: #4cc6f7;
+    color: black;
+    border: 0px;
+    cursor: pointer;
 }
-
-.login-btn {
-	background-color: aqua;
-}
-
-.delete-btn {
-	background-color: red;
-}
-
-.apply-btn {
-	background-color: rgb(28, 255, 28);
+.cancel-btn {
+    background-color: #f1f1f1;
+    color: black;
+    border: 0px;
+    cursor: pointer;
 }

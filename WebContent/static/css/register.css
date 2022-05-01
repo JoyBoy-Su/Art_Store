@@ -1,13 +1,65 @@
 body {
-    background: url(../img/rotation6.webp);
+    background: url(../img/works/large/092040.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-.login-btn {
-    width: 100px;
+.register-div {
+    /* 表单水平居中 */
+    margin: 10% auto;
+    padding: 30px 0;
+    width: 40%;
+    background-color: rgba(255, 237, 237, 0.7);
+    border-radius: 2%;
+}
+
+.register-div h3 {
+    margin: 0 10%;
+    font-size: 25px;
+}
+
+.register-div .info {
+    width: 40%;
+    margin: 0 auto;
+    overflow: hidden;
+    color: rgb(74, 72, 72);
+}
+
+.info div {
+    float: right;
+    padding: 0 3px;
+    font-size: 14px;
+}
+
+.register-div .info a {
+    color: rgb(74, 72, 72);
+    text-decoration: none;
+}
+
+.register-div .info a:hover {
+    color: #e8e6e3;
+}
+
+.register-div table {
+    /* 居中 */
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+    border-spacing: 0 10px;
+    line-height: 50px;
+}
+
+table input {
     height: 30px;
-    border-radius: 10%;
+    border: 1px solid black;
+    border-radius: 2px;
+    width: 200px;
+}
+
+/* 按钮样式 */
+.register-div button {
+    width: 80px;
+    height: 30px;
 }

@@ -6,31 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/global.css">
-    <link rel="stylesheet" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="../static/css/navigation.css">
     <link rel="stylesheet" href="../static/css/login.css">
-    <link rel="stylesheet" href="../static/css/form.css">
     <title>Login</title>
 </head>
 
 <body>
-    <!-- 导航栏 -->
+    <!-- 登录前导航栏 -->
     <nav>
         <div class="top">
-            <ul>
-                <li><a href="index.html">主页</a></li>
-                <li><a href="serach.html">搜索</a></li>
-                <li><a href="login.html">登录</a></li>
-                <li><a href="register.html">注册</a></li>
-                <li><a href="detail.html">商品详情</a></li>
-            </ul>
+            <!-- 左侧导航栏 -->
+            <div class="left">
+                <!-- welcome -->
+                <div class="welcome">欢迎来到</div>
+                <!-- 艺术字设置为背景图片 -->
+                <div class="name">
+                    <a href="index.html">ArtTrading</a>
+                </div> 
+            </div>
+            <!-- 右侧选项栏 -->
+            <div class="right">
+                <a href="home.html">主页</a>
+                <a href="login.html">登录</a>
+                <a href="register.html">注册</a>
+                <a href="serach.html">搜索</a>
+                <a href="detail.html">商品详情</a>
+            </div>
         </div>
     </nav>
+    
     <!-- 登录表单 -->
     <div class="login-div">
         <form class="login-form">
-            <p class="login-item">用户名: <input type="text" class="login-input"></p>
-            <p class="login-item">密 码&nbsp;: <input type="password" class="login-input"></p>
-            <button class="login-btn">登录</button>
+            <h3>欢迎登陆</h3>
+            <div class="info"> 
+                <div>
+                    <a href="register.html">注册</a>
+                </div> 
+                <div>|</div>
+                <div>
+                    <a href="#">忘记密码？</a>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <td><label for="username">用户名：</label></td>
+                    <td><input type="text" id="username" placeholder="请输入用户名"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">密码：</label></td>
+                    <td><input type="password" id="password" placeholder="请输入密码"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button class="submit-btn" type="button">登录</button>
+                        <button class="cancel-btn" type="button">取消</button>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 </body>

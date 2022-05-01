@@ -5,54 +5,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/global.css">
-    <link rel="stylesheet" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="../static/css/navigation.css">
     <link rel="stylesheet" href="../static/css/register.css">
-    <link rel="stylesheet" href="../static/css/form.css">
     <title>Register</title>
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- 登录前导航栏 -->
     <nav>
         <div class="top">
-            <ul>
-                <li><a href="index.html">主页</a></li>
-                <li><a href="serach.html">搜索</a></li>
-                <li><a href="login.html">登录</a></li>
-                <li><a href="register.html">注册</a></li>
-                <li><a href="detail.html">商品详情</a></li>
-            </ul>
+            <!-- 左侧导航栏 -->
+            <div class="left">
+                <!-- welcome -->
+                <div class="welcome">欢迎来到</div>
+                <!-- 艺术字设置为背景图片 -->
+                <div class="name">
+                    <a href="index.html">ArtTrading</a>
+                </div> 
+            </div>
+            <!-- 右侧选项栏 -->
+            <div class="right">
+                <a href="home.html">主页</a>
+                <a href="login.html">登录</a>
+                <a href="register.html">注册</a>
+                <a href="serach.html">搜索</a>
+                <a href="detail.html">商品详情</a>
+            </div>
         </div>
     </nav>
+
     <!-- 注册表单 -->
     <div class="register-div">
         <form class="register-form">
+            <h3>欢迎登陆</h3>
+            <div class="info"> 
+                <div class="login">
+                    <a href="login.html">已有账号？去登录</a>
+                </div> 
+            </div>
             <table>
                 <tr>
-                    <td>用户名:</td>
-                    <td><input type="text" class="register-input"></td>
+                    <td><label for="username">用户名：</label></td>
+                    <td><input type="text" id="username" placeholder="请输入用户名"></td>
                 </tr>
                 <tr>
-                    <td>密码:</td>
-                    <td><input type="text" class="register-input"></td>
+                    <td><label for="password">密码：</label></td>
+                    <td><input type="password" id="password" placeholder="请输入密码"></td>
                 </tr>
                 <tr>
-                    <td>确定密码:</td>
-                    <td><input type="text" class="register-input"></td>
+                    <td><label for="passwordConfirm">确定密码:</label></td>
+                    <td><input type="text" id="passwordConfirm" placeholder="请确定密码"></td>
                 </tr>
                 <tr>
-                    <td>邮箱:</td>
-                    <td><input type="text" class="register-input"></td>
+                    <td><label for="email">邮箱:</label></td>
+                    <td><input type="text" id="email" placeholder="请输入邮箱"></td>
                 </tr>
                 <tr>
-                    <td>电话:</td>
-                    <td><input type="text" class="register-input"></td>
+                    <td><label for="telephone">电话:</label></td>
+                    <td><input type="text" id="telephone" placeholder="请输入电话"></td>
                 </tr>
                 <tr>
-                    <td>住址:</td>
-                    <td><input type="text" class="register-input"></td>
+                    <td><label for="address">地址:</label></td>
+                    <td><input type="text" id="address" placeholder="请输入地址"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button class="submit-btn" type="button">注册</button>
+                        <button class="cancel-btn" type="button">重置</button>
+                    </td>
                 </tr>
             </table>
-            <button class="login-btn">注册</button>
         </form>
     </div>
 </body>

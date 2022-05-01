@@ -1,0 +1,65 @@
+/* 登录前导航栏样式 */
+/* 导航栏盒子整体 */
+.top {
+    height: 30px;
+    background-color: #262a2b;
+    line-height: 30px;
+}
+
+/* 左侧导航父盒子 */
+.left {
+    /* 左侧浮动 */
+    float: left;
+    width: 300px;
+    font-weight: 700;
+    color: #fffcff;
+}
+
+/* 左侧导航子盒子 */
+.left .welcome {
+    margin-left: 50px;
+    float: left;
+}
+.left .name {
+    float: left;
+    margin: 0 15px 0;
+}
+.left a {
+    display: block;
+    float: left;
+    text-align: center;
+    color: #fffcff;
+    text-decoration: none;
+}
+
+/* 右侧导航父盒子 */
+.right {
+    /* 右侧浮动 */
+    float: right;
+    width: 400px;
+    color: #b6b0a6;
+    font-size: 14px;
+    /* 清除默认样式 */
+    list-style: none;
+}
+
+/* 右侧导航子盒子 */
+.right a {
+    /* 设置为块元素 */
+    display: block;
+    /* 清除默认样式 */
+    text-decoration: none;
+    color: #b6b0a6;
+    /* 右侧浮动 */
+    float: left;
+    /* 添加内边距 */
+    padding: 0 18px 0;
+}
+
+/* 设置伪类样式 */
+.right a:hover {
+    color: #e8e6e3;
+    text-decoration: underline;
+}
+
+/* 登录后导航栏样式 */
