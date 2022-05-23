@@ -1,16 +1,16 @@
 /* 登录前导航栏样式 */
 /* 导航栏盒子整体 */
 .top {
-    height: 30px;
+    height: 40px;
     background-color: #262a2b;
-    line-height: 30px;
+    line-height: 40px;
 }
 
 /* 左侧导航父盒子 */
 .left {
     /* 左侧浮动 */
     float: left;
-    width: 300px;
+    width: 500px;
     font-weight: 700;
     color: #fffcff;
 }
@@ -63,3 +63,92 @@
 }
 
 /* 登录后导航栏样式 */
+
+
+
+/* 版心居中对齐 */
+.w {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/* 清除默认样式 */
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+
+/* 头部盒子 */
+.header {
+    height: 40px;
+    /* 这里会层叠w的margin */
+    margin: 10px auto;
+}
+
+/* logo样式 */
+.logo {
+    float: left;
+    width: 198px;
+    height: 40px;
+}
+
+.nav {
+    float: left;
+    margin-left: 40px;
+}
+
+/* nav的li加浮动 */
+.nav ul li {
+    float: left;
+    margin: 0 15px;
+}
+
+/* 块级元素a */
+.nav ul li a {
+    display: block;
+    height: 42px;
+    line-height: 42px;
+    padding: 0 10px;
+    font-size: 18px;
+    color: #050505;
+}
+
+/* hover样式 */
+.nav ul li a:hover {
+    border-bottom: 2px solid #00a4ff;
+    color: #00a4ff;
+}
+
+/* 搜索模块 */
+.search {
+    float: left;
+    margin-left: 70px;
+    width: 412px;
+    height: 42px;
+}
+
+/* 输入框样式 */
+.search input {
+    float: left;
+    padding-left: 15px;
+    width: 345px;
+    height: 40px;
+    border: 1px solid #00a4ff;
+    border-right: none;
+    /* 字体样式 */
+    font-size: 14px;
+    color: #bfbfbf; 
+    line-height: 40px;
+}
+
+/* 按钮样式 */
+.search button {
+    float: left;
+    border: #b6b0a6 1px solid;
+    width: 50px;
+    height: 42px;
+    background: url(../img/search.png);
+    background-size: 100% 100%;
+}
