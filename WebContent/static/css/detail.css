@@ -1,4 +1,4 @@
-.item {
+/* .item {
     float: left;
     margin: 5px;
     width: 80%;
@@ -112,4 +112,71 @@ aside {
 aside h4 {
     width: 200px;
     background-color: #09fcf4;
+} */
+/* 商品详情样式 */
+/* 基本信息盒子 */
+.box {
+    margin-top: 20px !important;
+    padding-top: 10px;
+}
+.basic-info {
+    padding-left: 30px;
+    margin-bottom: 10px;
+}
+/* 放照片的盒子 */
+.item-info-img {
+    float: left;
+    width: 350px;
+    height: 530px;
+}
+
+.item-info-img img {
+    width: 320px;
+    height: 500px;
+}
+
+/* 存基本信息的盒子 */
+.item-introduction {
+    float: left;
+}
+
+/* table的样式 */
+table{
+    margin-top: 40px;
+    width: 400px;
+    border-collapse: collapse;
+    border: solid;
+}
+th {
+    text-align: center;
+    font-size: 18px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #e3e3e3;
+}
+td{
+    padding: 5px;
+    text-align: left;
+    /* width: 80px; */
+}
+tr td,tr th{
+    border-bottom: 1px solid #221e1f;
+}
+
+.item-introduction table tr td span{
+    color: #ff7c2d;
+}
+
+/* 添加购物车按钮样式 */
+.item-introduction button {
+    margin-top: 15px;
+    width: 120px;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 5%;
+}
+
+.item-introduction button:hover {
+    color: #e8e6e3;
+    text-decoration: underline;
 }

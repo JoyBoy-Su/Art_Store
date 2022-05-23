@@ -1,40 +1,32 @@
+/* 设置定位与样式 */
 .page {
-    float:left;
-    margin-left: 20px;
-    margin-top: 10px;
-}
-/*设置 a 标签的css样式*/
-.page-normal a{
-    border: 1px solid #ff6500;
-    padding: 5px 7px;
-    color: #ff6500;
-    margin-left: 20px;/*设置标签 a 之间的间隔*/
-    text-decoration: none;/*去除页码数字下面的下划线*/
-}
-/*设置鼠标经过时 a 标签的css样式*/
-.page-normal a:hover{
-    background-color: #ffbe94;
-}
-
-/*设置整个div的css样式,该样式主要用于设置网页内的省略号 …… 的样式，并且同时设置内容居中显示*/
-.page-normal{
-    color: #ff6500;
+    margin: 0 auto 35px;
     text-align: center;
+    background-color: #efefef;
 }
 
-/*设置当前页面的css样式*/
-.page-normal .page-current{
-    color: #ffffff;
-    background-color: #ff6500;
+.page button {
+	border: none;
+	padding:4px 10px 5px;
+	font-size:20px;
 }
-
-/*设置左单括号 < 的css样式*/
-.page-normal .page-prev{
-    color: #ffe3c6;
+.page button:nth-child(3), .page-icon button:nth-child(4) {
+	cursor: default;
 }
-
-/*进行代码优化，将不同css样式中共有的属性放在一起，有助于提高运行效率*/
-.page-normal a, .page-normal a:hover, .page-normal .page-prev, .page-normal .page-current{
-    border: 1px solid #ff6500;
-    padding: 5px 7px;
+.page button img {
+	width: 15px;
+	height: 15px;
+    cursor: pointer;
+}
+#totalPage, #currentPage {
+	cursor: default;
+	border: none;
+	background-color: #efefef;
+	padding:4px 10px 5px;
+	font-size:20PX;
+}
+#currentPage {
+	cursor: auto;
+	text-align: center;
+	width: 40px;
 }
