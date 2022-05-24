@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>testValidate</title>
+    <script src="../utils/validate.js"></script>
+</head>
+<body>
+<script>
+    <!--  测试校验用户名   -->
+    let username1 = "testTEST123_-";
+    let username2 = "test123";
+    let username3 = "testTEST";
+    let username4 = "test^%#";
+    let username5 = "";
+    console.log("test username : ")
+    console.log(username1, validUserName(username1));
+    console.log(username2, validUserName(username2));
+    console.log(username3, validUserName(username3));
+    console.log(username4, validUserName(username4));
+    console.log(username5, validUserName(username5));
+    <!--  测试校验密码   -->
+    let password1 = "12345678";
+    let password2 = "testTEST123_-";
+    let password3 = "test";
+    let password4 = "";
+    let password5 = "tesategeDATE";
+    let password6 = "#$$#^%$%^%@#";
+    let password7 = "testTEST#^%$^";
+    let password8 = "1234#$^#$^";
+    let password9 = "TEZSgae14435";
+    let password10 = "testTEST12345@#$%^&";
+    console.log("test password : ")
+    console.log(password1, validPassword(password1, username1));
+    console.log(password2, validPassword(password2, username1));
+    console.log(password3, validPassword(password3, username1));
+    console.log(password4, validPassword(password4, username1));
+    console.log(password5, validPassword(password5, username1));
+    console.log(password6, validPassword(password6, username1));
+    console.log(password7, validPassword(password7, username1));
+    console.log(password8, validPassword(password8, username1));
+    console.log(password9, validPassword(password9, username1));
+    console.log(password10, validPassword(password10, username1));
+    <!--  测试校验电话   -->
+    let phone1 = "18317723039";
+    let phone2 = "7232012";
+    let phone3 = "123456";
+    let phone4 = "";
+    console.log(phone1, validPhone(phone1));
+    console.log(phone2, validPhone(phone2));
+    console.log(phone3, validPhone(phone3));
+    console.log(phone4, validPhone(phone4));
+    <!--  测试校验邮箱   -->
+    let email1 = "20302010043@fudan.edu.cn";
+    let email2 = "2928547890@qq.com";
+    let email3 = "aefad";
+    let email4 = "";
+    console.log(email1, validEmail(email1));
+    console.log(email2, validEmail(email2));
+    console.log(email3, validEmail(email3));
+    console.log(email4, validEmail(email4));
+</script>
+</body>
+</html>

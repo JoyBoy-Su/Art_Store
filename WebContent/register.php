@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/register.css">
+    <script src="js/register.js"></script>
     <title>Register</title>
 </head>
 <body>
@@ -45,26 +46,32 @@
             <tr>
                 <td><label for="username">用户名：</label></td>
                 <td><input type="text" id="username" placeholder="请输入用户名"></td>
+                <td><span id="username-message"></span></td>
             </tr>
             <tr>
                 <td><label for="password">密码：</label></td>
                 <td><input type="password" id="password" placeholder="请输入密码"></td>
+                <td><span id="password-message"></span></td>
             </tr>
             <tr>
-                <td><label for="passwordConfirm">确定密码:</label></td>
-                <td><input type="text" id="passwordConfirm" placeholder="请确定密码"></td>
+                <td><label for="confirm">确定密码:</label></td>
+                <td><input type="password" id="confirm" placeholder="请确定密码"></td>
+                <td><span id="confirm-message"></span></td>
             </tr>
             <tr>
                 <td><label for="email">邮箱:</label></td>
                 <td><input type="text" id="email" placeholder="请输入邮箱"></td>
+                <td><span id="email-message"></span></td>
             </tr>
             <tr>
-                <td><label for="telephone">电话:</label></td>
-                <td><input type="text" id="telephone" placeholder="请输入电话"></td>
+                <td><label for="phone">电话:</label></td>
+                <td><input type="text" id="phone" placeholder="请输入电话"></td>
+                <td><span id="phone-message"></span></td>
             </tr>
             <tr>
                 <td><label for="address">地址:</label></td>
                 <td><input type="text" id="address" placeholder="请输入地址"></td>
+                <td><span id="address-message"></span></td>
             </tr>
             <tr>
                 <td></td>
