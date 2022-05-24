@@ -36,7 +36,7 @@
 <!-- 注册表单 -->
 <div class="register-div">
     <form class="register-form">
-        <h3>欢迎登陆</h3>
+        <h3>欢迎注册</h3>
         <div class="info">
             <div class="login">
                 <a href="login.php">已有账号？去登录</a>
@@ -75,9 +75,13 @@
             </tr>
             <tr>
                 <td></td>
+                <td><span id="register-message"></span></td>
+            </tr>
+            <tr>
+                <td></td>
                 <td>
-                    <button class="submit-btn" type="button">注册</button>
-                    <button class="cancel-btn" type="button">重置</button>
+                    <button class="submit-btn" id="register-btn" type="button">注册</button>
+                    <button class="cancel-btn" id="cancel-btn" type="button">重置</button>
                 </td>
             </tr>
         </table>
