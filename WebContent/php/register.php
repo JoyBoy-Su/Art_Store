@@ -4,6 +4,9 @@
  * 拿到表单后根据信息进行注册或注册失败
  */
 // 校验合法后去数据库查询该用户名是否已使用
+/**
+ * TODO : 校验电子邮箱的重复性
+ */
 require ("./utils/DBUtil.php");
 require ("./utils/encrypt.php");
 //require ("./dao/UserDao.php");
@@ -23,8 +26,7 @@ if(count($result) >= 1) {
 }
 echo json_encode($resp);
 
-// 注册一个用户的一系列操作
-// 包括密码加密，处理
+// 注册一个用户的一系列操作，包括密码加密，操作数据库
 function register() {
     // 1、获取用户信息
     $info = [

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/login.css">
+    <script src="js/login.js"></script>
     <title>Login</title>
 </head>
 
@@ -49,18 +50,24 @@
         </div>
         <table>
             <tr>
-                <td><label for="username">用户名：</label></td>
-                <td><input type="text" id="username" placeholder="请输入用户名"></td>
+                <td><label for="userinfo">用户名（邮箱）：</label></td>
+                <td><input type="text" id="userinfo" placeholder="请输入用户名或邮箱"></td>
+                <td><span id="userinfo-message"></span></td>
             </tr>
             <tr>
                 <td><label for="password">密码：</label></td>
                 <td><input type="password" id="password" placeholder="请输入密码"></td>
+                <td><span id="password-message"></span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><span id="login-message"></span></td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <button class="submit-btn" type="button">登录</button>
-                    <button class="cancel-btn" type="button">取消</button>
+                    <button class="submit-btn" id="login-btn" type="button">登录</button>
+                    <button class="cancel-btn" id="cancel-btn" type="button">取消</button>
                 </td>
             </tr>
         </table>
