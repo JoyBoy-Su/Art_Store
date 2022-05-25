@@ -1,5 +1,5 @@
 body {
-    background-size: cover;
+    background-size: cover !important;
     background: url(../img/works/large/092040.jpg) no-repeat fixed center;
 }
 

@@ -29,6 +29,8 @@ function getNav($login) {
 }
 
 /**
+ * @param $type
+ * @param $id
  * @param $name
  * @param $author
  * @param $price
@@ -38,8 +40,8 @@ function getNav($login) {
  * @return string
  * 根据传入的信息，生成该艺术品的html展示页面
  */
-function getArtToShow($name, $author, $price, $visit, $img, $date) {
-    return "<li>
+function getArtToShow($type, $id, $name, $author, $price, $visit, $img, $date) {
+    return "<li class='art-{$type}' id='{$type}-{$id}'>
                 <img src='./static/img/works/small/{$img}.jpg'>
                     <h4>{$name} | {$author}</h4>
                     <div class='info'>

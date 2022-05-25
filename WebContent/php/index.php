@@ -42,14 +42,14 @@ function getHotArtsPage() {
     $pageSize = 10;
     $startPage = 0;
     // 降序分页查询，前10个艺术品的信息
-    $sql = "select Title, ArtistName, Price, VisitTimes, ImageFileName, AccessionDate  
+    $sql = "select ArtID, Title, ArtistName, Price, VisitTimes, ImageFileName, AccessionDate  
             from arts join artists
             on arts.ArtistID = artists.ArtistID
             order by VisitTimes desc
-            limit {$startPage}, {$pageSize};";
+            limit {$startPage}, {$pageSize}";
     global $util;
     $set = $util->query($sql);
-    return getArtShowPage($set);
+    return getArtShowPage("hot", $set);
 }
 
 /**
@@ -61,14 +61,14 @@ function getNewArtsPage() {
     $pageSize = 10;
     $startPage = 0;
     // 降序分页查询，前10个艺术品的信息
-    $sql = "select Title, ArtistName, Price, VisitTimes, ImageFileName, AccessionDate  
+    $sql = "select ArtID, Title, ArtistName, Price, VisitTimes, ImageFileName, AccessionDate  
             from arts join artists
             on arts.ArtistID = artists.ArtistID
             order by AccessionDate desc
-            limit {$startPage}, {$pageSize};";
+            limit {$startPage}, {$pageSize}";
     global $util;
     $set = $util->query($sql);
-    return getArtShowPage($set);
+    return getArtShowPage("new", $set);
 }
 
 /**

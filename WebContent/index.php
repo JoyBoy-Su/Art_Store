@@ -23,7 +23,7 @@
             <!-- 艺术字设置为背景图片 -->
             <div class="name">
                 <a href="#">ArtStore</a>
-                 <span>welcome to art trading</span>
+                 <span> welcome to art store </span>
             </div>
         </div>
         <!-- 右侧选项栏，由php动态生成 -->
