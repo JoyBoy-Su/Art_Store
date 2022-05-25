@@ -87,7 +87,7 @@ function submitRegister() {
             error: function (err) {
                 registerFail(err);
             },
-        })
+        });
     }
 }
 

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/index.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
+    <script src="./js/index.js"></script>
     <title>主页</title>
 </head>
 
@@ -25,20 +26,14 @@
                 <!-- <span>welcome to art trading</span> -->
             </div>
         </div>
-        <!-- 右侧选项栏 -->
-        <div class="right">
-            <a href="#">主页</a>
-            <a href="login.php">登录</a>
-            <a href="register.php">注册</a>
-            <a href="cart.php">购物车</a>
-        </div>
+        <!-- 右侧选项栏，由php动态生成 -->
     </div>
 </nav>
 <!-- 头部栏 -->
 <div class="header w">
     <!-- logo部分 -->
     <div class="logo">
-        <img src="./static/img/logo.png" alt="logo">
+<!--        <img src="./static/img/logo.png" alt="logo">-->
     </div>
     <!-- 导航栏部分 -->
     <div class="nav">
@@ -74,128 +69,18 @@
     </div>
     <!-- 热门艺术品 -->
     <div class="box-bd">
-        <ul>
-            <li>
-                <img src="./static/img/works/small/001020.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001050.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001060.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001080.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001090.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001100.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001130.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001140.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001150.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001170.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
+        <!--   热门艺术品ul，由后端生成每一个插入    -->
+        <ul class="hot-arts">
         </ul>
     </div>
     <!-- 最新艺术品 -->
     <div class="box-hd">
         <h3>最新艺术品</h3>
     </div>
-    <!-- 热门艺术品 -->
+    <!-- 最新艺术品 -->
     <div class="box-bd">
-        <ul>
-            <li>
-                <img src="./static/img/works/small/001180.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问 • 2022-5-20日发布
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001190.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问 • 2022-5-20日发布
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001260.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问 • 2022-5-20日发布
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001270.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问 • 2022-5-20日发布
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001280.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问 • 2022-5-20日发布
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/002020.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <span>价格</span> • 1125次访问 • 2022-5-20日发布
-                </div>
-            </li>
+        <!--   最新艺术品ul，由后端生成每一个插入    -->
+        <ul class="new-arts">
         </ul>
     </div>
 </div>

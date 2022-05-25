@@ -68,7 +68,7 @@ function submitLogin() {
             error: function (err) {
                 loginFail(err);
             },
-        })
+        });
     }
 }
 
