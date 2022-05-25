@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/index.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
-    <link rel="stylesheet" href="./static/css/rotation.css">
     <script src="./js/index.js"></script>
     <title>主页</title>
 </head>
