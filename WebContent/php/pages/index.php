@@ -21,3 +21,42 @@ function getArtShowPage($hots) {
     }
     return $page;
 }
+
+/**
+ * @param $set
+ * @return string
+ * 生成5个轮播图（前端css要求只能设置5个）
+ */
+function getRotationBySet($set) {
+    $page = "";
+    // 循环产生轮播图
+    for($i = 0; $i < count($set); $i++) {
+        $page = $page.getRotation(
+            $i + 1, $set[$i]['ImageFileName'],
+            $set[$i]['Title'], $set[$i]['Description']
+        );
+    }
+    return $page;
+}
+
+/**
+ * @param $count
+ * @param $img
+ * @param $title
+ * @param $description
+ * @return string
+ * 根据参数生成轮播图的一个图页面
+ */
+function getRotation($count, $img, $title, $description) {
+    return "<div class='main'>
+            <input type='radio' name='button' id='but{$count}' checked='checked'>
+            <label for='but{$count}' style='--i:{$count}'></label>
+            <div class='image'>
+                <img src='./static/img/works/large/{$img}.jpg'>
+                <div class='title'>
+                    <h1>{$title}</h1>
+                    <p>{$description}</p>
+                </div>
+            </div>
+        </div>";
+}

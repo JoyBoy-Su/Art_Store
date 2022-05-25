@@ -1,5 +1,5 @@
 /**
- * 一些公用的逻辑
+ * 一些公用的页面交互逻辑
  */
 // 引入jquery
 let newScript1 = document.createElement("script");
@@ -111,4 +111,30 @@ function userinfoBlur() {
             $("#userinfo-message").html("");
         }
     }
+}
+
+/**
+ * 发请求获取右侧导航栏
+ */
+function getNav() {
+    // 发请求获取导航栏
+    $.ajax({
+        type: "GET",
+        url: "./php/common.php?type=nav",
+        dataType: "json",
+        success : function (resp) {
+            insertNav(resp.page);
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
+}
+
+/**
+ * 界面中插入导航栏
+ * @param nav
+ */
+function insertNav(nav) {
+    $(".top").append(nav);
 }

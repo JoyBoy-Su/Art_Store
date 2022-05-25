@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/index.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
+    <link rel="stylesheet" href="./static/css/rotation.css">
     <script src="./js/index.js"></script>
     <title>主页</title>
 </head>
@@ -23,7 +24,7 @@
             <!-- 艺术字设置为背景图片 -->
             <div class="name">
                 <a href="#">ArtStore</a>
-                <!-- <span>welcome to art trading</span> -->
+                 <span>welcome to art trading</span>
             </div>
         </div>
         <!-- 右侧选项栏，由php动态生成 -->
@@ -51,14 +52,8 @@
 </div>
 <!-- 广告栏 -->
 <div class="banner">
-    <!-- 版心 -->
-    <div class="w">
-        <div class="rotation-box">
-            <!-- TODO: 制作轮播图 -->
-            <!-- <img src="../static/img/works/large/001020.jpg" alt="">
-            <img src="../static/img/works/large/001050.jpg" alt="">
-            <img src="../static/img/works/large/001060.jpg" alt=""> -->
-        </div>
+    <!--  轮播图位置，由服务器生成轮播图界面插入该处  -->
+    <div class="outside-box">
     </div>
 </div>
 <!-- 核心内容 -->

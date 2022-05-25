@@ -10,6 +10,8 @@ document.head.appendChild(newScript);
 window.onload = function () {
     // 发请求右侧半部分的导航栏
     getNav();
+    // 发请求获得轮播图
+    getRotation();
     // 发请求获取最热艺术品
     getHotArts();
     // 发请求获取最新艺术品
@@ -17,27 +19,10 @@ window.onload = function () {
 }
 
 /**
- * 发请求获取右侧导航栏
- */
-function getNav() {
-    // 发请求进行注册
-    $.ajax({
-        type: "GET",
-        url: "./php/index.php?type=nav",
-        dataType: "json",
-        success : function (resp) {
-            insertNav(resp.page);
-        },
-        error: function (err) {
-            console.log(err);
-        },
-    });
-}
-/**
  * 发请求获取热门艺术品TOP10
  */
 function getHotArts() {
-    // 发请求进行注册
+    // 发请求获取最热门的艺术品
     $.ajax({
         type: "GET",
         url: "./php/index.php?type=hot",
@@ -55,7 +40,7 @@ function getHotArts() {
  * 发请求获取最新发布艺术品TOP10
  */
 function getNewArts() {
-    // 发请求进行注册
+    // 发请求获取最新发布的艺术品
     $.ajax({
         type: "GET",
         url: "./php/index.php?type=new",
@@ -70,11 +55,21 @@ function getNewArts() {
 }
 
 /**
- * 界面中插入导航栏
- * @param nav
+ * 发请求获得轮播图页面
  */
-function insertNav(nav) {
-    $(".top").append(nav);
+function getRotation() {
+    // 发请求请求轮播图
+    $.ajax({
+        type: "GET",
+        url: "./php/index.php?type=rotation",
+        dataType: "json",
+        success : function (resp) {
+            insertRotation(resp.page);
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
 }
 
 /**
@@ -91,4 +86,8 @@ function insertHotArt(hot) {
  */
 function insertNewArt(new_art) {
     $(".new-arts").append(new_art);
+}
+
+function insertRotation(rotation) {
+    $(".outside-box").append(rotation);
 }

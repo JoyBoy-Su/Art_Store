@@ -3,17 +3,115 @@
     padding: 0;
 }
 
-body {
-    background-color: #ffffff;
-}
-
 /* 广告栏样式 */
 .banner {
     height: 421px;
-    background-color: #ffffff;
+    background-color: #9195a3;
 }
 
-.banner .w img{
+/* 轮播图 */
+.outside-box{
+    position: relative;
+    width: 1230px;
+    height: 421px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.outside-box::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255,255,255,.5);
+    bottom: 50px;
+    z-index: 11;
+}
+
+.box .main{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1230px;
+    height: 421px;
+}
+
+label{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255,255,255,.3);
+    cursor: pointer;
+    bottom: 35px;
+    border-radius: 50%;
+    left: calc((var(--i) - 1) * 120px + 210px);
+    transition: all 1s;
+    z-index: 12;
+
+}
+
+label:hover{
+    background-color: rgba(255,255,255,.7);
+}
+
+input[type=radio] {
+    transform : translateY(-900px);
+    opacity: 0;
+}
+
+input[type=radio]:checked+label{
+    background-color: #fff;
+}
+
+.image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1230px;
+    height: 421px;
+}
+
+.image img{
+    width: 100%;
     height: 100%;
-    width: auto;
+    position  : absolute;
+    transform : translateX(1230px);
+    transition: all .5s;
+}
+
+input[type=radio]:checked~.image img {
+    transform: translateX(0px);
+    z-index  : 9;
+}
+
+.image .title{
+    position: relative;
+    width: 300px;
+    height: 670px;
+    background-color: rgba(255,254,253,.1);
+    z-index: 10;
+    float: right;
+    left: 0;
+    transform: translateX(300px);
+    transition: all .5s;
+}
+
+.image .title h1{
+    text-align: center;
+    width: 300px;
+    height: 60px;
+    margin: 20px 0 20px 0;
+    color: rgb(201,197,195);
+    font-size: 50px;
+}
+
+.image .title p{
+    text-indent: 2em;
+    font-size: 20px;
+    color: rgb(201,197,195);
+    font-weight: 300;
+}
+
+input[type=radio]:checked~.image .title{
+    transform: translateX(0px);
 }

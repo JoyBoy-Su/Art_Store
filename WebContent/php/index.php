@@ -3,9 +3,7 @@
  * 处理主页界面的逻辑，主要动态生成页面内容
  * 1、最顶层导航栏：判断用户的登录状态，调用page得到导航栏的操作项
  */
-require_once ("./pages/common.php");
 require_once ("./pages/index.php");
-require_once ("./utils/Auth.php");
 require_once ("./utils/DBUtil.php");
 
 $type = $_GET['type'];
@@ -16,58 +14,30 @@ $util = new DBUtil();
 
 // 判断$type确定请求的是nav还是hot或new
 switch ($type) {
-    // 请求导航栏
-    case "nav" :
-        $resp['page'] = getNavPage();
-        break;
     // 请求热门艺术品
     case "hot" :
-        $resp['page'] = getHotPage();
+        $resp['page'] = getHotArtsPage();
         break;
     // 请求最新发布艺术品
     case "new" :
-        $resp['page'] = getNewPage();
+        $resp['page'] = getNewArtsPage();
+        break;
+    case "rotation":
+        $resp['page'] = getRotationsPage();
+        break;
+    default:
+        $resp['page'] = "";
         break;
 }
 
 // 响应
 echo json_encode($resp);
 
-function getNavPage() {
-    // 获取cookie中的token
-    if(!isset($_COOKIE['token'])) {
-        // token不存在
-        return getNav(false);
-    } else {
-        // token 存在，获得token判断是否有效
-        $token = $_COOKIE['token'];
-        $auth = new Auth();
-        if($auth->checkToken($token)) {
-            // token 有效，用户已登陆，获取登录后的nav
-            return getNav(true);
-        } else return getNav(false);
-    }
-}
-
-function getHotPage() {
-    // 查找数据库，获取最火的艺术品
-    $set = queryHotArts();
-    // 根据set的内容生成html界面
-    return getArtShowPage($set);
-}
-
-function getNewPage() {
-    // 查找数据库，获取最火的艺术品
-    $set = queryNewArts();
-    // 根据set的内容生成html界面
-    return getArtShowPage($set);
-}
-
 /**
- * @return array|void
+ * @return string
  * 查找并返回最火的10件艺术品
  */
-function queryHotArts() {
+function getHotArtsPage() {
     // 分页查询参数，查询前10个艺术品
     $pageSize = 10;
     $startPage = 0;
@@ -78,10 +48,15 @@ function queryHotArts() {
             order by VisitTimes desc
             limit {$startPage}, {$pageSize};";
     global $util;
-    return $util->query($sql);
+    $set = $util->query($sql);
+    return getArtShowPage($set);
 }
 
-function queryNewArts() {
+/**
+ * @return string
+ * 查找并返回最新的10件艺术品
+ */
+function getNewArtsPage() {
     // 分页查询参数，查询前10个艺术品
     $pageSize = 10;
     $startPage = 0;
@@ -92,5 +67,19 @@ function queryNewArts() {
             order by AccessionDate desc
             limit {$startPage}, {$pageSize};";
     global $util;
-    return $util->query($sql);
+    $set = $util->query($sql);
+    return getArtShowPage($set);
+}
+
+/**
+ * @return string
+ * 随机生成5个轮播艺术品，返回html页面
+ */
+function getRotationsPage() {
+    // 随机查询arts中的5条记录
+    $count = 5;
+    $sql = "select ArtID, ImageFileName, Title, Description from arts
+        where arts.ArtID >= (rand() * (select max(ArtID) from arts)) limit {$count}";
+    global $util;
+    return getRotationBySet($util->query($sql));
 }

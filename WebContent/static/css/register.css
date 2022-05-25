@@ -1,9 +1,6 @@
 body {
-    background: url(../img/works/large/092040.jpg);
-    background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: url(../img/works/large/092040.jpg) no-repeat fixed center;
 }
 
 .register-div {

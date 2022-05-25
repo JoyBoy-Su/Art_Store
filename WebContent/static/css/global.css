@@ -7,6 +7,10 @@
     margin: auto;
 }
 
+body {
+    background-color: #fffcff;
+}
+
 /* 按钮样式 */
 .submit-btn {
     background-color: #4cc6f7;
