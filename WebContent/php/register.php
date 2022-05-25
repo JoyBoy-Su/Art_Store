@@ -7,9 +7,9 @@
 /**
  * TODO : 校验电子邮箱的重复性
  */
-require ("./utils/DBUtil.php");
-require ("./utils/encrypt.php");
-//require ("./dao/UserDao.php");
+require_once ("./utils/DBUtil.php");
+require_once ("./utils/encrypt.php");
+//require_once ("./dao/UserDao.php");
 
 $util = new DBUtil();
 $sql = "select * from users where UserName = ?";
@@ -41,7 +41,7 @@ function register() {
     $info['salt'] = salt();
     $info['password'] = encrypt($info['password'].$info['salt']);
     // 3、数据存入数据库
-    $sql = "insert into users (UserName, Password, Salt, Phone, Email, Address) value (?, ?, ?, ?, ?, ?)";
+    $sql = "insert into users (UserName, Password, Salt, Phone, Email, Address) values (?, ?, ?, ?, ?, ?)";
     global $util;
     $util->update($sql,
         $info['username'], $info['password'], $info['salt'],

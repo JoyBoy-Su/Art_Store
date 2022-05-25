@@ -1,16 +1,22 @@
 /**
  * 一些公用的逻辑
  */
-// 引入validate.js
+// 引入jquery
 let newScript1 = document.createElement("script");
 newScript1.setAttribute("type","text/javascript");
-newScript1.setAttribute("src","js/utils/validate.js");
+newScript1.setAttribute("src","js/lib/jquery-3.6.0.min.js");
 document.head.appendChild(newScript1);
-// 引入jquery
+// 引入validate.js
 let newScript2 = document.createElement("script");
 newScript2.setAttribute("type","text/javascript");
-newScript2.setAttribute("src","js/lib/jquery-3.6.0.min.js");
+newScript2.setAttribute("src","js/utils/validate.js");
 document.head.appendChild(newScript2);
+// 引入cookie.js
+let newScript3 = document.createElement("script");
+newScript3.setAttribute("type","text/javascript");
+newScript3.setAttribute("src","js/utils/cookie.js");
+document.head.appendChild(newScript3);
+
 
 // 修改每个input的message
 function changeMessage(message ,messageId, valid) {

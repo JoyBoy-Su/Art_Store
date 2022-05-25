@@ -76,13 +76,14 @@ function submitLogin() {
 function loginSuccess(resp) {
     // 判断resp的success与message
     if(resp.success) {
-        // 登录成功跳转到主页
+        // 登录成功则把token存到cookie里，然后跳转到主页
+        setCookie("token", resp.token);
         window.location.href = "index.php";
     } else {
         // 登录失败，显示错误信息
-        $("#register-message").html(resp.message);
-        $("#register-message").css("color", "red");
-        $("#register-message").css("font-weight", "200");
+        $("#login-message").html(resp.message);
+        $("#login-message").css("color", "red");
+        $("#login-message").css("font-weight", "200");
     }
 }
 
