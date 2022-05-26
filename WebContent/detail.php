@@ -47,8 +47,8 @@
     </div>
     <!-- 搜索部分 -->
     <div class="search">
-        <input type="text" value="请输入关键词">
-        <button></button>
+        <input type="text" placeholder="请输入关键词" id="search-input">
+        <button id="search-btn"></button>
     </div>
 </div>
 

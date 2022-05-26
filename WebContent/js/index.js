@@ -8,6 +8,8 @@ newScript.setAttribute("src","js/common.js");
 document.head.appendChild(newScript);
 
 window.onload = function () {
+    // 为搜索绑定单击事件
+    bindSearchBtnInOtherPage();
     // 发请求右侧半部分的导航栏
     getNav();
     // 发请求获得轮播图

@@ -8,6 +8,8 @@ newScript.setAttribute("src","js/common.js");
 document.head.appendChild(newScript);
 
 window.onload = function () {
+    // 绑定搜索的点击事件
+    bindSearchBtnInOtherPage();
     // 获取导航栏
     getNav();
     // 获取详情信息
@@ -20,8 +22,7 @@ window.onload = function () {
  */
 function getPage() {
     // 获取url参数
-    let params = getUrlParam();
-    let artID = params['id'];
+    let artID = getUrlParam('id');
     // console.log("id = ", artID);
     // 发请求获取艺术品详情内容
     $.ajax({
@@ -113,7 +114,6 @@ function addCart(resp) {
     if(resp.success) {
         alert("添加成功");
     } else {
-        console.log("message = ", resp.message);
         if(resp.message === "login") {
             alert("请先登录");
             // 跳转到登录界面，并存储from路径

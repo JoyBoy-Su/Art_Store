@@ -140,21 +140,22 @@ function insertNav(nav) {
 }
 
 /**
- * 获得url参数
- * @returns {{}|null}
+ * 获得url参数key
+ * @param key
+ * @returns {string}
  */
-function getUrlParam() {
+function getUrlParam(key) {
     let url = window.location.href;
     if(url.indexOf('?') != -1){
-        let obj = {};
+        let value = "";
         let arr = url.slice(url.indexOf('?')+1).split('&');
         arr.forEach(item => {
             let param = item.split('=');
-            obj[param[0]] = param[1];
+            if(key === param[0]) value = param[1];
         })
-        return obj;
+        return value;
     }else{
-        return null;
+        return "";
     }
 }
 
@@ -168,4 +169,17 @@ function beforeToLogin() {
     // 从全地址中把path前的内容去掉
     let path = href.substring(href.indexOf(pathname));
     storage.setItem("from", path);
+}
+
+/**
+ * 为搜索框的按钮绑定点击事件
+ */
+function bindSearchBtnInOtherPage() {
+    let btn = document.getElementById("search-btn");
+    btn.onclick = function () {
+        // 如果input的输入内容不为空
+        let keyword = document.getElementById("search-input").value;
+        // 如果有搜索内容，则跳转到搜索界面
+        if(keyword !== "") window.location.href = "search.php?keyword=" + keyword;
+    }
 }

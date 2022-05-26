@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/page.css">
+    <script src="js/search.js"></script>
     <title>搜索</title>
 </head>
 
 <body>
-<!-- 登录前导航栏 -->
+<!-- 导航栏 -->
 <nav>
     <div class="top">
         <!-- 左侧导航栏 -->
@@ -24,13 +25,7 @@
                 <a href="index.php">ArtStore</a>
             </div>
         </div>
-        <!-- 右侧选项栏 -->
-        <div class="right">
-            <a href="index.php">主页</a>
-            <a href="login.php">登录</a>
-            <a href="register.php">注册</a>
-            <a href="cart.php">购物车</a>
-        </div>
+        <!-- 右侧选项栏，由后端插入 -->
     </div>
 </nav>
 
@@ -50,8 +45,8 @@
     </div>
     <!-- 搜索部分 -->
     <div class="search">
-        <input type="text" value="请输入关键词">
-        <button></button>
+        <input type="text" value="请输入关键词" id="search-input">
+        <button id="search-btn"></button>
     </div>
 </div>
 
@@ -59,99 +54,21 @@
 <div class="box w">
     <!-- 查询到的艺术品数据 -->
     <div class="box-hd">
-        <h3>关键字： 搜索结果</h3>
+        <h3>关键字： <span id="keyword-span"></span> 搜索结果：</h3>
     </div>
     <div class="box-bd">
+        <!--   搜索结果   -->
         <ul>
-            <li>
-                <img src="./static/img/works/small/001020.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001050.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001060.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001080.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001090.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001100.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001130.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001140.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001150.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
-            <li>
-                <img src="./static/img/works/small/001170.jpg" alt="">
-                <h4>艺术品名称 | 作者</h4>
-                <div class="info">
-                    <div>作品简介</div>
-                    <span>价格</span> • 1125次访问
-                </div>
-            </li>
         </ul>
     </div>
 
     <!-- 分页 -->
     <div class="page">
+        <button>共<span id="total-span">0</span>条</button>
         <button class="firstPage"><img src="./static/img/page-icon/left-end.png" /></button>
         <button class="beforePage"><img src="./static/img/page-icon/page-left.png" /></button>
-        <button>第<input id="currentPage" type="text" value="1" />页</button>
-        <button>/&nbsp;&nbsp;&nbsp;共<input id="totalPage" type="button" value="3" readonly="readonly">页</button>
+        <button>第<input id="currentPage" type="number" value="1" />页</button>
+        <button>/&nbsp;&nbsp;&nbsp;共<input id="totalPage" type="button" value="1" readonly="readonly">页</button>
         <button class="nextPage"><img src="./static/img/page-icon/page-right.png" /></button>
         <button class="lastPage"><img src="./static/img/page-icon/right-end.png" /></button>
     </div>
