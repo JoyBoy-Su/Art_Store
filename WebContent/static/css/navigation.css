@@ -80,6 +80,7 @@ a {
     height: 25px;
     /* 这里会层叠w的margin */
     margin: 5px auto;
+    background-color: #fffcff;
 }
 
 /* logo样式 */
