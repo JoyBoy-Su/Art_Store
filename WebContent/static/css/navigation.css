@@ -10,7 +10,6 @@
     /* 左侧浮动 */
     float: left;
     width: 500px;
-    font-weight: 700;
     color: #fffcff;
 }
 
@@ -29,6 +28,7 @@
     text-align: center;
     color: #fffcff;
     text-decoration: none;
+    font-weight: 700;
 }
 
 /* 右侧导航父盒子 */

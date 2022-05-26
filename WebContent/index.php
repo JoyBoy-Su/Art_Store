@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<!-- 登录前导航栏 -->
+<!-- 导航栏 -->
 <nav>
     <div class="top">
         <!-- 左侧导航栏 -->
@@ -23,8 +23,8 @@
             <!-- 艺术字设置为背景图片 -->
             <div class="name">
                 <a href="#">ArtStore</a>
-                 <span> welcome to art store </span>
             </div>
+            <div class="welcome"> welcome to art store </div>
         </div>
         <!-- 右侧选项栏，由php动态生成 -->
     </div>
@@ -33,7 +33,7 @@
 <div class="header w">
     <!-- logo部分 -->
     <div class="logo">
-<!--        <img src="./static/img/logo.png" alt="logo">-->
+        <img src="./static/img/logo.png" alt="logo">
     </div>
     <!-- 导航栏部分 -->
     <div class="nav">
@@ -82,7 +82,7 @@
 <div class="footer">
     <div class="w">
         <div class="copyright">
-            <img src="./static/img/logo.png" alt="">
+            <img src="./static/img/logo-full.png" alt="">
             <p>
                 艺术品交易网站……
             </p>

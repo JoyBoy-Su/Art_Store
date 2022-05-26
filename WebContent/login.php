@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<!-- 登录前导航栏 -->
+<!-- 导航栏 -->
 <nav>
     <div class="top">
         <!-- 左侧导航栏 -->
@@ -24,7 +24,9 @@
             <div class="name">
                 <a href="index.php">ArtStore</a>
             </div>
+            <div class="welcome"> welcome to art store </div>
         </div>
+        <body>
         <!-- 右侧选项栏 -->
         <div class="right">
             <a href="index.php">主页</a>

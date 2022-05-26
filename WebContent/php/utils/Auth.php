@@ -55,6 +55,8 @@ class Auth {
      * 判断token是否有效
      */
     public function checkToken($token) {
+        // 如果token为空，返回false
+        if(strcmp($token, "") == 0) return false;
         // 根据token查找数据库中是否存在该token
         $pass = false;
         $sql = "select * from userlogon where Token = ?";

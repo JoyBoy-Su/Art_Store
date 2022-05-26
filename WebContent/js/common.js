@@ -138,3 +138,22 @@ function getNav() {
 function insertNav(nav) {
     $(".top").append(nav);
 }
+
+/**
+ * 获得url参数
+ * @returns {{}|null}
+ */
+function getUrlParam() {
+    let url = window.location.href;
+    if(url.indexOf('?') != -1){
+        let obj = {};
+        let arr = url.slice(url.indexOf('?')+1).split('&');
+        arr.forEach(item => {
+            let param = item.split('=');
+            obj[param[0]] = param[1];
+        })
+        return obj;
+    }else{
+        return null;
+    }
+}

@@ -5,6 +5,7 @@
  */
 require_once ("./pages/index.php");
 require_once ("./utils/DBUtil.php");
+require_once ("./utils/Auth.php");
 
 $type = $_GET['type'];
 $resp = [
@@ -28,6 +29,12 @@ switch ($type) {
     default:
         $resp['page'] = "";
         break;
+}
+
+// 判断是否为登录状态，如果是登录状态则更新token
+$auth = new Auth();
+if(isset($_COOKIE['token']) && $auth->checkToken($_COOKIE['token'])) {
+    $auth->updateToken($_COOKIE['token']);
 }
 
 // 响应

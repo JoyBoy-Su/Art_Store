@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/detail.css">
+    <script src="js/detail.js"></script>
     <title>Details</title>
 </head>
 
+<body>
 <body>
 <!-- 登录前导航栏 -->
 <nav>
@@ -21,16 +23,11 @@
             <div class="welcome">欢迎来到</div>
             <!-- 艺术字设置为背景图片 -->
             <div class="name">
-                <a href="index.php">ArtStore</a>
+                <a href="#">ArtStore</a>
             </div>
+            <div class="welcome"> welcome to art store </div>
         </div>
-        <!-- 右侧选项栏 -->
-        <div class="right">
-            <a href="index.php">主页</a>
-            <a href="login.php">登录</a>
-            <a href="register.php">注册</a>
-            <a href="cart.php">购物车</a>
-        </div>
+        <!-- 右侧选项栏，由php动态生成 -->
     </div>
 </nav>
 
@@ -59,62 +56,56 @@
 <div class="box w">
     <!-- 艺术品详情信息 -->
     <div class="item">
-        <div class="basic-info">
-            <h3>艺术品名称 • 作者名称</h3>
-        </div>
+        <!--   艺术品基础信息，包括名称，作者和图片     -->
         <!-- 两个盒子，左浮动，img在左，放在一个盒子里 -->
-        <div class="item-info-img">
-            <img src="./static/img/works/medium/001020.jpg" alt="艺术品1">
-        </div>
+        <!--    艺术品的详细信息    -->
         <div class="item-introduction">
-            <!-- 用table展示基本信息 -->
+            <!-- 用table展示基本信息，信息由后端返回页面插入 -->
             <table>
                 <tr>
                     <th colspan="2">商品详情</th>
                 </tr>
-                <tr>
-                    <td>年份</td>
-                    <td>1850年</td>
-                </tr>
-                <tr>
-                    <td>尺寸</td>
-                    <td>290 × 120</td>
-                </tr>
-                <tr>
-                    <td>时代</td>
-                    <td>文艺复兴</td>
-                </tr>
-                <tr>
-                    <td>风格</td>
-                    <td>xxx</td>
-                </tr>
-                <tr>
-                    <td>发布日期</td>
-                    <td>2020-5-20</td>
-                </tr>
-                <tr>
-                    <td>发布用户</td>
-                    <td>su</td>
-                </tr>
-                <tr>
-                    <td>价格</td>
-                    <td><span>￥999</span></td>
-                </tr>
-                <tr>
-                    <td>访问量</td>
-                    <td>1129次</td>
-                </tr>
-                <tr>
-                    <td>是否售出</td>
-                    <td>否</td>
-                </tr>
-                <tr>
-                    <td>介绍</td>
-                    <td>这是一个xxxxx</td>
-                </tr>
             </table>
             <button class="submit-btn">加入购物车</button>
             <button class="submit-btn">购买</button>
+        </div>
+    </div>
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+    <div class="w">
+        <div class="copyright">
+            <img src="./static/img/logo-full.png" alt="">
+            <p>
+                艺术品交易网站……
+            </p>
+        </div>
+        <div class="links">
+            <dl>
+                <dt>关于ArtTrading</dt>
+                <dd>关于</dd>
+                <dd>团队管理</dd>
+                <dd>工作机会</dd>
+                <dd>客户服务</dd>
+                <dd>帮助</dd>
+            </dl>
+            <dl>
+                <dt>关于ArtTrading</dt>
+                <dd>关于</dd>
+                <dd>团队管理</dd>
+                <dd>工作机会</dd>
+                <dd>客户服务</dd>
+                <dd>帮助</dd>
+            </dl>
+            <dl>
+                <dt>关于ArtTrading</dt>
+                <dd>关于</dd>
+                <dd>团队管理</dd>
+                <dd>工作机会</dd>
+                <dd>客户服务</dd>
+                <dd>帮助</dd>
+            </dl>
         </div>
     </div>
 </div>

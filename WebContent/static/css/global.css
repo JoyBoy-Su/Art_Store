@@ -127,7 +127,7 @@ body {
 /* footer样式 */
 /* footer样式 */
 .footer {
-    height: 300px;
+    height: 200px;
     background-color: #f5f5f5;
 }
 
@@ -157,6 +157,11 @@ body {
 
 .footer .w .links {
     float: right;
+}
+
+.footer .copyright img {
+    width: 203px;
+    height: 77px;
 }
 
 .links dl {
