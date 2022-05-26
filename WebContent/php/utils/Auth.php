@@ -51,19 +51,20 @@ class Auth {
 
     /**
      * @param $token
-     * @return bool
+     * @return int|mixed
      * 判断token是否有效
      */
     public function checkToken($token) {
-        // 如果token为空，返回false
-        if(strcmp($token, "") == 0) return false;
+        // 如果token为空，返回0
+        if(strcmp($token, "") == 0) return 0;
         // 根据token查找数据库中是否存在该token
-        $pass = false;
+        $user = 0;
         $sql = "select * from userlogon where Token = ?";
         $set = $this->util->query($sql, $token);
         // 如果token存在并且当前token未过期，则通过
-        if(count($set) != 0 && strtotime($set[0]['ExpirationTime']) > time()) $pass = true;
-        return $pass;
+        if(count($set) != 0 && strtotime($set[0]['ExpirationTime']) > time())
+            $user = $set[0]['UserID'];
+        return $user;
     }
 
     /**

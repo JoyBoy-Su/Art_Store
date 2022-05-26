@@ -52,24 +52,8 @@
     </div>
 </div>
 
-<!-- 核心内容，搜索到的结果 -->
+<!-- 核心内容，页面的详情信息 -->
 <div class="box w">
-    <!-- 艺术品详情信息 -->
-    <div class="item">
-        <!--   艺术品基础信息，包括名称，作者和图片     -->
-        <!-- 两个盒子，左浮动，img在左，放在一个盒子里 -->
-        <!--    艺术品的详细信息    -->
-        <div class="item-introduction">
-            <!-- 用table展示基本信息，信息由后端返回页面插入 -->
-            <table>
-                <tr>
-                    <th colspan="2">商品详情</th>
-                </tr>
-            </table>
-            <button class="submit-btn">加入购物车</button>
-            <button class="submit-btn">购买</button>
-        </div>
-    </div>
 </div>
 
 <!-- 底部 -->

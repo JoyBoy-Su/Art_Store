@@ -127,12 +127,12 @@ aside h4 {
 /* 放照片的盒子 */
 .item-info-img {
     float: left;
-    width: 350px;
+    width: 370px;
     height: 530px;
 }
 
 .item-info-img img {
-    width: 320px;
+    width: 350px;
     height: 500px;
 }
 

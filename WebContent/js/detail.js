@@ -11,13 +11,14 @@ window.onload = function () {
     // 获取导航栏
     getNav();
     // 获取详情信息
-    getDetailInfoPage();
+    getPage();
 }
 
-/* TODO : 获取nav */
-
-/* TODO : 获取detail页面 */
-function getDetailInfoPage() {
+/**
+ * 发请求获取页面，后端根据id的内容返回不同的界面
+ * 如果id为空或者id不存在，
+ */
+function getPage() {
     // 获取url参数
     let params = getUrlParam();
     let artID = params['id'];
@@ -25,10 +26,10 @@ function getDetailInfoPage() {
     // 发请求获取艺术品详情内容
     $.ajax({
         type: "GET",
-        url: "./php/detail.php?id=" + artID,
+        url: "./php/detail.php?type=detail&id=" + artID,
         dataType: "json",
         success : function (resp) {
-            insertDetailInfo(resp);
+            insertPage(resp.detail);
         },
         error: function (err) {
             console.log(err);
@@ -36,9 +37,103 @@ function getDetailInfoPage() {
     });
 }
 
-function insertDetailInfo(page) {
-    // 插入basic
-    $(".item").prepend(page.basic);
+function insertPage(page) {
     // 插入detail
-    $(".item-introduction table").append(page.detail);
+    $(".box").append(page);
+    // 为cart按钮绑定单击事件
+    $("#cart-btn").click(function () {
+        cartClick();
+    });
+    // 为purchase绑定单击事件
+    $("#purchase-btn").click( function () {
+        purchaseClick();
+    });
+}
+
+/**
+ * 添加购物车的单击事件
+ */
+function cartClick() {
+    // 获取艺术品的状态是否已售出
+    let artState = parseInt($(".item").attr('state'));
+    if( artState !== 0) {
+        // 如果该艺术品已售出，返回
+        alert("添加失败！\n该艺术品已售出");
+        return;
+    }
+    // 获取url参数
+    let params = getUrlParam();
+    let artID = params['id'];
+    // 获取艺术品版本号
+    let artVersion = $(".item").attr('version');
+    // 发请求添加购物车
+    $.ajax({
+        type: "POST",
+        url: "./php/detail.php?type=cart&id=" + artID,
+        data: {
+            version: artVersion
+        },
+        dataType: "json",
+        success : function (resp) {
+            addCart(resp);
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
+}
+
+/**
+ * 购买艺术品的单击事件
+ */
+function purchaseClick() {
+    // 获取url参数
+    let params = getUrlParam();
+    let artID = params['id'];
+    // 发请求添加购物车
+    $.ajax({
+        type: "POST",
+        url: "./php/detail.php?type=purchase&id=" + artID,
+        dataType: "json",
+        success : function (resp) {
+            purchaseArt(resp);
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
+}
+
+/**
+ * 添加购物车的回调
+ * @param resp
+ */
+function addCart(resp) {
+    // 添加成功
+    if(resp.success) {
+        alert("添加成功");
+    } else {
+        if(resp.message == "login") {
+            console.log("添加需要登录");
+        } else {
+            alert("添加失败!\n" + resp.message);
+        }
+    }
+}
+
+/**
+ * 购买艺术品的回调
+ * @param resp
+ */
+function purchaseArt(resp) {
+    // 添加成功
+    if(resp.success) {
+        console.log("购买成功");
+    } else {
+        if(resp.message == "login") {
+            console.log("购买需要登录");
+        } else {
+            console.log("请求失败");
+        }
+    }
 }

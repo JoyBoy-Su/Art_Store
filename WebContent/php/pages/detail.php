@@ -6,6 +6,19 @@
 /**
  * @param $art
  * @return string
+ * 根据art获取整个艺术品详情信息
+ */
+function getDetailPage($art) {
+    return "<!-- 艺术品详情信息 -->
+    <div class='item' version='{$art['VersionNumber']}' state='{$art['State']}'>"
+        .getBasicInfoPage($art).getDetailInfoPage($art).
+        "<!--    艺术品的详细信息    -->
+    </div>";
+}
+
+/**
+ * @param $art
+ * @return string
  * 处理艺术品信息生成basic界面
  */
 function getBasicInfoPage($art) {
@@ -20,9 +33,12 @@ function getBasicInfoPage($art) {
 function getDetailInfoPage($art) {
     return getDetailInfoTable(
         $art['Year'], $art['Width'], $art['Height'],
-        $art['EraName'], $art['GenreName'],
-        $art['AccessionDate'], $art['UserName'], $art['Price'], $art['VisitTimes'],
-        ($art['State'] ? "已售出" : "未售出"), $art['Description']
+        ($art['EraName'] == null ? "该艺术品暂无时代信息" : $art['EraName']),
+        ($art['GenreName'] == null ? "该艺术品暂无风格信息" : $art['GenreName']),
+        ($art['AccessionDate'] == null ? "该艺术品暂无发布日期信息" : $art['AccessionDate']),
+        ($art['UserName'] == null ? "该艺术品暂无发布者信息" : $art['UserName']),
+        $art['Price'], $art['VisitTimes'], ($art['State'] ? "已售出" : "未售出"),
+        ($art['Description'] == null ? "该艺术品暂无描述" : $art['Description'])
     );
 }
 
@@ -60,7 +76,13 @@ function getBasicInfo($title, $author, $img) {
  */
 function getDetailInfoTable($year, $width, $height, $era,
     $genre, $date, $user, $price, $visit, $state, $description) {
-    return "<tr>
+    return "<div class='item-introduction'>
+            <!-- 用table展示基本信息，信息由后端返回页面插入 -->
+            <table>
+                <tr>
+                    <th colspan='2'>商品详情</th>
+                </tr>
+                <tr>
                     <td class='left-col'>年份</td>
                     <td>{$year}年</td>
                 </tr>
@@ -99,5 +121,9 @@ function getDetailInfoTable($year, $width, $height, $era,
                 <tr>
                     <td class='left-col'>介绍</td>
                     <td>{$description}</td>
-                </tr>";
+                </tr>
+                </table>
+                <button class='submit-btn' id='cart-btn'>加入购物车</button>
+                <button class='submit-btn' id='purchase-btn'>购买</button>
+        </div>";
 }
