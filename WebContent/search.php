@@ -161,7 +161,7 @@
 <div class="footer">
     <div class="w">
         <div class="copyright">
-            <img src="./static/img/logo.png" alt="">
+            <img src="./static/img/logo-full.png" alt="">
             <p>
                 艺术品交易网站……
             </p>
