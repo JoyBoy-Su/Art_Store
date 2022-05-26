@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/cart.css">
+    <script src="js/cart.js"></script>
     <title>购物车</title>
 </head>
 
@@ -52,58 +53,6 @@
 <!-- 核心内容 -->
 <div class="box">
     <div class="cart w">
-        <!-- 购物车基本信息 -->
-        <div class="cart-head">
-            <h3> 用户a 的购物车（全部 100 个）</h3>
-            <div class="selected">
-                已选商品（不含运费） <span>0.00</span>
-                <button> 结算 </button>
-            </div>
-        </div>
-        <div class="all-check">
-            <input type="checkbox"> 全选
-        </div>
-        <!-- 购物车的内容 -->
-        <div class="cart-item">
-            <div class="check">
-                <input type="checkbox">
-            </div>
-            <div class="image">
-                <img src="./static/img/works/medium/006040.jpg">
-            </div>
-            <div class="art-info">
-                <h3> Art Name • Author Name</h3>
-                <div style="margin-top: 5px"> Description </div>
-            </div>
-            <div class="tips">
-                该艺术品信息存在变动<br>
-                <span class="update">点击更新</span>
-            </div>
-            <div class="price"> $999.000 </div>
-            <div class="operation">
-                <span>从购物车中删除</span>
-            </div>
-        </div>
-        <div class="cart-item">
-            <div class="check">
-                <input type="checkbox">
-            </div>
-            <div class="image">
-                <img src="./static/img/works/medium/006040.jpg">
-            </div>
-            <div class="art-info">
-                <h3> Art Name • Author Name</h3>
-                <div style="margin-top: 5px"> Description </div>
-            </div>
-            <div class="tips">
-                该艺术品信息存在变动<br>
-                <span class="update">点击更新</span>
-            </div>
-            <div class="price"> $999.000 </div>
-            <div class="operation">
-                <span>从购物车中删除</span>
-            </div>
-        </div>
     </div>
 </div>
 <!-- 底部 -->

@@ -63,8 +63,7 @@ function cartClick() {
         return;
     }
     // 获取url参数
-    let params = getUrlParam();
-    let artID = params['id'];
+    let artID = getUrlParam('id');
     // 获取艺术品版本号
     let artVersion = $(".item").attr('version');
     // 发请求添加购物车

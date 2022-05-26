@@ -22,6 +22,11 @@
     line-height: 80px;
 }
 
+.cart-head h3 span {
+    font-size: 20px;
+    color: #6c6c6c;
+}
+
 /* 右侧结算 */
 .cart-head .selected {
     float: right;
@@ -94,10 +99,11 @@
     width: 450px;
 }
 
-/*150px 提示该艺术品状态 */
+/*提示该艺术品状态 */
 .cart-item .tips {
     float: left;
     padding-top: 60px;
+    width: 150px;
     font-size: 14px;
     text-align: center;
 }
@@ -124,12 +130,13 @@
     float: left;
     padding-left: 70px;
     text-align: center;
-    line-height: 145px;
+    padding-top: 60px;
 }
-.cart-item .operation span {
+.cart-item .operation div {
+    font-size: 14px;
     cursor: pointer;
 }
-.cart-item .operation span:hover {
+.cart-item .operation div:hover {
     text-decoration: underline;
     color: #fd444f;
 }

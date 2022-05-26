@@ -3,7 +3,6 @@
  * 处理用户搜索的逻辑
  */
 require_once ("./utils/DBUtil.php");
-require_once ("./Enum/ArtSortOrder.php");
 require_once ("./utils/ArtMatch.php");
 require_once ("./utils/ArtSort.php");
 require_once ("./pages/search.php");
