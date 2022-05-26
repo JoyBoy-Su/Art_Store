@@ -26,9 +26,11 @@ if(isset($_REQUEST['id']) && isset($_REQUEST['type'])) {
             $resp['detail'] = $page;
             break;
         case "cart":
-            $result = addArtToCart($artID, $_REQUEST['version']);
-            $resp['success'] = $result['success'];
-            $resp['message'] = $result['message'];
+//            $result = addArtToCart($artID, $_REQUEST['version']);
+//            $resp['success'] = $result['success'];
+//            $resp['message'] = $result['message'];
+            $resp['success'] = false;
+            $resp['message'] = "login";
             break;
         case "purchase":
             break;

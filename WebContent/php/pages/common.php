@@ -10,16 +10,16 @@
 function getNav($login) {
     if($login) {
         $page = "<div class='right'>
-            <a href='#'>主页</a>
+            <a href='index.php'>主页</a>
             <a href='detail.php'>详情</a>
             <a href='cart.php'>购物车</a> 
             <a href='#'>登出</a>
-            <a href='login.php'>重新登录</a>
+            <a href='login.php' onclick='beforeToLogin()'>重新登录</a>
         </div>";
     } else {
         $page = "<div class='right'>
-            <a href='#'>主页</a>
-            <a href='login.php'>登录</a>
+            <a href='index.php'>主页</a>
+            <a href='login.php' onclick='beforeToLogin()'>登录</a>
             <a href='register.php'>注册</a>
             <a href='detail.php'>详情</a>
             <a href='cart.php'>购物车</a>

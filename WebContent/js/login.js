@@ -78,7 +78,11 @@ function loginSuccess(resp) {
     if(resp.success) {
         // 登录成功则把token存到cookie里，然后跳转到主页
         setCookie("token", resp.token);
-        window.location.href = "index.php";
+        // 判断session是否存在from路径
+        let from = window.sessionStorage.getItem("from");
+        // 如果from存在，跳转回from
+        if(from) window.location.href = from;
+        else window.location.href = "index.php";
     } else {
         // 登录失败，显示错误信息
         $("#login-message").html(resp.message);

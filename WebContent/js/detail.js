@@ -113,8 +113,12 @@ function addCart(resp) {
     if(resp.success) {
         alert("添加成功");
     } else {
-        if(resp.message == "login") {
-            console.log("添加需要登录");
+        console.log("message = ", resp.message);
+        if(resp.message === "login") {
+            alert("请先登录");
+            // 跳转到登录界面，并存储from路径
+            beforeToLogin();
+            window.location.href = "login.php";
         } else {
             alert("添加失败!\n" + resp.message);
         }

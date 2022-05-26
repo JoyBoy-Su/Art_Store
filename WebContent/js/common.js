@@ -157,3 +157,15 @@ function getUrlParam() {
         return null;
     }
 }
+
+/**
+ * 跳转到login界面前记录跳转地址
+ */
+function beforeToLogin() {
+    let storage = window.sessionStorage;
+    let pathname = window.location.pathname;
+    let href = window.location.href;
+    // 从全地址中把path前的内容去掉
+    let path = href.substring(href.indexOf(pathname));
+    storage.setItem("from", path);
+}
