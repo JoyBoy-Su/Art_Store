@@ -18,8 +18,8 @@ function getCartArtPageBySet($set) {
             (substr($art['Description'], 0, 270)."......") :
             ($art['Description'] == null ? "该艺术品暂无描述" : $art['Description']);
         // 判断state是已售出还是信息有变动还是无误，优先级从左至右降低
-        $state = $art['State'] ? SOLD :
-            $art['VersionNumber'] > $art['ArtVersion'] ? MODIFIED : NORMAL;
+        $state = ($art['State'])? (SOLD) :
+            (($art['VersionNumber'] > $art['ArtVersion']) ? MODIFIED : NORMAL);
         $page = $page.getCartArtInfoPage(
             $art['CartID'], $art['ArtID'],
             $art['ImageFileName'], $art['Title'], $art['ArtistName'],
@@ -87,7 +87,7 @@ function getCartArtInfoPage($cartID, $artID, $img, $artName, $author, $descripti
 }
 
 /**
- * @param $state 0代表无误，1代表艺术品已售出，2代表信息存在变动
+ * @param $state
  * @return string
  * 获得购物车中提示的界面（已售出/信息待更新）
  */
