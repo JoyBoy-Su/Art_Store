@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/profile.css">
+    <script src="js/profile.js"></script>
     <title>个人中心</title>
 </head>
 
@@ -25,12 +26,6 @@
             </div>
         </div>
         <!-- 右侧选项栏 -->
-        <div class="right">
-            <a href="index.php">主页</a>
-            <a href="login.php">登录</a>
-            <a href="register.php">注册</a>
-            <a href="cart.php">购物车</a>
-        </div>
     </div>
 </nav>
 
@@ -50,8 +45,8 @@
     </div>
     <!-- 搜索部分 -->
     <div class="search">
-        <input type="text" value="请输入关键词">
-        <button></button>
+        <input type="text" placeholder="请输入关键词" id="search-input">
+        <button id="search-btn"></button>
     </div>
 </div>
 
@@ -59,7 +54,7 @@
 <div class="box">
     <div class="profile w">
         <div class='profile-head'>
-            <h3> <span> UserName </span> 的个人中心 </h3>
+            <h3> <span id="user-name"></span> 的个人中心 </h3>
         </div>
         <!-- 选择展示的信息 -->
         <div class="profile-choice" checked="1">
@@ -72,88 +67,6 @@
         </div>
         <!-- 展示的信息 -->
         <div class="profile-info">
-            <!-- 展示用户的个人信息 -->
-<!--            <div class='personal-info-item'>-->
-<!--                <div class='item-label'>-->
-<!--                    <label for=''>用户名称：</label>-->
-<!--                </div>-->
-<!--                <div class='item-content'>-->
-<!--                    UserName-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class='personal-info-item'>-->
-<!--                <div class='item-label'>-->
-<!--                    <label for=''>电话：</label>-->
-<!--                </div>-->
-<!--                <div class='item-content'>-->
-<!--                    Phone-->
-<!--                </div>-->
-<!--                <div class='item-message' id='title-message'></div>-->
-<!--            </div>-->
-<!--            <div class='personal-info-item'>-->
-<!--                <div class='item-label'>-->
-<!--                    <label for=''>地址：</label>-->
-<!--                </div>-->
-<!--                <div class='item-content'>-->
-<!--                    Address-->
-<!--                </div>-->
-<!--                <div class='item-message' id='title-message'></div>-->
-<!--            </div>-->
-<!--            <div class='personal-info-item'>-->
-<!--                <div class='item-label'>-->
-<!--                    <label for=''>邮箱：</label>-->
-<!--                </div>-->
-<!--                <div class='item-content'>-->
-<!--                    Email-->
-<!--                </div>-->
-<!--                <div class='item-message' id='title-message'></div>-->
-<!--            </div>-->
-<!--            <div class='personal-info-item'>-->
-<!--                <div class='item-label'>-->
-<!--                    <label for=''>用户当前余额：</label>-->
-<!--                </div>-->
-<!--                <div class='item-content'>-->
-<!--                    Balance-->
-<!--                </div>-->
-<!--                <div class='item-message' id='title-message'></div>-->
-<!--            </div>-->
-            <!-- 展示已发布的艺术品 -->
-<!--            <div class='art-item'>-->
-<!--                <div class='image'>-->
-<!--                    <img src='./static/img/works/large/006040.jpg'>-->
-<!--                </div>-->
-<!--                < 基本信息 -->
-<!--                <div class='art-info'>-->
-<!--                    <h3> artName • author</h3>-->
-<!--                    <div style='margin-top: 5px'> description </div>-->
-<!--                </div>-->
-<!--                < 发布信息 -->
-<!--                <div class='date-info'>-->
-<!--                    <h3>发布日期：2022-5-27</h3>-->
-<!--                </div>-->
-<!--                <div class='price'> ￥price </div>-->
-<!--                <div class='operation'>-->
-<!--                    <div class='delete'>删除</div>-->
-<!--                    <div class='detail'>修改</div>-->
-<!--                </div>-->
-<!--            </div>-->
-            <!-- 展示买入的艺术品 -->
-            <div class='art-item'>
-                <div class='image'>
-                    <img src='./static/img/works/large/006040.jpg'>
-                </div>
-                <div class='art-info'>
-                    <h3> artName • author</h3>
-                    <div style='margin-top: 5px'> description </div>
-                </div>
-                <div class='order-info'>
-                    <h3>订单编号：<span>203020103</span></h3>
-                </div>
-                <div class='date-info'>
-                    <h3>订单日期：<span>2022-5-27</span></h3>
-                </div>
-                <div class='price'> ￥price </div>
-            </div>
         </div>
     </div>
 </div>

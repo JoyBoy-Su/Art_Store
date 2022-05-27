@@ -59,7 +59,8 @@ function getUserInfo() {
             "userid" => 0,
             "username" => "",
             "address" => "",
-            "phone" => ""
+            "phone" => "",
+            "email" => ""
         ],
     ];
     // 获取cookie中的token
@@ -71,13 +72,14 @@ function getUserInfo() {
         if($userID != 0) {
             // token 有效，根据userid查信息
             $util = new DBUtil();
-            $sql = "select UserID, UserName, Address, Phone
+            $sql = "select UserID, UserName, Address, Phone, Email
                 from users where UserID = ?";
             $user = $util->query($sql, $userID)[0];
             $resp['userinfo']['userid'] = $userID;
             $resp['userinfo']['username'] = $user['UserName'];
             $resp['userinfo']['address'] = $user['Address'];
             $resp['userinfo']['phone'] = $user['Phone'];
+            $resp['userinfo']['email'] = $user['Email'];
             $resp['success'] = true;
         }
     }

@@ -166,3 +166,21 @@
 .art-item .order-info h3 span {
     color: #ff7c2d;
 }
+
+/* 按钮样式 */
+.profile-info .form-btn {
+    margin: 10px 300px;
+}
+.profile-info .form-btn button {
+    margin-top: 15px;
+    margin-left: auto;
+    width: 120px;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 5%;
+}
+
+.profile-info .form-btn .submit-btn:hover{
+    color: #e8e6e3;
+    text-decoration: underline;
+}
