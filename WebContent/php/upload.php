@@ -70,3 +70,4 @@ function getUploadPage($token, $artID) {
     // 4、根据以上信息得到页面
     return getUploadInfoPage($userName, $art, $eras, $genres);
 }
+

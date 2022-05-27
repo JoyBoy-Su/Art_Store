@@ -12,7 +12,7 @@
  * 获得发布/修改的表单页面
  */
 function getUploadInfoPage($userName, $art, $eras, $genres) {
-    $description = ($art['Description'] == null) ? "该艺术品暂无简介" : $art['Description'];
+    $img = ($art['ImageFileName'] == null) ? "" : "./static/img/works/large/{$art['ImageFileName']}.jpg";
     return "<!-- 发布/修改基本信息 -->
         <div class='upload-modify-head'>
             <h3> <span> {$userName} </span> 发布 / 修改</h3>
@@ -29,7 +29,7 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                     <div class='item-input'>
                         <input type='text' id='art-title' value='{$art['Title']}'>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='title-message'></div>
                 </div>
                 <!--  作者名称    -->
                 <div class='form-item'>
@@ -39,7 +39,7 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                     <div class='item-input'>
                         <input type='text' id='art-author' value='{$art['Author']}'>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='author-message'></div>
                 </div>
                 <!--  艺术品简介    -->
                 <div class='form-item'>
@@ -47,9 +47,9 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                         <label for='art-description'>艺术品简介：</label>
                     </div>
                     <div class='item-input'>
-                        <input type='text' id='art-description' value='{$description}'>
+                        <input type='text' id='art-description' value='{$art['Description']}'>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='description-message'></div>
                 </div>
                 <!--  艺术品图片    -->
                 <div class='form-item'>
@@ -59,17 +59,17 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                     <div class='item-input'>
                         <input type='file' id='art-img' value='{$art['ImageFileName']}' accept='image/*'>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='img-message'></div>
                 </div>
                 <!--  艺术品年份    -->
                 <div class='form-item'>
                     <div class='item-label'>
-                        <label for='art-description'>年份：</label>
+                        <label for='art-year'>年份：</label>
                     </div>
                     <div class='item-input'>
                         <input type='number' min='-2020' max='202' id='art-year' value='{$art['Year']}'>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='year-message'></div>
                 </div>
                 <!--  艺术品时代    -->
                 <div class='form-item'>
@@ -81,7 +81,7 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                             .getErasSelectPage($eras, $art['EraID']).
                         "</select>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='era-message'></div>
                 </div>
                 <!--  艺术品风格流派    -->
                 <div class='form-item'>
@@ -93,7 +93,7 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                             .getGenresSelectPage($genres, $art['GenreID']).
                         "</select>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='genre-message'></div>
                 </div>
                 <!--  艺术品长度    -->
                 <div class='form-item'>
@@ -103,7 +103,7 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                     <div class='item-input'>
                         <input type='number' min='1' id='art-width' value='{$art['Width']}'>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='width-message'></div>
                 </div>
                 <!--  艺术品宽度    -->
                 <div class='form-item'>
@@ -113,7 +113,7 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                     <div class='item-input'>
                         <input type='number' min='1' id='art-height' value='{$art['Height']}'>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='height-message'></div>
                 </div>
                 <!--  艺术品售价    -->
                 <div class='form-item'>
@@ -123,16 +123,15 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                     <div class='item-input'>
                         <input type='number' min='1' id='art-price' value='{$art['Price']}'>
                     </div>
-                    <div class='item-message'></div>
+                    <div class='item-message' id='price-message'></div>
                 </div>
             </div>
             <!-- 图片预览 -->
             <div class='form-img'>
-                <img src='./static/img/works/large/{$art['ImageFileName']}.jpg' id='img-preview'>
+                <img src='{$img}' id='img-preview'>
             </div>
             <div class='form-btn'>
-                <button class='submit-btn'>确认</button>
-                <button class='cancel-btn'>取消</button>
+                <button class='submit-btn' id='confirm-btn'>确认</button>
             </div>
         </div>";
 }

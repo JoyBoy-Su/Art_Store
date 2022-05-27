@@ -20,7 +20,7 @@
             <div class="welcome">欢迎来到</div>
             <!-- 艺术字设置为背景图片 -->
             <div class="name">
-                <a href="#">ArtStore</a>
+                <a href="index.php">ArtStore</a>
             </div>
             <div class="welcome"> welcome to art store </div>
         </div>

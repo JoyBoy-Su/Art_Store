@@ -72,3 +72,25 @@ function validEmail(email) {
     let emailReg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     return emailReg.test(email);
 }
+
+/**
+ * 校验输入是否为正整数
+ * @param cont
+ * @returns {boolean}
+ */
+function validPositiveInteger(cont) {
+    let reg = /^[0-9]*[1-9][0-9]*$/;
+    return reg.test(cont);
+}
+
+/**
+ * 校验输入是否为正数
+ * @param cont
+ * @returns {boolean}
+ */
+function validPositiveNumber(cont) {
+    // 先判断是否为数据
+    let par = parseFloat(cont);
+    if(isNaN(par)) return false;
+    return par > 0;
+}
