@@ -34,6 +34,11 @@ if(isset($_REQUEST['type'])) {
             chargeMoney($_COOKIE['token'], $_REQUEST['money']);
             $resp['success'] = true;
             break;
+        case "delete":
+            $result = deleteArt($_COOKIE['token'], $_REQUEST['artID']);
+            $resp["success"] = $result["success"];
+            $resp["message"] = $result["message"];
+            break;
     }
 }
 
@@ -123,4 +128,42 @@ function chargeMoney($token, $money) {
     // 3、设置新的余额
     $sql = "update users set Balance = ? where UserID = ?";
     $util->update($sql, $balance + $money, $userID);
+}
+
+/**
+ * @param $token
+ * @param $artID
+ * @return array
+ * 根据艺术品id删除艺术品
+ */
+function deleteArt($token, $artID) {
+    $resp = [
+        "success" => false,
+        "message" => ""
+    ];
+    // 1、确定userID，与art的信息
+    global $auth;
+    $userID = $auth->checkToken($token);
+    global $util;
+    $sql = "select * from arts where ArtID = ?";
+    $art = $util->query($sql, $artID)[0];
+    // 2、判断artID是否为userID发布
+    if($art['AccessionUserID'] != $userID) {
+        $resp["message"] = "权限不足";
+        return $resp;
+    }
+    // 3、判断art的状态是否为已售出，若已售出不可删除
+    if($art['State']) {
+        $resp["message"] = "该艺术品已售出";
+        return $resp;
+    }
+    // 4、art状态为未售出，进行删除
+    $sql = "delete from arts where ArtID = ?";
+    $util->update($sql, $artID);
+    // 5、与其相关的购物车记录一同删除
+    $sql = "delete from carts where ArtID = ?";
+    $util->update($sql, $artID);
+    $resp["success"] = true;
+    // 6、TODO : 删除相关文件
+    return $resp;
 }

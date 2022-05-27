@@ -79,6 +79,7 @@ function getUploadPageBySet($set) {
 }
 
 /**
+ * @param $artID
  * @param $img
  * @param $artName
  * @param $author
@@ -90,7 +91,7 @@ function getUploadPageBySet($set) {
  */
 function getUploadArt($artID, $img, $artName, $author, $description, $date, $price) {
     return "<!-- 展示已发布的艺术品 -->
-            <div class='art-item'>
+            <div class='art-item' id='art-{$artID}'>
                 <div class='art-item-click' artId='{$artID}'>
                     <div class='image'>
                         <img src='./static/img/works/large/{$img}.jpg'>
@@ -107,8 +108,8 @@ function getUploadArt($artID, $img, $artName, $author, $description, $date, $pri
                     <div class='price'> ￥{$price} </div>
                 </div>
                 <div class='operation'>
-                    <div class='delete'>删除</div>
-                    <div class='modify'>修改</div>
+                    <div class='delete-art-btn' artID='{$artID}'>删除</div>
+                    <div class='modify-art-btn' artID='{$artID}'>修改</div>
                 </div>
             </div>";
 }
@@ -133,6 +134,7 @@ function getOrderPageBySet($set) {
 }
 
 /**
+ * @param $artID
  * @param $img
  * @param $artName
  * @param $author

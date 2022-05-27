@@ -130,6 +130,50 @@ function bindArtClick() {
 }
 
 /**
+ * 为发布的艺术品绑定删除单击事件
+ */
+function bindDelete() {
+    let btnObjs = $(".delete-art-btn");
+    for (let i = 0; i < btnObjs.length; i++) {
+        btnObjs[i].onclick = function () {
+            // 发请求删除
+            let artID = parseInt(btnObjs[i].getAttribute("artID"));
+            $.ajax({
+                type: "POST",
+                url: "./php/profile.php?type=delete",
+                dataType: "json",
+                data: { artID },
+                success : function (resp) {
+                    if(resp.success) {
+                        alert("删除成功");
+                        // 删除dom
+                        $("#art-" + artID).remove();
+                    } else {
+                        alert("删除失败，" + resp.message);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            });
+        }
+    }
+}
+
+/**
+ * 为艺术品修改绑定单击事件
+ */
+function bindModify() {
+    let btnObjs = $(".modify-art-btn");
+    for (let i = 0; i < btnObjs.length; i++) {
+        btnObjs[i].onclick = function () {
+            // 带参数跳转到发布/修改界面
+            window.location.href = "upload.php?id=" + btnObjs[i].getAttribute("artID");
+        }
+    }
+}
+
+/**
  * 更新展示的内容
  * @param index
  */
@@ -161,10 +205,12 @@ function getUploadPage() {
         url: "./php/profile.php?type=upload",
         dataType: "json",
         success : function (resp) {
-            // 展示个人信息页面
+            // 展示已发布信息页面
             $(".profile-info").html(resp.page);
             // 绑定单击事件
             bindArtClick();
+            bindDelete();
+            bindModify();
         },
         error: function (err) {
             console.log(err);
@@ -182,7 +228,7 @@ function getBuyPage() {
         url: "./php/profile.php?type=buy",
         dataType: "json",
         success : function (resp) {
-            // 展示个人信息页面
+            // 展示已买入页面
             $(".profile-info").html(resp.page);
             // 绑定单击事件
             bindArtClick();
@@ -203,7 +249,7 @@ function getSellPage() {
         url: "./php/profile.php?type=sell",
         dataType: "json",
         success : function (resp) {
-            // 展示个人信息页面
+            // 展示已卖出页面
             $(".profile-info").html(resp.page);
             // 绑定单击事件
             bindArtClick();
