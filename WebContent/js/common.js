@@ -183,3 +183,18 @@ function bindSearchBtnInOtherPage() {
         if(keyword !== "") window.location.href = "search.php?keyword=" + keyword;
     }
 }
+
+/**
+ * 获取用户的基本信息
+ * @returns {*[]}
+ */
+function getUserInfo() {
+    const xhr = new XMLHttpRequest();
+    const url = './php/common.php?type=userinfo';
+    xhr.open('get', url, false);     // 同步请求
+    xhr.send();
+    const res = JSON.parse(xhr.responseText);
+    if(res.userinfo.success) {
+        return res.userinfo.userinfo;
+    } return null;
+}

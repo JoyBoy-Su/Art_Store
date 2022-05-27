@@ -23,24 +23,13 @@ class DBUtil {
 
     // 执行查询语句
     public function query($sql, ...$params) {
-        try {
-            // 预编译
-            $statement = $this->connection->prepare($sql);
-            // 填充占位符
-            for ($i = 0; $i < count($params); $i++) {
-                $statement->bindValue($i + 1, $params[$i]);
-            }
-            // 查询
-            $statement->execute();
-            $result = array();
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC)){
-                array_push($result,$row);   //将每一条数据添加到结果集
-            }
-            // 返回结果集
-            return $result;
-        } catch (PDOException $e) {
-            echo "conn_error:<br/>" . $e -> getMessage();
-        }
+        return $this->getResult($sql, $params);
+    }
+
+    // 执行数组查询语句
+    // 执行查询语句
+    public function queryByArray($sql, $arr) {
+        return $this->getResult($sql, $arr);
     }
 
     public function update($sql, ...$params) {
@@ -62,5 +51,33 @@ class DBUtil {
     public function __destruct() {
         // 关闭数据库连接
         $this->connection = null;
+    }
+
+    /**
+     * @param $sql
+     * @param $arr
+     * @return array
+     */
+    public function getResult($sql, $arr)
+    {
+        try {
+            // 预编译
+            $statement = $this->connection->prepare($sql);
+            // 填充占位符
+            for ($i = 0; $i < count($arr); $i++) {
+                $statement->bindValue($i + 1, $arr[$i]);
+            }
+            // 查询
+            $statement->execute();
+            $result = array();
+            while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                array_push($result, $row);   //将每一条数据添加到结果集
+            }
+            // 返回结果集
+            return $result;
+        } catch (PDOException $e) {
+            echo "conn_error:<br/>" . $e->getMessage();
+        }
+        return $result;
     }
 }

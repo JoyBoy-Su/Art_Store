@@ -40,7 +40,8 @@ function getCartBasicInfoPage($userName, $count){
         <div class='cart-head'>
             <h3> <span>$userName</span> 的购物车（全部 <span id='cart-total'>{$count}</span> 个）</h3>
             <div class='selected'>
-                已选商品（不含运费） <span id='total-price'>0.00</span>
+                已选商品（不含运费） <span>￥</span>
+                <span id='total-price'>0.00</span>
                 <button id='payment-btn' total='[]'> 结算 </button>
             </div>
         </div>
@@ -77,7 +78,7 @@ function getCartArtInfoPage($cartID, $artID, $img, $artName, $author, $descripti
             <div class='tips'>"
                 .getTipsInfoPage($state).
             "</div>
-            <div class='price' id='cart-price-{$cartID}' price='{$price}'> {$price} </div>
+            <div class='price' id='cart-price-{$cartID}' price='{$price}'> ￥{$price} </div>
             <div class='operation'>
                 <div class='delete-cart' cartID='{$cartID}'>从购物车中删除</div>
                 <div class='detail' artID='{$artID}'>查看详情</div>

@@ -18,7 +18,7 @@ window.onload = function () {
 }
 
 function getCartPage() {
-    // 发请求获取艺术品详情内容
+    // 发请求获取购物车详情内容
     $.ajax({
         type: "GET",
         url: "./php/cart.php?type=get",
@@ -33,6 +33,8 @@ function getCartPage() {
             bindCheckbox();
             // 为全选按钮绑定单击事件
             bindCheckAll();
+            // 绑定结算按钮
+            bindPayment();
         },
         error: function (err) {
             console.log(err);
@@ -118,6 +120,34 @@ function bindCheckAll() {
 }
 
 /**
+ * 为结算按钮绑定单击事件
+ */
+function bindPayment() {
+    // 判断total，如果没有选择则无反应
+    let paymentObj = $("#payment-btn");
+    paymentObj.click(function () {
+        let arr = JSON.parse(paymentObj.attr("total"));
+        if(arr.length === 0) return;
+        // TODO : 校验是否存在已经售出的商品
+
+        // 显示总价、账户余额、地址、电话
+        let userInfo = getUserInfo();
+        let resp = confirm(
+            "您的信息：\n" +
+            "用户名：" + userInfo.username + "\n" +
+            "电话：" + userInfo.phone + "\n" +
+            "地址：" + userInfo.address + "\n"
+        );
+        // 如果确认，则处理支付逻辑
+        if(resp) {
+            let cartArr = JSON.parse($("#payment-btn").attr("total"));
+            paymentCart(cartArr);
+            // console.log(cartArr);
+        }
+    });
+}
+
+/**
  * 按cartID发请求删除购物车信息
  * @param cartID
  */
@@ -161,6 +191,12 @@ function updateAfterDelete(cartID) {
     if(checkboxObj.checked) updateAfterCanceled(cartID);
     // 删除div
     $("#cart-" + cartID).remove();
+    // 判断是否全选
+    let paymentObj = $("#payment-btn");
+    let arr = JSON.parse(paymentObj.attr("total"));
+    if(arr.length === parseInt($("#cart-total").html())) {
+        document.getElementById("check-all-cart").checked = true;
+    }
 }
 
 /**
@@ -244,4 +280,33 @@ function updateAfterCanceledAll() {
         checkboxObjs[i].checked = false;
         updateAfterCanceled(parseInt(checkboxObjs[i].getAttribute("cartID")));
     }
+}
+
+/**
+ * 发起请求进行支付
+ */
+function paymentCart(cartArr) {
+    $.ajax({
+        type: "POST",
+        url: "./php/cart.php",
+        data: {
+            type: "payment",
+            cartArr
+        },
+        dataType: "json",
+        success : function (resp) {
+            // 如果返回成功，则提示成功，订单已生成
+            if(resp.success) {
+                alert("交易成功，订单已生成！");
+                // 按cartArr删除div
+                for (let i = 0; i < cartArr.length; i++) {
+                    updateAfterDelete(cartArr[i]);
+                }
+            }
+            else alert("交易失败！\n" + resp.message);
+        },
+        error: function (err) {
+            console.log("error", err);
+        },
+    });
 }

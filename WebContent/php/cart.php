@@ -32,6 +32,9 @@ if(isset($_REQUEST['type'])) {
             $resp['success'] = $result['success'];
             $resp['message'] = $result['message'];
             break;
+        case "payment":
+            $resp = paymentCart($_REQUEST['cartArr']);
+            break;
     }
 } else {
     $resp["detail"] = "<h1>加载出错</h1>";
@@ -94,4 +97,136 @@ function deleteCart($cartID) {
         $result["success"] = true;
     }
     return $result;
+}
+
+/**
+ * @param $cartArr
+ * @return array
+ * 按购物车编号处理交易
+ */
+function paymentCart($cartArr) {
+    $result = [
+        "success" => false,
+        "message" => ""
+    ];
+    // 0、得到所有的艺术品信息
+    // 生成占位符
+    $placeholder = "?";
+    for ($i = 1; $i < count($cartArr); $i++) {
+        $placeholder = $placeholder.",?";
+    }
+    global $util;
+    // 生成sql语句
+    $sql = "select c.CartID, c.UserID, c.ArtID, u.Balance PayUserBalance,
+        a.Price, a.State, a.AccessionUserID, u2.Balance ReceiveUserBalance
+        from carts c
+        left join arts a on c.ArtID = a.ArtID
+        left join artists a2 on a.ArtistID = a2.ArtistID
+        left join users u on c.UserID = u.UserID
+        left join users u2 on a.AccessionUserID = u2.UserID
+        where c.CartID in (".$placeholder.")";
+    $set = $util->queryByArray($sql, $cartArr);
+    // 1、校验支付是否合法
+    $valid = validPayment($set);
+    if(!$valid) {
+        $result['message'] = "存在已售出的艺术品";
+        return $result;
+    }
+    // 2、校验余额是否足够
+    $valid = validBalance($set, $set[0]['PayUserBalance']);
+    if(!$valid) {
+        $result['message'] = "余额不足";
+        return $result;
+    }
+    // 3、可以交易，处理双方余额
+    manageBalance($set, $set[0]['UserID'], $set[0]['PayUserBalance']);
+    // 4、支付成功后处理艺术品状态
+    manageArtState($set);
+    // 5、支付成功后处理订单信息，一件艺术品生成一个订单
+    generateOrders($set);
+    // 6、订单生成完毕，从购物车中删除
+    foreach ($set as $item) deleteCart($item['CartID']);
+    // 6、全部完成返回成功
+    $result['success'] = true;
+    return $result;
+}
+
+/**
+ * @param $set
+ * @return bool
+ * 判断此次支付中是否有已出售的艺术品
+ */
+function validPayment($set) {
+    // 判断是否存在已出售的艺术品，如果有则false
+    foreach ($set as $item) {
+        if($item['State']) return false;
+    }
+    return true;
+}
+
+/**
+ * @param $set
+ * @param $balance
+ * @return bool
+ * 判断余额是否足够
+ */
+function validBalance($set, $balance) {
+    // 判断余额是否足够
+    $price = 0;
+    foreach ($set as $item) $price += $item['Price'];
+    if($balance < $price) return false;
+    return true;
+}
+
+/**
+ * @param $set
+ * @param $payUserID
+ * @param $balance
+ * @return void
+ * 处理双方余额
+ */
+function manageBalance($set, $payUserID, $balance) {
+    // 一件艺术品一件艺术品地交易，循环中设置收款方的余额增加，循环结束一次性减少付款方余额
+    global $util;
+    $totalPrice = 0;
+    $sql = "update users set Balance = ? where UserID = ?";
+    // 更新收款方的余额
+    foreach ($set as $item) {
+        $userID = $item['AccessionUserID'];
+        $newBalance = $item['ReceiveUserBalance'] + $item['Price'];
+        $util->update($sql, $newBalance, $userID);
+        $totalPrice += $item['Price'];
+    }
+    // 更新付款方的余额
+    $newBalance = $balance - $totalPrice;
+    $util->update($sql, $newBalance, $payUserID);
+}
+
+/**
+ * @param $set
+ * @return void
+ * 处理艺术品的状态
+ */
+function manageArtState($set) {
+    global $util;
+    $sql = "update arts set State = true where ArtID = ?";
+    foreach ($set as $item)
+        $util->update($sql, $item['ArtID']);
+}
+
+/**
+ * @param $set
+ * @return void
+ * 为每件交易的艺术品生成订单
+ */
+function generateOrders($set) {
+    // 为每件艺术品生成订单，包括交易双方id，交易时间与交易金额
+    global $util;
+    $sql = "insert into orders (PayUserID, ReceiveUserID, Date, Price) value (?, ?, ?, ?)";
+    foreach ($set as $item) {
+        // 生成订单
+        $date = date('Y-m-d H:i:s', time());
+        // 如果存在出售者
+        $util->update($sql, $item['UserID'], $item['AccessionUserID'], $date, $item['Price']);
+    }
 }

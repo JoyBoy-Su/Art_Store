@@ -51,6 +51,7 @@
     background-color: #aaaaaa;
     color: #fcfbfc;
     border: none;
+    cursor: pointer;
 }
 
 /* 全选 */
