@@ -48,6 +48,8 @@ function getUserInfoPage() {
         success : function (resp) {
             // 展示个人信息页面
             $(".profile-info").html(resp.page);
+            // 为充值按钮绑定事件
+            bindCharge();
         },
         error: function (err) {
             console.log(err);
@@ -78,6 +80,41 @@ function bindChoice() {
             updateProfilePage(i + 1);
         }
     }
+}
+
+/**
+ * 为充值按钮绑定单击事件
+ */
+function bindCharge() {
+    $("#charge-btn").click(function () {
+        // 1、弹出充值框，输入充值的数字，校验正整数
+        let value = prompt("请输入您要充值的金额：", "0");
+        if(value === null || !validPositiveInteger(value)) return;
+        // 2、校验通过后再谈一个确认框，确定则发请求，不确定则取消
+        let money = parseInt(value);
+        let ensure = confirm("您的充值金额为：" + money + "\n您确定要充值吗？");
+        if(!ensure) return;
+        // 3、将该数据发给后端进行充值，直接到账
+        $.ajax({
+            type: "POST",
+            url: "./php/profile.php?type=charge",
+            dataType: "json",
+            data: { money },
+            success : function (resp) {
+                if(resp.success) {
+                    alert("充值成功");
+                    // 修改余额
+                    let balanceObj = $("#item-balance");
+                    balanceObj.html(parseInt(balanceObj.html()) + money);
+                } else {
+                    alert("充值失败，" + resp.message);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            },
+        });
+    });
 }
 
 /**

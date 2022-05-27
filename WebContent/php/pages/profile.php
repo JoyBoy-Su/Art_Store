@@ -50,7 +50,7 @@ function getUserInfoPage($userName, $phone, $address, $email, $balance) {
                 <div class='item-label'>
                     <label for=''>当前余额：</label>
                 </div>
-                <div class='item-content'>
+                <div class='item-content' id='item-balance'>
                     {$balance}
                 </div>
             </div>

@@ -7,7 +7,9 @@ require_once ("./utils/Auth.php");
 require_once ("./pages/profile.php");
 
 $resp = [
-    "page" => ""
+    "page" => "",
+    "success" => false,
+    "message" => ""
 ];
 
 $util = new DBUtil();
@@ -27,6 +29,10 @@ if(isset($_REQUEST['type'])) {
             break;
         case "sell" :
             $resp["page"] = getSellArtPage($_COOKIE['token']);
+            break;
+        case "charge":
+            chargeMoney($_COOKIE['token'], $_REQUEST['money']);
+            $resp['success'] = true;
             break;
     }
 }
@@ -98,4 +104,23 @@ function getSellArtPage($token) {
         where orders.ReceiveUserID = ?";
     $set = $util->query($sql, $userID);
     return getOrderPageBySet($set);
+}
+
+/**
+ * @param $token
+ * @param $money
+ * @return void
+ * 为指定用户充值
+ */
+function chargeMoney($token, $money) {
+    // 1、确定用户id
+    global $auth;
+    $userID = $auth->checkToken($token);
+    // 2、确定用户当前余额
+    global $util;
+    $sql = "select Balance from users where UserID = ?";
+    $balance = $util->query($sql, $userID)[0]['Balance'];
+    // 3、设置新的余额
+    $sql = "update users set Balance = ? where UserID = ?";
+    $util->update($sql, $balance + $money, $userID);
 }
