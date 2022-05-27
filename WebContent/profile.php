@@ -57,12 +57,12 @@
             <h3> <span id="user-name"></span> 的个人中心 </h3>
         </div>
         <!-- 选择展示的信息 -->
-        <div class="profile-choice" checked="1">
+        <div class="profile-choice" index="1">
             <ul>
-                <li class="checked-choice" index="1">个人信息</li>
-                <li index="2">已发布</li>
-                <li index="3">已买入</li>
-                <li index="3">已售出</li>
+                <li class="checked-choice" id="choice-1">个人信息</li>
+                <li id="choice-2">已发布</li>
+                <li id="choice-3">已买入</li>
+                <li id="choice-4">已售出</li>
             </ul>
         </div>
         <!-- 展示的信息 -->

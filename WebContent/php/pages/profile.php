@@ -60,6 +60,25 @@ function getUserInfoPage($userName, $phone, $address, $email, $balance) {
 }
 
 /**
+ * @param $set
+ * @return string
+ * 根据艺术品集合，生成上传艺术品的页面
+ */
+function getUploadPageBySet($set) {
+    $page = "";
+    foreach ($set as $art) {
+        $description = strlen($art['Description']) >= 30 ?
+            substr($art['Description'], 0, 30)."..." :
+            $art['Description'] == null ? "该艺术品暂无描述" : $art['Description'];
+        $page = $page.getUploadArt(
+            $art['ImageFileName'], $art['Title'], $art['Author'],
+            $description, $art['AccessionDate'], $art['Price']
+        );
+    }
+    return $page;
+}
+
+/**
  * @param $img
  * @param $artName
  * @param $author
@@ -90,6 +109,25 @@ function getUploadArt($img, $artName, $author, $description, $date, $price) {
                     <div class='modify'>修改</div>
                 </div>
             </div>";
+}
+
+/**
+ * @param $set
+ * @return string
+ * 根据艺术品集合，生成买入卖出的艺术品订单的页面
+ */
+function getOrderPageBySet($set) {
+    $page = "";
+    foreach ($set as $art) {
+        $description = strlen($art['Description']) >= 30 ?
+            substr($art['Description'], 0, 30)."..." :
+            $art['Description'] == null ? "该艺术品暂无描述" : $art['Description'];
+        $page = $page.getOrderPage(
+                $art['ImageFileName'], $art['Title'], $art['Author'],
+                $description, $art['OrderID'], $art['Date'], $art['Price']
+            );
+    }
+    return $page;
 }
 
 /**
