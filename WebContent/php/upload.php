@@ -102,5 +102,4 @@ function saveFile($userID) {
     // 1、时间戳和userid生成随机文件名
     $fileName = "user_".strval($userID)."_".time();
     // 2、保存文件
-    echo $_FILES['file'];
 }

@@ -1,45 +1,150 @@
-/* .user-info {
+.box {
+    background-color: #eae8eb;
+    padding: 40px 0;
+}
+
+/* 信息展示盒子 */
+.profile {
+    background-color: #ffffff;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+/* 头部信息 */
+.profile-head {
+    overflow: hidden;
+    border-bottom: #e6e6e6 1px solid;
+}
+
+/* 左侧信息 */
+.profile-head h3 {
     float: left;
-    margin: auto;
-    background-color: #e1ffff;
+    margin: 0 25px;
+    color: #3c3c3c;
+    line-height: 80px;
+}
+
+.profile-head h3 span {
+    font-size: 20px;
+    color: #6c6c6c;
+}
+
+/* 左侧选中信息类型 */
+.profile .profile-choice {
+    float: left;
+    margin: 5px 50px;
     width: 150px;
-    height: auto;
+}
+.profile .profile-choice ul li {
+    padding: 10px 0;
     text-align: center;
-    border: 1px solid;
-    font-size: 18px;
-    margin-top: 50px;
-    margin-left: 30px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-.commodity {
-    margin-left: 300px;
-    margin-top: 10px;
-    height: 200px;
+.profile .profile-choice ul li:hover {
+    background-color: #f2f5fc;
+    color: #fc9802;
 }
 
-.upload {
-    background-color: antiquewhite;
+.profile .profile-choice ul .checked-choice {
+    background-color: #f2f5fc;
+    color: #fc9802;
 }
 
-.buy {
-    background-color: aquamarine;
+/* 展示信息的盒子 */
+.profile .profile-info {
+    float: left;
+    margin: 5px 0;
+    overflow: hidden;
+    width: 800px;
+    background-color: #f5f5f5;
 }
 
-.sell {
-    background-color: chartreuse;
+.profile .profile-info .personal-info-item {
+    width: 100%;
+    height: 50px;
 }
-
-.commodity-table {
-    margin-left: 30px;
-    margin-top: 30px;
+/* 选项文字 */
+.profile .profile-info .personal-info-item .item-label {
+    float: left;
+    margin: 5px 10px;
+    width: 150px;
     text-align: center;
-    border: 1px solid;
-    font-size: 18px;
-} */
-/* 
-table,
-th,
-td {
-    border: 1px solid black;
-} */
-/* nav样式 */
+}
+
+/* 选项输入框 */
+.profile .profile-info .personal-info-item .item-content {
+    float: left;
+    margin: 5px 10px;
+    width: 350px;
+    height: 40px;
+}
+
+/* 一件已发布艺术品 */
+.art-item {
+    overflow: hidden;
+    margin: 5px 20px;
+    padding: 5px 0;
+    width: 750px;
+    transition: 0.3s;
+    border-radius: 20px;
+    background-color: #f2f5fc;
+    cursor: pointer;
+}
+.art-item:hover {
+    box-shadow: 0 3px 13px 3px rgba(51, 51, 51, 0.5);
+}
+
+.art-item .image {
+    float: left;
+    width: 100px;
+    height: 100px;
+}
+.art-item .image img {
+    width: 90px;
+    height: 90px;
+    margin: 5px 10px;
+}
+
+.art-item .art-info {
+    float: left;
+    padding: 5px 10px;
+}
+
+.art-item .accession-info {
+    float: left;
+    padding: 5px 30px;
+}
+
+.art-item .accession-info h3 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #ff7c2d;
+    line-height: 80px;
+}
+
+.art-item .price {
+    float: left;
+    margin-left: 50px;
+    line-height: 85px;
+    color: #ff4400;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* 操作选项样式 */
+.art-item .operation {
+    float: left;
+    margin-left: 60px;
+    padding-top: 27px;
+    text-align: center;
+}
+.art-item .operation div {
+    font-size: 14px;
+    cursor: pointer;
+}
+.art-item .operation div:hover {
+    text-decoration: underline;
+    color: #fd444f;
+}

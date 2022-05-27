@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/profile.css">
-    <title>Profile</title>
+    <title>个人中心</title>
 </head>
 
 <body>
@@ -56,46 +56,125 @@
 </div>
 
 <!-- 核心内容 -->
-<div class="box w">
-    <!-- 个人信息，左浮动 -->
-    <div class="profile-nav">
-        <ul>
-            <li>个人信息</li>
-            <li>上传的艺术品</li>
-            <li>购买的艺术品</li>
-            <li>卖出的艺术品</li>
-        </ul>
+<div class="box">
+    <div class="profile w">
+        <div class='profile-head'>
+            <h3> <span> UserName </span> 的个人中心 </h3>
+        </div>
+        <!-- 选择展示的信息 -->
+        <div class="profile-choice" checked="1">
+            <ul>
+                <li class="checked-choice" index="1">个人信息</li>
+                <li index="2">已发布</li>
+                <li index="3">已买入</li>
+                <li index="3">已售出</li>
+            </ul>
+        </div>
+        <!-- 展示的信息 -->
+        <div class="profile-info">
+            <!-- 展示用户的个人信息 -->
+<!--            <div class='personal-info-item'>-->
+<!--                <div class='item-label'>-->
+<!--                    <label for=''>用户名称：</label>-->
+<!--                </div>-->
+<!--                <div class='item-content'>-->
+<!--                    UserName-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class='personal-info-item'>-->
+<!--                <div class='item-label'>-->
+<!--                    <label for=''>电话：</label>-->
+<!--                </div>-->
+<!--                <div class='item-content'>-->
+<!--                    Phone-->
+<!--                </div>-->
+<!--                <div class='item-message' id='title-message'></div>-->
+<!--            </div>-->
+<!--            <div class='personal-info-item'>-->
+<!--                <div class='item-label'>-->
+<!--                    <label for=''>地址：</label>-->
+<!--                </div>-->
+<!--                <div class='item-content'>-->
+<!--                    Address-->
+<!--                </div>-->
+<!--                <div class='item-message' id='title-message'></div>-->
+<!--            </div>-->
+<!--            <div class='personal-info-item'>-->
+<!--                <div class='item-label'>-->
+<!--                    <label for=''>邮箱：</label>-->
+<!--                </div>-->
+<!--                <div class='item-content'>-->
+<!--                    Email-->
+<!--                </div>-->
+<!--                <div class='item-message' id='title-message'></div>-->
+<!--            </div>-->
+<!--            <div class='personal-info-item'>-->
+<!--                <div class='item-label'>-->
+<!--                    <label for=''>用户当前余额：</label>-->
+<!--                </div>-->
+<!--                <div class='item-content'>-->
+<!--                    Balance-->
+<!--                </div>-->
+<!--                <div class='item-message' id='title-message'></div>-->
+<!--            </div>-->
+            <!-- 展示已发布的艺术品 -->
+            <div class='art-item'>
+                <div class='image'>
+                    <img src='./static/img/works/large/006040.jpg'>
+                </div>
+                <!-- 基本信息 -->
+                <div class='art-info'>
+                    <h3> artName • author</h3>
+                    <div style='margin-top: 5px'> description </div>
+                </div>
+                <!-- 发布信息 -->
+                <div class='accession-info'>
+                    <h3>发布日期：2022-5-27</h3>
+                </div>
+                <div class='price'> ￥price </div>
+                <div class='operation'>
+                    <div class='delete'>删除</div>
+                    <div class='detail'>修改</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- 艺术品信息 -->
-    <div class="commodity-info">
-        <div class="upload commodity">
-            我上传的艺术品：
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+    <div class="w">
+        <div class="copyright">
+            <img src="./static/img/logo-full.png" alt="">
+            <p>
+                艺术品交易网站……
+            </p>
         </div>
-        <div class="buy commodity">
-            我购买的艺术品：
-            <table class="commodity-table">
-                <tr>
-                    <th>订单编号</th>
-                    <th>订单名称</th>
-                    <th>订单时间</th>
-                    <th>订单金额</th>
-                </tr>
-                <tr>
-                    <td>xxx</td>
-                    <td>xxx</td>
-                    <td>xxx</td>
-                    <td>xxx</td>
-                </tr>
-                <tr>
-                    <td>xxx</td>
-                    <td>xxx</td>
-                    <td>xxx</td>
-                    <td>xxx</td>
-                </tr>
-            </table>
-        </div>
-        <div class="sell commodity">
-            我卖出的艺术品：
+        <div class="links">
+            <dl>
+                <dt>关于ArtTrading</dt>
+                <dd>关于</dd>
+                <dd>团队管理</dd>
+                <dd>工作机会</dd>
+                <dd>客户服务</dd>
+                <dd>帮助</dd>
+            </dl>
+            <dl>
+                <dt>关于ArtTrading</dt>
+                <dd>关于</dd>
+                <dd>团队管理</dd>
+                <dd>工作机会</dd>
+                <dd>客户服务</dd>
+                <dd>帮助</dd>
+            </dl>
+            <dl>
+                <dt>关于ArtTrading</dt>
+                <dd>关于</dd>
+                <dd>团队管理</dd>
+                <dd>工作机会</dd>
+                <dd>客户服务</dd>
+                <dd>帮助</dd>
+            </dl>
         </div>
     </div>
 </div>
