@@ -21,6 +21,7 @@ function getCartArtPageBySet($set) {
         $state = $art['State'] ? SOLD :
             $art['VersionNumber'] > $art['ArtVersion'] ? MODIFIED : NORMAL;
         $page = $page.getCartArtInfoPage(
+            $art['CartID'], $art['ArtID'],
             $art['ImageFileName'], $art['Title'], $art['ArtistName'],
             $description, $art['Price'], $state
         );
@@ -37,10 +38,10 @@ function getCartArtPageBySet($set) {
 function getCartBasicInfoPage($userName, $count){
     return "<!-- 购物车基本信息 -->
         <div class='cart-head'>
-            <h3> <span>$userName</span> 的购物车（全部 {$count} 个）</h3>
+            <h3> <span>$userName</span> 的购物车（全部 <span id='cart-total'>{$count}</span> 个）</h3>
             <div class='selected'>
-                已选商品（不含运费） <span>0.00</span>
-                <button> 结算 </button>
+                已选商品（不含运费） <span id='total-Price'>0.00</span>
+                <button id='payment-btn' total='0'> 结算 </button>
             </div>
         </div>
         <div class='all-check'>
@@ -49,6 +50,8 @@ function getCartBasicInfoPage($userName, $count){
 }
 
 /**
+ * @param $cartID
+ * @param $artID
  * @param $img
  * @param $artName
  * @param $author
@@ -58,14 +61,14 @@ function getCartBasicInfoPage($userName, $count){
  * @return string
  * 获得一个艺术品的购物车信息界面
  */
-function getCartArtInfoPage($img, $artName, $author, $description, $price, $state) {
+function getCartArtInfoPage($cartID, $artID, $img, $artName, $author, $description, $price, $state) {
     return "<!-- 购物车的内容 -->
-        <div class='cart-item'>
+        <div class='cart-item' id='cart-{$cartID}'>
             <div class='check'>
-                <input type='checkbox'>
+                <input type='checkbox' class='cart-checkbox' id='checkbox-{$cartID}'>
             </div>
             <div class='image'>
-                <img src='./static/img/works/medium/{$img}.jpg'>
+                <img src='./static/img/works/large/{$img}.jpg'>
             </div>
             <div class='art-info'>
                 <h3> {$artName} • {$author}</h3>
@@ -74,10 +77,10 @@ function getCartArtInfoPage($img, $artName, $author, $description, $price, $stat
             <div class='tips'>"
                 .getTipsInfoPage($state).
             "</div>
-            <div class='price'> {$price} </div>
+            <div class='price' price='{$price}'> {$price} </div>
             <div class='operation'>
-                <div id='delete-cart'>从购物车中删除</div>
-                <div id='detail'>查看详情</div>
+                <div class='delete-cart' cartID='{$cartID}'>从购物车中删除</div>
+                <div class='detail' artID='{$artID}'>查看详情</div>
             </div>
         </div>";
 }

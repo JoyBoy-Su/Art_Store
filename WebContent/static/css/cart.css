@@ -53,10 +53,6 @@
     border: none;
 }
 
-.cart-head .selected .checked {
-    background-color: #ff8600;
-}
-
 /* 全选 */
 .cart .all-check {
     margin-left: 20px;

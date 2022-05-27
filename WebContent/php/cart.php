@@ -11,12 +11,31 @@ $resp = [
         "basic" => "",
         "info" => "",
     ],
+    "success" => false,
+    "message" => ""
 ];
 
 $util = new DBUtil();
 $auth = new Auth();
 
-$resp["page"] = getCartPage($_COOKIE['token']);
+// 如果id存在，按id查找艺术品信息
+if(isset($_REQUEST['type'])) {
+    // 判断操作类型
+    $type = $_REQUEST['type'];
+    switch ($type) {
+        case "get":
+            $resp["page"] = getCartPage($_COOKIE['token']);
+            break;
+        case "delete":
+            $cartID = $_REQUEST['cartID'];
+            $result = deleteCart($cartID);
+            $resp['success'] = $result['success'];
+            $resp['message'] = $result['message'];
+            break;
+    }
+} else {
+    $resp["detail"] = "<h1>加载出错</h1>";
+}
 
 echo json_encode($resp);
 
@@ -50,4 +69,21 @@ function getCartPage($token) {
     // 获得每个艺术品的页面
     $page["info"] = getCartArtPageBySet($set);
     return $page;
+}
+
+/**
+ * @param $cartID
+ * @return array
+ * 删除一条购物车信息
+ */
+function deleteCart($cartID) {
+    $result = [
+        "success" => false,
+        "message" => ""
+    ];
+    global $util;
+    $sql = "delete from carts where CartID = ?";
+    $util->update($sql, $cartID);
+    $result["success"] = true;
+    return $result;
 }
