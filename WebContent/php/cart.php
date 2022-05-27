@@ -18,7 +18,6 @@ $resp = [
 $util = new DBUtil();
 $auth = new Auth();
 
-// 如果id存在，按id查找艺术品信息
 if(isset($_REQUEST['type'])) {
     // 判断操作类型
     $type = $_REQUEST['type'];
