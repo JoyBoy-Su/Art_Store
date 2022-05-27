@@ -57,7 +57,7 @@
     float: left;
     margin: 5px 0;
     overflow: hidden;
-    width: 800px;
+    width: 900px;
     background-color: #f5f5f5;
 }
 
@@ -86,7 +86,7 @@
     overflow: hidden;
     margin: 5px 20px;
     padding: 5px 0;
-    width: 750px;
+    width: 850px;
     transition: 0.3s;
     border-radius: 20px;
     background-color: #f2f5fc;
@@ -112,16 +112,19 @@
     padding: 5px 10px;
 }
 
-.art-item .accession-info {
+.art-item .date-info {
     float: left;
     padding: 5px 30px;
 }
 
-.art-item .accession-info h3 {
+.art-item .date-info h3{
     font-size: 14px;
     font-weight: 400;
-    color: #ff7c2d;
     line-height: 80px;
+}
+
+.art-item .date-info h3 span{
+    color: #ff7c2d;
 }
 
 .art-item .price {
@@ -147,4 +150,19 @@
 .art-item .operation div:hover {
     text-decoration: underline;
     color: #fd444f;
+}
+
+.art-item .order-info {
+    float: left;
+    padding: 5px 30px;
+}
+
+.art-item .order-info h3{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 80px;
+}
+
+.art-item .order-info h3 span {
+    color: #ff7c2d;
 }

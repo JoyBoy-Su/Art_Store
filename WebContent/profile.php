@@ -118,24 +118,41 @@
 <!--                <div class='item-message' id='title-message'></div>-->
 <!--            </div>-->
             <!-- 展示已发布的艺术品 -->
+<!--            <div class='art-item'>-->
+<!--                <div class='image'>-->
+<!--                    <img src='./static/img/works/large/006040.jpg'>-->
+<!--                </div>-->
+<!--                < 基本信息 -->
+<!--                <div class='art-info'>-->
+<!--                    <h3> artName • author</h3>-->
+<!--                    <div style='margin-top: 5px'> description </div>-->
+<!--                </div>-->
+<!--                < 发布信息 -->
+<!--                <div class='date-info'>-->
+<!--                    <h3>发布日期：2022-5-27</h3>-->
+<!--                </div>-->
+<!--                <div class='price'> ￥price </div>-->
+<!--                <div class='operation'>-->
+<!--                    <div class='delete'>删除</div>-->
+<!--                    <div class='detail'>修改</div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <!-- 展示买入的艺术品 -->
             <div class='art-item'>
                 <div class='image'>
                     <img src='./static/img/works/large/006040.jpg'>
                 </div>
-                <!-- 基本信息 -->
                 <div class='art-info'>
                     <h3> artName • author</h3>
                     <div style='margin-top: 5px'> description </div>
                 </div>
-                <!-- 发布信息 -->
-                <div class='accession-info'>
-                    <h3>发布日期：2022-5-27</h3>
+                <div class='order-info'>
+                    <h3>订单编号：<span>203020103</span></h3>
+                </div>
+                <div class='date-info'>
+                    <h3>订单日期：<span>2022-5-27</span></h3>
                 </div>
                 <div class='price'> ￥price </div>
-                <div class='operation'>
-                    <div class='delete'>删除</div>
-                    <div class='detail'>修改</div>
-                </div>
             </div>
         </div>
     </div>
