@@ -13,6 +13,8 @@ window.onload = function () {
     getNav();
     // 获得购物车界面
     getCartPage();
+    // 绑定搜索栏
+    bindSearchBtnInOtherPage();
 }
 
 function getCartPage() {
@@ -27,6 +29,10 @@ function getCartPage() {
             bindDetailClick();
             // 插入后绑定删除的单击事件
             bindDeleteClick();
+            // 为选择购物车绑定单击事件
+            bindCheckbox();
+            // 为全选按钮绑定单击事件
+            bindCheckAll();
         },
         error: function (err) {
             console.log(err);
@@ -73,6 +79,45 @@ function bindDeleteClick() {
 }
 
 /**
+ * 为选择购物车记录绑定单击事件
+ */
+function bindCheckbox() {
+    let checkboxObjs = $(".cart-checkbox");
+    for (let i = 0; i < checkboxObjs.length; i++) {
+        // 为复选框绑定单击事件
+        checkboxObjs[i].onclick = function () {
+            let checked = checkboxObjs[i].checked;
+            // console.log(checked);
+            // 如果选中
+            if( checked ) {
+                // console.log(checkboxObjs[i].getAttribute("cartID"));
+                updateAfterChecked(parseInt(checkboxObjs[i].getAttribute("cartID")));
+            } else {
+                updateAfterCanceled(parseInt(checkboxObjs[i].getAttribute("cartID")));
+            }
+        }
+    }
+}
+
+/**
+ * 为全选绑定单击事件
+ */
+function bindCheckAll() {
+    let checkAllObj = document.getElementById("check-all-cart");
+    checkAllObj.onclick = function () {
+        let checked = checkAllObj.checked;
+        console.log(checked);
+        // 如果选中
+        if( checked ) {
+            // console.log(checkboxObjs[i].getAttribute("cartID"));
+            updateAfterCheckedAll();
+        } else {
+            updateAfterCanceledAll();
+        }
+    }
+}
+
+/**
  * 按cartID发请求删除购物车信息
  * @param cartID
  */
@@ -103,6 +148,7 @@ function deleteCart(cartID) {
 
 /**
  * 在删除一条信息后更新页面
+ * @param cartID
  */
 function updateAfterDelete(cartID) {
     // 更新总数total
@@ -110,16 +156,92 @@ function updateAfterDelete(cartID) {
     let total = parseInt(totalObj.html()) - 1;
     totalObj.html(total);
     // 更新结算，判断当前状态
-    let checkboxObj = $("#checkbox-" + cartID);
+    let checkboxObj = document.getElementById("checkbox-" + cartID);
     // 如果当前状态为选中，则减少总金额，并减少total
-    if(checkboxObj.attr("checked")) {
-        let priceObj = $("#total-price");
-        let price = parseFloat($("#cart-" + cartID + ".price").attr("price"));
-        priceObj.val(priceObj.val() - price);
-        let paymentObj = $("#payment-btn");
-        paymentObj.attr("total", total);
-        if(total === 0) paymentObj.css("background-color", "#aaaaaa");
-    }
+    if(checkboxObj.checked) updateAfterCanceled(cartID);
     // 删除div
     $("#cart-" + cartID).remove();
+}
+
+/**
+ * 在选中一条记录后更新
+ * @param cartID
+ */
+function updateAfterChecked(cartID) {
+    // 更新结算与总价
+    addCartRecord(cartID);
+    let priceObj = $("#total-price");
+    let price = parseFloat($("#cart-price-" + cartID).attr("price"));
+    // console.log(price);
+    // console.log(priceObj.html());
+    priceObj.html(parseFloat(priceObj.html()) + price);
+}
+
+/**
+ * 在取消一条记录后更新
+ * @param cartID
+ */
+function updateAfterCanceled(cartID) {
+    // 更新结算与总价
+    deleteCartRecord(cartID);
+    let priceObj = $("#total-price");
+    let price = parseFloat($("#cart-price-" + cartID).attr("price"));
+    priceObj.html(parseFloat(priceObj.html()) - price);
+}
+
+/**
+ * 从total数组中添加一个id
+ * @param cartID
+ */
+function addCartRecord(cartID) {
+    let paymentObj = $("#payment-btn");
+    let arr = JSON.parse(paymentObj.attr("total"));
+    arr.push(cartID);
+    paymentObj.attr("total", JSON.stringify(arr));
+    if(arr.length > 0) paymentObj.css("background-color", "#ff8300");
+    // 判断是否全选
+    if(arr.length === parseInt($("#cart-total").html())) {
+        document.getElementById("check-all-cart").checked = true;
+    }
+}
+
+/**
+ * 从total数组中删除一个id
+ * @param cartID
+ */
+function deleteCartRecord(cartID) {
+    let paymentObj = $("#payment-btn");
+    let arr = JSON.parse(paymentObj.attr("total"));
+    let result = arr.filter(
+        (p) => p !== cartID
+    );
+    paymentObj.attr("total", JSON.stringify(result));
+    if(result.length === 0) paymentObj.css("background-color", "#aaaaaa");
+    document.getElementById("check-all-cart").checked = false;
+}
+
+/**
+ * 全选的回调
+ */
+function updateAfterCheckedAll() {
+    // 遍历div，更新price和total
+    let checkboxObjs = $(".cart-checkbox");
+    for (let i = 0; i < checkboxObjs.length; i++) {
+        // 为复选框绑定单击事件
+        checkboxObjs[i].checked = true;
+        updateAfterChecked(parseInt(checkboxObjs[i].getAttribute("cartID")));
+    }
+}
+
+/**
+ * 全选的回调
+ */
+function updateAfterCanceledAll() {
+    // 遍历div，更新price和total
+    let checkboxObjs = $(".cart-checkbox");
+    for (let i = 0; i < checkboxObjs.length; i++) {
+        // 为复选框绑定单击事件
+        checkboxObjs[i].checked = false;
+        updateAfterCanceled(parseInt(checkboxObjs[i].getAttribute("cartID")));
+    }
 }

@@ -40,12 +40,12 @@ function getCartBasicInfoPage($userName, $count){
         <div class='cart-head'>
             <h3> <span>$userName</span> 的购物车（全部 <span id='cart-total'>{$count}</span> 个）</h3>
             <div class='selected'>
-                已选商品（不含运费） <span id='total-Price'>0.00</span>
-                <button id='payment-btn' total='0'> 结算 </button>
+                已选商品（不含运费） <span id='total-price'>0.00</span>
+                <button id='payment-btn' total='[]'> 结算 </button>
             </div>
         </div>
         <div class='all-check'>
-            <input type='checkbox'> 全选
+            <input type='checkbox' id='check-all-cart'> 全选
         </div>";
 }
 
@@ -65,7 +65,7 @@ function getCartArtInfoPage($cartID, $artID, $img, $artName, $author, $descripti
     return "<!-- 购物车的内容 -->
         <div class='cart-item' id='cart-{$cartID}'>
             <div class='check'>
-                <input type='checkbox' class='cart-checkbox' id='checkbox-{$cartID}'>
+                <input type='checkbox' class='cart-checkbox' id='checkbox-{$cartID}' cartID='{$cartID}'>
             </div>
             <div class='image'>
                 <img src='./static/img/works/large/{$img}.jpg'>
@@ -77,7 +77,7 @@ function getCartArtInfoPage($cartID, $artID, $img, $artName, $author, $descripti
             <div class='tips'>"
                 .getTipsInfoPage($state).
             "</div>
-            <div class='price' price='{$price}'> {$price} </div>
+            <div class='price' id='cart-price-{$cartID}' price='{$price}'> {$price} </div>
             <div class='operation'>
                 <div class='delete-cart' cartID='{$cartID}'>从购物车中删除</div>
                 <div class='detail' artID='{$artID}'>查看详情</div>

@@ -82,8 +82,16 @@ function deleteCart($cartID) {
         "message" => ""
     ];
     global $util;
-    $sql = "delete from carts where CartID = ?";
-    $util->update($sql, $cartID);
-    $result["success"] = true;
+    // 先查找是否存在
+    $sql = "select * from carts where CartID = ?";
+    $set = $util->query($sql, $cartID);
+    if(count($set) == 0) {
+        $result["success"] = false;
+        $result["message"] = "您的购物车中无该艺术品";
+    } else {
+        $sql = "delete from carts where CartID = ?";
+        $util->update($sql, $cartID);
+        $result["success"] = true;
+    }
     return $result;
 }
