@@ -118,6 +118,18 @@ function bindCharge() {
 }
 
 /**
+ * 为艺术品div绑定点击事件
+ */
+function bindArtClick() {
+    let artObjs = $(".art-item-click");
+    for (let i = 0; i < artObjs.length; i++) {
+        artObjs[i].onclick = function () {
+            window.location.href = "detail.php?id=" + artObjs[i].getAttribute("artID");
+        }
+    }
+}
+
+/**
  * 更新展示的内容
  * @param index
  */
@@ -151,6 +163,8 @@ function getUploadPage() {
         success : function (resp) {
             // 展示个人信息页面
             $(".profile-info").html(resp.page);
+            // 绑定单击事件
+            bindArtClick();
         },
         error: function (err) {
             console.log(err);
@@ -170,6 +184,8 @@ function getBuyPage() {
         success : function (resp) {
             // 展示个人信息页面
             $(".profile-info").html(resp.page);
+            // 绑定单击事件
+            bindArtClick();
         },
         error: function (err) {
             console.log(err);
@@ -189,6 +205,8 @@ function getSellPage() {
         success : function (resp) {
             // 展示个人信息页面
             $(".profile-info").html(resp.page);
+            // 绑定单击事件
+            bindArtClick();
         },
         error: function (err) {
             console.log(err);

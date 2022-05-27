@@ -71,7 +71,7 @@ function getUploadPageBySet($set) {
             substr($art['Description'], 0, 30)."..." :
             $art['Description'] == null ? "该艺术品暂无描述" : $art['Description'];
         $page = $page.getUploadArt(
-            $art['ImageFileName'], $art['Title'], $art['Author'],
+            $art['ArtID'], $art['ImageFileName'], $art['Title'], $art['Author'],
             $description, $art['AccessionDate'], $art['Price']
         );
     }
@@ -88,22 +88,24 @@ function getUploadPageBySet($set) {
  * @return string
  * 根据信息生成一条已发布的艺术品页面
  */
-function getUploadArt($img, $artName, $author, $description, $date, $price) {
+function getUploadArt($artID, $img, $artName, $author, $description, $date, $price) {
     return "<!-- 展示已发布的艺术品 -->
             <div class='art-item'>
-                <div class='image'>
-                    <img src='./static/img/works/large/{$img}.jpg'>
+                <div class='art-item-click' artId='{$artID}'>
+                    <div class='image'>
+                        <img src='./static/img/works/large/{$img}.jpg'>
+                    </div>
+                    <!--基本信息-->
+                    <div class='art-info'>
+                        <h3> {$artName} • {$author}</h3>
+                        <div style='margin-top: 5px'> {$description} </div>
+                    </div>
+                    <!-- 发布信息 -->
+                    <div class='date-info'>
+                        <h3>发布日期：{$date}</h3>
+                    </div>
+                    <div class='price'> ￥{$price} </div>
                 </div>
-                <!--基本信息-->
-                <div class='art-info'>
-                    <h3> {$artName} • {$author}</h3>
-                    <div style='margin-top: 5px'> {$description} </div>
-                </div>
-                <!-- 发布信息 -->
-                <div class='date-info'>
-                    <h3>发布日期：{$date}</h3>
-                </div>
-                <div class='price'> ￥{$price} </div>
                 <div class='operation'>
                     <div class='delete'>删除</div>
                     <div class='modify'>修改</div>
@@ -123,7 +125,7 @@ function getOrderPageBySet($set) {
             substr($art['Description'], 0, 30)."..." :
             $art['Description'] == null ? "该艺术品暂无描述" : $art['Description'];
         $page = $page.getOrderPage(
-                $art['ImageFileName'], $art['Title'], $art['Author'],
+                $art['ArtID'], $art['ImageFileName'], $art['Title'], $art['Author'],
                 $description, $art['OrderID'], $art['Date'], $art['Price']
             );
     }
@@ -141,9 +143,9 @@ function getOrderPageBySet($set) {
  * @return string
  * 根据订单信息生成对应的页面
  */
-function getOrderPage($img, $artName, $author, $description, $orderID, $date, $price) {
+function getOrderPage($artID, $img, $artName, $author, $description, $orderID, $date, $price) {
     return "<!-- 展示买入的艺术品 -->
-            <div class='art-item'>
+            <div class='art-item art-item-click' artId='{$artID}'>
                 <div class='image'>
                     <img src='./static/img/works/large/{$img}.jpg'>
                 </div>

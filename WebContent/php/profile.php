@@ -81,7 +81,7 @@ function getBuyArtPage($token) {
     global $auth;
     $userID = $auth->checkToken($token);
     $sql = "select OrderID, orders.Date, orders.Price,
-        arts.Title, arts.ImageFileName, arts.Author, arts.Description
+        arts.ArtID, arts.Title, arts.ImageFileName, arts.Author, arts.Description
         from orders join arts on orders.ArtID = arts.ArtID
         where orders.PayUserID = ?";
     $set = $util->query($sql, $userID);
@@ -99,7 +99,7 @@ function getSellArtPage($token) {
     global $auth;
     $userID = $auth->checkToken($token);
     $sql = "select OrderID, orders.Date, orders.Price,
-        arts.Title, arts.ImageFileName, arts.Author, arts.Description
+        arts.ArtID, arts.Title, arts.ImageFileName, arts.Author, arts.Description
         from orders join arts on orders.ArtID = arts.ArtID
         where orders.ReceiveUserID = ?";
     $set = $util->query($sql, $userID);
