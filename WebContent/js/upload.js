@@ -77,17 +77,18 @@ function bindConfirmBtn() {
         if(valid) {
             // 获得url参数，url参数为艺术品id
             let artID = getUrlParam('id');
-            if(!artID) artID = 0;
             // 准备信息参数
             let info = getFormInfo();
             $.ajax({
                 type: "POST",
                 url: "./php/upload.php",
                 data : {
-                    type: "update",
+                    type: (artID === "") ? "add" : "update",
                     artID,
                     info,
                 },
+                contentType: false,
+                processData: false,
                 dataType: "json",
                 success : function (resp) {
                     console.log(resp);

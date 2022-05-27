@@ -7,7 +7,9 @@ require_once ("./pages/upload.php");
 require_once ("./utils/Auth.php");
 
 $resp = [
-    "page" => ""
+    "page" => "",
+    "success" => false,
+    "message" => ""
 ];
 
 $util = new DBUtil();
@@ -20,16 +22,25 @@ if(isset($_REQUEST['type'])) {
         case "page":
             $resp["page"] = getUploadPage($_COOKIE['token'], $_REQUEST['artID']);
             break;
-        case "payment":
+        case "add" :
+            addArt("", $_COOKIE['token']);
+            break;
+        case "update":
             $resp = paymentCart($_REQUEST['cartArr']);
             break;
     }
 } else {
-    $resp["detail"] = "<h1>加载出错</h1>";
+    $resp["page"] = "<h1>加载出错</h1>";
 }
 
 echo json_encode($resp);
 
+/**
+ * @param $token
+ * @param $artID
+ * @return string
+ * 根据url参数，获取发布/修改页面
+ */
 function getUploadPage($token, $artID) {
     // 0、获得用户信息
     global $auth;
@@ -71,3 +82,25 @@ function getUploadPage($token, $artID) {
     return getUploadInfoPage($userName, $art, $eras, $genres);
 }
 
+/**
+ * @param $info
+ * @param $token
+ * @return void
+ * 根据信息，添加一个艺术品
+ */
+function addArt($info, $token) {
+    // 1、确定添加的用户id与添加时间
+    global $auth;
+    $uerID = $auth->checkToken($token);
+    $date = date('Y-m-d H:i:s', time());
+    // 2、保存艺术品图片，得到ImageFileName
+    saveFile($uerID);
+    // 3、操作数据库添加艺术品
+}
+
+function saveFile($userID) {
+    // 1、时间戳和userid生成随机文件名
+    $fileName = "user_".strval($userID)."_".time();
+    // 2、保存文件
+    echo $_FILES['file'];
+}
