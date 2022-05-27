@@ -23,11 +23,18 @@
 
 /* 表单div */
 .upload-modify .form-div {
-    float: left;
     margin: 5px 20px;
     padding-top: 18px;
     width: 95%;
     background-color: #f5f5f5;
+    /*background-color: #00a4ff;*/
+}
+
+/* 除图片外的元素 */
+.upload-modify .form-div .form-info {
+    float: left;
+    overflow: hidden;
+    /*background-color: pink;*/
 }
 
 .form-div .form-item {
@@ -50,11 +57,43 @@
 }
 .form-div .form-item .item-input input {
     width: 400px;
-    height: 20px;
+    height: 25px;
+}
+.form-div .form-item .item-input select {
+    width: 400px;
+    height: 25px;
 }
 
 /* 选项错误提示 */
 .form-div .form-item .item-message {
     float: left;
     margin: 5px 10px;
+}
+
+/* 图片预览盒子 */
+.upload-modify .form-div .form-img {
+    float: left;
+    margin-left: 50px;
+    margin-top: 50px;
+    /*background-color: green;*/
+}
+
+.upload-modify .form-div .form-img img {
+    width: 400px;
+    height: 400px;
+}
+
+/* 按钮样式 */
+.upload-modify .form-btn button {
+    margin-top: 15px;
+    margin-left: auto;
+    width: 120px;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 5%;
+}
+
+.upload-modify .form-btn .submit-btn:hover{
+    color: #e8e6e3;
+    text-decoration: underline;
 }
