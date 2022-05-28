@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/detail.css">
+    <link rel="icon" href="./static/img/favicon.ico" type ="image/x-icon">
     <script src="js/detail.js"></script>
     <title>艺术品详情</title>
 </head>

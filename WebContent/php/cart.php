@@ -24,19 +24,19 @@ if(isset($_REQUEST['type'])) {
     switch ($type) {
         case "enter" :
             // 判断token
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else $resp['success'] = true;
             break;
         case "get":
             // 判断token
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else $resp["page"] = getCartPage($_COOKIE['token']);
             break;
         case "delete":
             // 判断token
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else {
                 $cartID = $_REQUEST['cartID'];
@@ -47,13 +47,13 @@ if(isset($_REQUEST['type'])) {
             break;
         case "payment":
             // 判断token
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else $resp = paymentCart($_REQUEST['cartArr']);
             break;
         case "update":
             // 判断token
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else {
                 $resp["success"] = true;

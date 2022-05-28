@@ -24,7 +24,7 @@ switch ($type) {
         $resp['userinfo'] = getUserInfo();
         break;
     case "logout":
-        logout($_COOKIE['token']);
+        if(isset($_COOKIE['token'])) logout($_COOKIE['token']);
         $resp['success'] = true;
         break;
     default:
@@ -43,6 +43,7 @@ echo json_encode($resp);
  * 根据登录状态返回导航栏
  */
 function getNavPage() {
+    global $auth;
     // 获取cookie中的token
     if(!isset($_COOKIE['token'])) {
         // token不存在

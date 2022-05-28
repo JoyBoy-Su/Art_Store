@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/page.css">
     <link rel="stylesheet" href="./static/css/search.css">
+    <link rel="icon" href="./static/img/favicon.ico" type ="image/x-icon">
     <script src="js/search.js"></script>
     <title>搜索</title>
 </head>

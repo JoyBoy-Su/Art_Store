@@ -66,6 +66,10 @@ function validUploadAuth($artID) {
     global $auth;
     $resp = ['success' => false, 'message' => ""];
     // 判断token，未登录则无权限
+    if(!isset($_COOKIE['token'])) {
+        $resp["message"] = "login";
+        return $resp;
+    }
     $userID = $auth->checkToken($_COOKIE['token']);
     if($userID == 0) {
         $resp["message"] = "login";

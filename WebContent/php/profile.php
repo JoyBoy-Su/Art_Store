@@ -20,33 +20,33 @@ if(isset($_REQUEST['type'])) {
     switch ($type) {
         case "enter" :
             // 判断token
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else $resp['success'] = true;
             break;
         case "personal" :
             // 判断token
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else $resp["page"] = getPersonalInfoPage($_COOKIE['token']);
             break;
         case "upload" :
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else $resp["page"] = getUploadArtPage($_COOKIE['token']);
             break;
         case "buy" :
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else $resp["page"] = getBuyArtPage($_COOKIE['token']);
             break;
         case "sell" :
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else $resp["page"] = getSellArtPage($_COOKIE['token']);
             break;
         case "charge":
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else {
                 chargeMoney($_COOKIE['token'], $_REQUEST['money']);
@@ -54,7 +54,7 @@ if(isset($_REQUEST['type'])) {
             }
             break;
         case "delete":
-            if($auth->checkToken($_COOKIE['token']) == 0) {
+            if(!isset($_COOKIE['token']) || $auth->checkToken($_COOKIE['token']) == 0) {
                 $resp["message"] = "login";
             } else {
                 $result = deleteArt($_COOKIE['token'], $_REQUEST['artID']);

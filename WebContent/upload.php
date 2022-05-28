@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/upload.css">
+    <link rel="icon" href="./static/img/favicon.ico" type ="image/x-icon">
     <script src="js/upload.js"></script>
     <title>发布修改</title>
 </head>

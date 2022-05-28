@@ -102,11 +102,15 @@ function getArtInfoPage($artID) {
 function addArtToCart($artID, $artVersion) {
     // 校验token，判断是否登录
     global $auth;
-    $userID = $auth->checkToken($_COOKIE['token']);
     $result = [
         "success" => false,
         "message" => ""
     ];
+    if(!isset($_COOKIE['token'])) {
+        $result['message'] = "login";
+        return $result;
+    }
+    $userID = $auth->checkToken($_COOKIE['token']);
     // token无效，返回false并设置登录
     if($userID == 0) $result['message'] = "login";
     // token有效，判断是否可以添加
