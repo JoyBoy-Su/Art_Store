@@ -4,6 +4,7 @@
  */
 
 /**
+ * @param $upload
  * @param $userName
  * @param $art
  * @param $eras
@@ -11,7 +12,8 @@
  * @return string
  * 获得发布/修改的表单页面
  */
-function getUploadInfoPage($userName, $art, $eras, $genres) {
+function getUploadInfoPage($upload, $userName, $art, $eras, $genres) {
+    // 修改时，艺术品名称和作者名称不可修改
     $img = ($art['ImageFileName'] == null) ? "" : "./static/img/works/large/{$art['ImageFileName']}.jpg";
     return "<!-- 发布/修改基本信息 -->
         <div class='upload-modify-head'>
@@ -27,7 +29,9 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                         <label for='art-title'>艺术品名称：</label>
                     </div>
                     <div class='item-input'>
-                        <input type='text' id='art-title' value='{$art['Title']}'>
+                        <input type='text' id='art-title' value='{$art['Title']}' "
+                            .($upload ? "" : "readonly='readonly'").
+                        ">
                     </div>
                     <div class='item-message' id='title-message'></div>
                 </div>
@@ -37,7 +41,9 @@ function getUploadInfoPage($userName, $art, $eras, $genres) {
                         <label for='art-author'>作者名称：</label>
                     </div>
                     <div class='item-input'>
-                        <input type='text' id='art-author' value='{$art['Author']}'>
+                        <input type='text' id='art-author' value='{$art['Author']}' "
+                            .($upload ? "" : "readonly='readonly'").
+                        ">
                     </div>
                     <div class='item-message' id='author-message'></div>
                 </div>

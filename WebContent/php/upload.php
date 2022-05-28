@@ -23,7 +23,9 @@ if(isset($_REQUEST['type'])) {
             $resp["page"] = getUploadPage($_COOKIE['token'], $_REQUEST['artID']);
             break;
         case "add" :
-            addArt("", $_COOKIE['token']);
+//            addArt($_COOKIE['token']);
+//            echo json_encode($_FILES);
+            addArt($_COOKIE['token']);
             break;
         case "update":
             $resp = paymentCart($_REQUEST['cartArr']);
@@ -79,27 +81,105 @@ function getUploadPage($token, $artID) {
     $sql = "select GenreID, GenreName from genres";
     $genres = $util->query($sql);
     // 4、根据以上信息得到页面
-    return getUploadInfoPage($userName, $art, $eras, $genres);
+    return getUploadInfoPage(($artID == 0), $userName, $art, $eras, $genres);
 }
 
 /**
- * @param $info
  * @param $token
  * @return void
  * 根据信息，添加一个艺术品
  */
-function addArt($info, $token) {
+function addArt($token) {
+    global $resp;
     // 1、确定添加的用户id与添加时间
     global $auth;
-    $uerID = $auth->checkToken($token);
+    $userID = $auth->checkToken($token);
     $date = date('Y-m-d H:i:s', time());
     // 2、保存艺术品图片，得到ImageFileName
-    saveFile($uerID);
+    $imgFileName = saveImageFile($userID);
+    if(strcmp($imgFileName, "") == 0) {
+        // 图片保存失败
+        return;
+    }
     // 3、操作数据库添加艺术品
+    addArtToDataBase($_REQUEST, $userID, $date, $imgFileName);
+    $resp['success'] = true;
 }
 
-function saveFile($userID) {
-    // 1、时间戳和userid生成随机文件名
-    $fileName = "user_".strval($userID)."_".time();
+/**
+ * @param $userID
+ * @return string
+ * 保存上传的文件，并生成文件名
+ */
+function saveImageFile($userID) {
+    // 1、时间戳和userid生成文件名
+    $fileName = "user_".strval($userID)."_".strval(time());
     // 2、保存文件
+    if(saveImg("../static/img/works/large/", $fileName.".jpg"))
+        return $fileName;
+    return "";
+}
+
+/**
+ * @param $info
+ * @param $userID
+ * @param $date
+ * @param $img
+ * @return void
+ * 根据信息存储一个新的艺术品
+ */
+function addArtToDataBase($info, $userID, $date, $img) {
+    global $util;
+    $sql = "insert into arts 
+        (Title, Author, Description, ImageFileName, Year, 
+         EraID, GenreID, Width, Height, Price,
+         AccessionUserID, AccessionDate) value 
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $util->update($sql,
+        $info['title'], $info['author'], $info['description'], $img,
+        intval($info['year']), intval($info['era']), intval($info['genre']),
+        floatval($info['width']), floatval($info['height']),
+        intval($info['price']), $userID, $date
+    );
+}
+
+/**
+ * @param $path
+ * @param $name
+ * @return bool
+ * 根据路径与文件名保存上传的文件
+ */
+function saveImg($path, $name) {
+    global $resp;
+    // 校验文件类型
+    if ((($_FILES["picFile"]["type"] == "image/gif")
+            || ($_FILES["picFile"]["type"] == "image/jpeg")
+            || ($_FILES["picFile"]["type"] == "image/png")
+            || ($_FILES["picFile"]["type"] == "image/jpg")
+            || ($_FILES["picFile"]["type"] == "image/pjpeg"))) {
+        // 判断文件大小
+        if(($_FILES["picFile"]["size"] < 1048576 * 5)) {
+            // 判断是否出错
+            if ($_FILES["picFile"]["error"] > 0) {
+//            echo "Return Code: " . $_FILES["picFile"]["error"] . "<br />";
+                // TODO：设置不同的错误码译码
+                return false;
+            }
+            else {
+//            echo "Upload: " . $_FILES["picFile"]["name"] . "<br />";
+//            echo "Type: " . $_FILES["picFile"]["type"] . "<br />";
+//            echo "Size: " . ($_FILES["picFile"]["size"] / 1024) . " Kb<br />";
+//            echo "Temp file: " . $_FILES["picFile"]["tmp_name"] . "<br />";
+                move_uploaded_file($_FILES["picFile"]["tmp_name"], $path . $name);
+                return true;
+//            echo "Stored in: " . $path . $name;
+            }
+        } else {
+            $resp["message"] = "文件大小不合法";
+            return false;
+        }
+    } else {
+        $resp["message"] = "文件类型不合法";
+        return false;
+    }
 }

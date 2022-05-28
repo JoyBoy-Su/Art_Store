@@ -75,23 +75,44 @@ function bindConfirmBtn() {
         let valid = validForm();
         // 如果信息合法，发请求更新艺术品
         if(valid) {
-            // 获得url参数，url参数为艺术品id
-            let artID = getUrlParam('id');
-            // 准备信息参数
-            let info = getFormInfo();
+            // 获取对应form表单中数据
+            const title = $("#art-title").val();
+            const author = $("#art-author").val();
+            const description = $("#art-description").val();
+            const year = $("#art-year").val();
+            const width = $("#art-width").val();
+            const height = $("#art-height").val();
+            const price = $("#art-price").val();
+            const era = $("#art-era").val();
+            const genre = $("#art-genre").val();
+            // ***此处为附件数据
+            const picFile = $("#art-img")[0].files[0];
+
+            // 创建FromData()并赋值
+            let formFile = new FormData();
+            formFile.append("title", title);
+            formFile.append("author", author);
+            formFile.append("description", description);
+            formFile.append("year", year);
+            formFile.append("width", width);
+            formFile.append("height", height);
+            formFile.append("price", price);
+            formFile.append("era", era);
+            formFile.append("genre", genre);
+            // ***注意此处为附件数据
+            formFile.append("picFile", picFile);
+            // 使用ajax进行传递
             $.ajax({
                 type: "POST",
-                url: "./php/upload.php",
-                data : {
-                    type: (artID === "") ? "add" : "update",
-                    artID,
-                    info,
-                },
-                contentType: false,
-                processData: false,
+                url: "./php/upload.php?type=add",
+                data: formFile,
+                processData: false,  // ！！！重要必须有该字段
+                contentType: false,   // ！！！重要必须有该字段
                 dataType: "json",
-                success : function (resp) {
-                    console.log(resp);
+                success: function (resp) {
+                    // 若上传成功，提示
+                    if(resp.success) alert("发布成功!");
+                    else alert("发布失败!\n" + resp.message);
                 },
                 error: function (err) {
                     console.log(err);
@@ -171,15 +192,6 @@ function validForm() {
  */
 function getFormInfo() {
     let info = {};
-    info.title = $("#art-title").val()
-    info.author = $("#art-author").val();
-    info.description = $("#art-description").val();
-    info.year = parseInt($("#art-year").val());
-    info.width = parseFloat($("#art-width").val());
-    info.height = parseFloat($("#art-height").val());
-    info.price = $("#art-price").val();
-    info.era = $("#art-era").val();
-    info.genre = $("#art-genre").val();
     // 获取上传文件数据
     let formData = new FormData();
     let files = $("#art-img").prop("files");
