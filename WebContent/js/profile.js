@@ -8,6 +8,7 @@ newScript.setAttribute("src","js/common.js");
 document.head.appendChild(newScript);
 
 window.onload = function () {
+    enterProfile();
     getNav();
     bindSearchBtnInOtherPage();
     // 发请求获取用户名
@@ -16,6 +17,26 @@ window.onload = function () {
     getUserInfoPage();
     // 为选项栏选择绑定事件
     bindChoice();
+}
+
+function enterProfile() {
+// 发请求，enter
+    $.ajax({
+        type: "GET",
+        url: "./php/profile.php?type=enter",
+        dataType: "json",
+        async: false,
+        success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
 }
 
 /**
@@ -27,6 +48,12 @@ function getUserName() {
         url: "./php/common.php?type=userinfo",
         dataType: "json",
         success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+                return;
+            }
             // 插入userName
             $("#user-name").html(resp.userinfo.userinfo.username);
         },
@@ -46,6 +73,12 @@ function getUserInfoPage() {
         url: "./php/profile.php?type=personal",
         dataType: "json",
         success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+                return;
+            }
             // 展示个人信息页面
             $(".profile-info").html(resp.page);
             // 为充值按钮绑定事件
@@ -89,7 +122,10 @@ function bindCharge() {
     $("#charge-btn").click(function () {
         // 1、弹出充值框，输入充值的数字，校验正整数
         let value = prompt("请输入您要充值的金额：", "0");
-        if(value === null || !validPositiveInteger(value)) return;
+        if(value === null || !validPositiveInteger(value)) {
+            alert("充值金额必须为正整数！");
+            return;
+        }
         // 2、校验通过后再谈一个确认框，确定则发请求，不确定则取消
         let money = parseInt(value);
         let ensure = confirm("您的充值金额为：" + money + "\n您确定要充值吗？");
@@ -101,6 +137,12 @@ function bindCharge() {
             dataType: "json",
             data: { money },
             success : function (resp) {
+                if(!resp.success & resp.message === "login") {
+                    // 跳转到login
+                    beforeToLogin();
+                    window.location.href = "login.php";
+                    return;
+                }
                 if(resp.success) {
                     alert("充值成功");
                     // 修改余额
@@ -144,6 +186,12 @@ function bindDelete() {
                 dataType: "json",
                 data: { artID },
                 success : function (resp) {
+                    if(!resp.success & resp.message === "login") {
+                        // 跳转到login
+                        beforeToLogin();
+                        window.location.href = "login.php";
+                        return;
+                    }
                     if(resp.success) {
                         alert("删除成功");
                         // 删除dom
@@ -205,6 +253,12 @@ function getUploadPage() {
         url: "./php/profile.php?type=upload",
         dataType: "json",
         success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+                return;
+            }
             // 展示已发布信息页面
             $(".profile-info").html(resp.page);
             // 绑定单击事件
@@ -228,6 +282,12 @@ function getBuyPage() {
         url: "./php/profile.php?type=buy",
         dataType: "json",
         success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+                return;
+            }
             // 展示已买入页面
             $(".profile-info").html(resp.page);
             // 绑定单击事件
@@ -249,6 +309,12 @@ function getSellPage() {
         url: "./php/profile.php?type=sell",
         dataType: "json",
         success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+                return;
+            }
             // 展示已卖出页面
             $(".profile-info").html(resp.page);
             // 绑定单击事件

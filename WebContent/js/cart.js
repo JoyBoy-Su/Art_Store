@@ -50,6 +50,7 @@ function getCartPage() {
                 // 跳转到login
                 beforeToLogin();
                 window.location.href = "login.php";
+                return;
             }
             insertCartPage(resp.page);
             // 插入后绑定查看详情的单击事件
@@ -155,8 +156,6 @@ function bindPayment() {
     paymentObj.click(function () {
         let arr = JSON.parse(paymentObj.attr("total"));
         if(arr.length === 0) return;
-        // TODO : 校验是否存在已经售出的商品
-
         // 显示总价、账户余额、地址、电话
         let userInfo = getUserInfo();
         let resp = confirm(
@@ -189,6 +188,12 @@ function deleteCart(cartID) {
         },
         dataType: "json",
         success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+                return;
+            }
             // 判断响应做出提示
             if(resp.success) {
                 alert("删除成功");
@@ -323,6 +328,12 @@ function paymentCart(cartArr) {
         },
         dataType: "json",
         success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+                return;
+            }
             // 如果返回成功，则提示成功，订单已生成
             if(resp.success) {
                 alert("交易成功，订单已生成！");

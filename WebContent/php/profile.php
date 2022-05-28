@@ -18,26 +18,49 @@ $auth = new Auth();
 if(isset($_REQUEST['type'])) {
     $type = $_REQUEST['type'];
     switch ($type) {
+        case "enter" :
+            // 判断token
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else $resp['success'] = true;
+            break;
         case "personal" :
-            $resp["page"] = getPersonalInfoPage($_COOKIE['token']);
+            // 判断token
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else $resp["page"] = getPersonalInfoPage($_COOKIE['token']);
             break;
         case "upload" :
-            $resp["page"] = getUploadArtPage($_COOKIE['token']);
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else $resp["page"] = getUploadArtPage($_COOKIE['token']);
             break;
         case "buy" :
-            $resp["page"] = getBuyArtPage($_COOKIE['token']);
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else $resp["page"] = getBuyArtPage($_COOKIE['token']);
             break;
         case "sell" :
-            $resp["page"] = getSellArtPage($_COOKIE['token']);
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else $resp["page"] = getSellArtPage($_COOKIE['token']);
             break;
         case "charge":
-            chargeMoney($_COOKIE['token'], $_REQUEST['money']);
-            $resp['success'] = true;
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else {
+                chargeMoney($_COOKIE['token'], $_REQUEST['money']);
+                $resp['success'] = true;
+            }
             break;
         case "delete":
-            $result = deleteArt($_COOKIE['token'], $_REQUEST['artID']);
-            $resp["success"] = $result["success"];
-            $resp["message"] = $result["message"];
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else {
+                $result = deleteArt($_COOKIE['token'], $_REQUEST['artID']);
+                $resp["success"] = $result["success"];
+                $resp["message"] = $result["message"];
+            }
             break;
     }
 }
