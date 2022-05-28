@@ -22,17 +22,34 @@ if(isset($_REQUEST['type'])) {
     // 判断操作类型
     $type = $_REQUEST['type'];
     switch ($type) {
+        case "enter" :
+            // 判断token
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else $resp['success'] = true;
+            break;
         case "get":
-            $resp["page"] = getCartPage($_COOKIE['token']);
+            // 判断token
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else $resp["page"] = getCartPage($_COOKIE['token']);
             break;
         case "delete":
-            $cartID = $_REQUEST['cartID'];
-            $result = deleteCart($cartID);
-            $resp['success'] = $result['success'];
-            $resp['message'] = $result['message'];
+            // 判断token
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else {
+                $cartID = $_REQUEST['cartID'];
+                $result = deleteCart($cartID);
+                $resp['success'] = $result['success'];
+                $resp['message'] = $result['message'];
+            }
             break;
         case "payment":
-            $resp = paymentCart($_REQUEST['cartArr']);
+            // 判断token
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else $resp = paymentCart($_REQUEST['cartArr']);
             break;
     }
 } else {

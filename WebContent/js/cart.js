@@ -9,12 +9,34 @@ newScript.setAttribute("src","js/common.js");
 document.head.appendChild(newScript);
 
 window.onload = function () {
+    // 请求进入
+    enterCart();
     // 获得nav
     getNav();
     // 获得购物车界面
     getCartPage();
     // 绑定搜索栏
     bindSearchBtnInOtherPage();
+}
+
+function enterCart() {
+    // 发请求，enter
+    $.ajax({
+        type: "GET",
+        url: "./php/cart.php?type=enter",
+        dataType: "json",
+        async: false,
+        success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
 }
 
 function getCartPage() {
@@ -24,6 +46,11 @@ function getCartPage() {
         url: "./php/cart.php?type=get",
         dataType: "json",
         success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+            }
             insertCartPage(resp.page);
             // 插入后绑定查看详情的单击事件
             bindDetailClick();
@@ -264,6 +291,7 @@ function updateAfterCheckedAll() {
     let checkboxObjs = $(".cart-checkbox");
     for (let i = 0; i < checkboxObjs.length; i++) {
         // 为复选框绑定单击事件
+        if(checkboxObjs[i].checked) return;
         checkboxObjs[i].checked = true;
         updateAfterChecked(parseInt(checkboxObjs[i].getAttribute("cartID")));
     }
