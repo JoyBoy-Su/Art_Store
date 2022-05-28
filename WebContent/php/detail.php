@@ -2,10 +2,10 @@
 /**
  * 处理艺术品详情信息的逻辑
  */
-require_once ("./utils/DBUtil.php");
 require_once ("./pages/detail.php");
-require_once ("./pages/search.php");
+require_once ("./utils/DBUtil.php");
 require_once ("./utils/Auth.php");
+require_once ("./utils/validate.php");
 require_once ("./Enum/AddCartState.php");
 
 $resp = [
@@ -23,8 +23,9 @@ if(isset($_REQUEST['id']) && isset($_REQUEST['type'])) {
     $artID = intval($_REQUEST['id']);
     switch ($type) {
         case "detail":
-            $page = getArtInfoPage($artID);
-            $resp['detail'] = $page;
+            if(!validArtID($artID)) $artID = getRandomArtID();
+            increaseVisit($artID);          // 先增加访问次数，再获取页面
+            $resp['detail'] = getArtInfoPage($artID);
             break;
         case "cart":
             $result = addArtToCart($artID, $_REQUEST['version']);
@@ -42,8 +43,34 @@ if(isset($_REQUEST['id']) && isset($_REQUEST['type'])) {
 echo json_encode($resp);
 
 /**
+ * @return mixed
+ * 随机生成artID
+ */
+function getRandomArtID() {
+    global $util;
+    $sql = "select ArtID from arts";
+    $set = $util->query($sql);
+    // 随机生成一个下标，查找该下标对应的art
+    $index = rand(0, count($set) - 1);
+    return $set[$index]['ArtID'];
+}
+
+/**
+ * @param $artID
+ * @return void
+ * 根据artID增加访问次数
+ */
+function increaseVisit($artID) {
+    global $util;
+    $sql = "select VisitTimes from arts where ArtID = ?";
+    $times = $util->query($sql, $artID)[0]['VisitTimes'];
+    $sql = "update arts set VisitTimes = ? where ArtID = ?";
+    $util->update($sql, $times + 1, $artID);
+}
+
+/**
  * @return string
- * 根据id生成页面返回
+ * 根据id生成页面返回，若没有id则随机生成id
  */
 function getArtInfoPage($artID) {
     $sql = "select Title, Author, ImageFileName, arts.Year, Width, Height,
@@ -57,24 +84,9 @@ function getArtInfoPage($artID) {
     global $util;
     $set = $util->query($sql, $artID);
     // 如果set的大小为0，即该商品不存在（id不合法或者没有传递id）
-    if(count($set) >= 1) {
-        $art = $set[0];
-        // 根据art信息，生成展示信息
-        return getDetailPage($art);
-    } else {
-        // 没有具体的艺术品，随机查找一个页面
-        $count = 1;
-        $sql = "select Title, Author, ImageFileName, arts.Year, Width, Height,
-        EraName, GenreName, AccessionDate, users.UserName,
-        Price, VisitTimes, State, arts.Description, VersionNumber
-        from arts
-        left join eras on arts.EraID = eras.EraID
-        left join genres on arts.GenreID = genres.GenreID
-        left join users on arts.AccessionUserID = users.UserID
-        where arts.ArtID >= (rand() * (select max(ArtID) from arts)) limit {$count}";
-        global $util;
-        return getDetailPage($util->query($sql)[0]);
-    }
+    $art = $set[0];
+    // 根据art信息，生成展示信息
+    return getDetailPage($art);
 }
 
 /**

@@ -23,7 +23,7 @@ window.onload = function () {
 function getPage() {
     // 获取url参数
     let artID = getUrlParam('id');
-    // console.log("id = ", artID);
+    if(artID === "") artID = 0;
     // 发请求获取艺术品详情内容
     $.ajax({
         type: "GET",
