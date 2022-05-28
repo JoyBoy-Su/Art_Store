@@ -69,7 +69,7 @@ function getSearchPage($keyword, $attribute, $sortAttr, $pageNumber, $pageSize) 
 function searchArt($keyword, $attribute) {
     // 查找所有艺术品
     global $util;
-    $sql = "select ArtID, Title, ImageFileName, Author, Price, Description, VisitTimes from arts";
+    $sql = "select ArtID, Title, ImageFileName, Author, Price, Description, VisitTimes, AccessionDate from arts";
     $set = $util->query($sql);
     // 查找到所有艺术品，进行搜索匹配
     $precision = 0.7;

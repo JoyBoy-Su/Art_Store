@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <link rel="stylesheet" href="./static/css/navigation.css">
     <link rel="stylesheet" href="./static/css/page.css">
+    <link rel="stylesheet" href="./static/css/search.css">
     <script src="js/search.js"></script>
     <title>搜索</title>
 </head>
@@ -59,6 +60,15 @@
     <!-- 查询到的艺术品数据 -->
     <div class="box-hd">
         <h3>关键字： <span id="keyword-span"></span> 搜索结果：</h3>
+        <div class="sort">
+            <select id="select-sort">
+                <option value="" selected="selected">默认</option>
+                <option value="price">价格</option>
+                <option value="hot">热度</option>
+                <option value="date">发布日期</option>
+                <option value="title">艺术品名称</option>
+            </select>
+        </div>
     </div>
     <div class="box-bd">
         <!--   搜索结果   -->

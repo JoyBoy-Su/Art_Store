@@ -19,8 +19,9 @@ window.onload = function () {
     let attr = window.sessionStorage.getItem("attribute");
     console.log(attr);
     $("#select-attribute").val(attr);
-    // 为搜索按钮绑定单击事件
+    // 为搜索按钮与搜索选项绑定事件
     bindSearchBtnInSearchPage();
+    bindChange();
     // 发请求获取页面
     getSearchPage();
     // 为箭头绑定点击事件，修改页码并发请求获取
@@ -92,7 +93,7 @@ function getSearchPage() {
     // 获取url参数
     let keyword = getUrlParam('keyword');
     let attribute = $("#select-attribute option:selected").val();
-    let sortAttr = "price";
+    let sortAttr = $("#select-sort option:selected").val();
     let pageNumber = parseInt($("#currentPage").val());
     let pageSize = 10;
     // 发请求搜索艺术品
@@ -152,4 +153,18 @@ function bindSearchResult() {
             window.location.href = 'detail.php?id=' + artID;
         }
     }
+}
+
+/**
+ * 为搜索的参数绑定change事件
+ */
+function bindChange() {
+    // attribute
+    $("#select-attribute").change(function () {
+        getSearchPage();
+    });
+    // sort
+    $("#select-sort").change(function () {
+        getSearchPage();
+    });
 }

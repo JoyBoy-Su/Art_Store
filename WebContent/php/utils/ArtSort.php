@@ -23,6 +23,9 @@ class ArtSort {
             case "date" :
                 $func = "\\ArtSort::sortDate";
                 break;
+            case "title" :
+                $func = "\\ArtSort::sortTitle";
+                break;
             case "degree" :
                 $func = "\\ArtSort::sortDegree";
                 break;
@@ -48,6 +51,10 @@ class ArtSort {
 
     private static function sortDate($art1, $art2) {
         return strtotime($art1['AccessionDate']) < strtotime($art2['AccessionDate']);
+    }
+
+    private static function sortTitle($art1, $art2) {
+        return $art1['Title'] > $art2['Title'];
     }
 
     private static function sortDegree($art1, $art2) {

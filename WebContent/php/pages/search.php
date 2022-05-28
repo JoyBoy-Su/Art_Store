@@ -11,9 +11,9 @@
 function getArtSearchPage($set) {
     $page = "";
     foreach ($set as $art) {
-        $description = strlen($art['Description']) >= 50 ?
-            substr($art['Description'], 0, 50)."..." :
-            $art['Description'] == null ? "该艺术品暂无描述" : $art['Description'];
+        $description = (strlen($art['Description']) >= 60) ?
+            (substr($art['Description'], 0, 70)."......") :
+            ($art['Description'] == null ? "该艺术品暂无描述" : $art['Description']);
         $page = $page.getArtToShowSearch(
             $art['ArtID'], $art['Title'], $art['Author'], $art['Price'],
             $art['VisitTimes'], $art['ImageFileName'], $description

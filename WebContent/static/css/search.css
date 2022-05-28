@@ -1,0 +1,9 @@
+.sort {
+    float: right;
+}
+
+#select-sort {
+    margin-top: 5px;
+    width: 100px;
+    height: 20px;
+}
