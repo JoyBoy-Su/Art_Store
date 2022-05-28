@@ -5,6 +5,7 @@
 require_once ("./utils/DBUtil.php");
 require_once ("./pages/upload.php");
 require_once ("./utils/Auth.php");
+require_once ("./utils/validate.php");
 
 $resp = [
     "page" => "",
@@ -18,17 +19,29 @@ if(isset($_REQUEST['type'])) {
     // 判断操作类型
     $type = $_REQUEST['type'];
     switch ($type) {
+        case "enter":
+            $resp = validUploadAuth($_REQUEST['artID']);
+            break;
         // 请求获得发布/修改界面
         case "page":
-            $resp["page"] = getUploadPage($_COOKIE['token'], $_REQUEST['artID']);
+            $result = validUploadAuth($_REQUEST['artID']);
+            if(!$result['success']) {
+                $resp["message"] = $result['message'];
+            } else $resp["page"] = getUploadPage($_COOKIE['token'], $_REQUEST['artID']);
             break;
         case "add" :
+            $result = validUploadAuth($_REQUEST['artID']);
+            if(!$result['success']) {
+                $resp["message"] = $result['message'];
+            } else addArt($_COOKIE['token']);
 //            addArt($_COOKIE['token']);
 //            echo json_encode($_FILES);
-            addArt($_COOKIE['token']);
             break;
         case "update":
-            updateArt($_COOKIE['token'], $_REQUEST['artID']);
+            $result = validUploadAuth($_REQUEST['artID']);
+            if(!$result['success']) {
+                $resp["message"] = $result['message'];
+            } else updateArt($_COOKIE['token'], $_REQUEST['artID']);
             break;
     }
 } else {
@@ -36,6 +49,39 @@ if(isset($_REQUEST['type'])) {
 }
 
 echo json_encode($resp);
+
+/**
+ * @param $artID
+ * @return array
+ * 检查权限
+ */
+function validUploadAuth($artID) {
+    global $auth;
+    $resp = ['success' => false, 'message' => ""];
+    // 判断token，未登录则无权限
+    $userID = $auth->checkToken($_COOKIE['token']);
+    if($userID == 0) {
+        $resp["message"] = "login";
+        return $resp;
+    }
+    // 判断是否是修改页面
+    if(!validArtID($artID)) {
+        // 若artID无效，即不是修改
+        $resp['success'] = true;
+        return $resp;
+    }
+    // 修改判断用户权限
+    global $util;
+    $sql = "select AccessionUserID from arts where ArtID = ?";
+    $art = $util->query($sql, $artID)[0];
+    if($art['AccessionUserID'] != $userID) {
+        // 发布者id和用户不一致，
+        $resp['message'] = "no auth";
+        return $resp;
+    }
+    $resp['success'] = true;
+    return $resp;
+}
 
 /**
  * @param $token

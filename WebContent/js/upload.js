@@ -8,12 +8,44 @@ newScript.setAttribute("src","js/common.js");
 document.head.appendChild(newScript);
 
 window.onload = function () {
+    enterUpload();
     // 获取导航栏内容
     getNav();
     // 绑定搜索
     bindSearchBtnInOtherPage();
     // 获取界面：包括头部UserName 发布/修改，艺术品时代的多选选项，艺术品风格的多选选项
     getUploadPage();
+}
+
+function enterUpload() {
+    // 获得url参数，url参数为艺术品id
+    let artID = getUrlParam('id');
+    if(!artID) artID = 0;
+    // 发请求，enter
+    $.ajax({
+        type: "GET",
+        url: "./php/upload.php?type=enter&artID=" + artID,
+        dataType: "json",
+        async: false,
+        success : function (resp) {
+            if(!resp.success) {
+                if(resp.message === "login") {
+                    // 跳转到login
+                    beforeToLogin();
+                    window.location.href = "login.php";
+                } else if(resp.message === "no auth") {
+                    alert("您没有权限修改该艺术品");
+                    // 跳转到login
+                    beforeToLogin();
+                    window.location.href = "login.php";
+                }
+                return;
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
 }
 
 /**
@@ -33,6 +65,19 @@ function getUploadPage() {
         },
         dataType: "json",
         success : function (resp) {
+            if(!resp.success) {
+                if(resp.message === "login") {
+                    // 跳转到login
+                    beforeToLogin();
+                    window.location.href = "login.php";
+                } else if(resp.message === "no auth") {
+                    alert("您没有权限修改该艺术品");
+                    // 跳转到login
+                    beforeToLogin();
+                    window.location.href = "login.php";
+                }
+                return;
+            }
             // 为upload页面插入表单信息
             $(".upload-modify").append(resp.page);
             // 绑定上传文件预览的逻辑
@@ -115,6 +160,19 @@ function bindConfirmBtn() {
                 contentType: false,   // ！！！重要必须有该字段
                 dataType: "json",
                 success: function (resp) {
+                    if(!resp.success) {
+                        if(resp.message === "login") {
+                            // 跳转到login
+                            beforeToLogin();
+                            window.location.href = "login.php";
+                        } else if(resp.message === "no auth") {
+                            alert("您没有权限修改该艺术品");
+                            // 跳转到login
+                            beforeToLogin();
+                            window.location.href = "login.php";
+                        }
+                        return;
+                    }
                     // 若上传成功，提示
                     if(resp.success) alert("操作成功!");
                     else alert("操作失败!\n" + resp.message);
