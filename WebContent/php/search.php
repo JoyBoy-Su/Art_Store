@@ -6,12 +6,14 @@ require_once ("./utils/DBUtil.php");
 require_once ("./utils/ArtMatch.php");
 require_once ("./utils/ArtSort.php");
 require_once ("./pages/search.php");
+require_once ("./utils/Auth.php");
 
 $resp = [
     "page" => "",
     "total" => 0
 ];
 $util = new DBUtil();
+$auth = new Auth();
 
 // 判断是否存在关键字keyword与请求类型type
 if(isset($_REQUEST['keyword']) && $_REQUEST['type']) {
@@ -35,8 +37,10 @@ if(isset($_REQUEST['keyword']) && $_REQUEST['type']) {
     $resp["page"] = "<h1>加载出错</h1>";
 }
 
-if($auth->checkToken($_COOKIE['token']) != 0)
-    $auth->updateToken($_COOKIE['token']);
+if(isset($_COOKIE['token'])) {
+    if($auth->checkToken($_COOKIE['token']) != 0)
+        $auth->updateToken($_COOKIE['token']);
+}
 echo json_encode($resp);
 
 /**

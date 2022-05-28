@@ -55,7 +55,7 @@ function getBasicInfo($title, $author, $img) {
         </div>
         <!-- 两个盒子，左浮动，img在左，放在一个盒子里 -->
         <div class='item-info-img'>
-            <img src='./static/img/works/medium/{$img}.jpg'>
+            <img src='./static/img/works/large/{$img}.jpg'>
         </div>";
 }
 

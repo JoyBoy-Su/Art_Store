@@ -42,7 +42,7 @@ function getNav($login) {
  */
 function getArtToShow($type, $id, $name, $author, $price, $visit, $img, $date) {
     return "<li class='art-{$type}' id='{$type}-{$id}'>
-                <img src='./static/img/works/small/{$img}.jpg'>
+                <img src='./static/img/works/large/{$img}.jpg'>
                     <h4>{$name} | {$author}</h4>
                     <div class='info'>
                         <span>{$price}</span> • {$visit}次访问 • {$date}发布

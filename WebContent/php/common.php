@@ -32,8 +32,10 @@ switch ($type) {
         break;
 }
 
-if($auth->checkToken($_COOKIE['token']) != 0)
-    $auth->updateToken($_COOKIE['token']);
+if(isset($_COOKIE['token'])) {
+    if($auth->checkToken($_COOKIE['token']) != 0)
+        $auth->updateToken($_COOKIE['token']);
+}
 echo json_encode($resp);
 
 /**

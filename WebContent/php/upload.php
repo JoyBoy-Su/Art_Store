@@ -51,8 +51,10 @@ if(isset($_REQUEST['type'])) {
     $resp["page"] = "<h1>加载出错</h1>";
 }
 
-if($auth->checkToken($_COOKIE['token']) != 0)
-    $auth->updateToken($_COOKIE['token']);
+if(isset($_COOKIE['token'])) {
+    if($auth->checkToken($_COOKIE['token']) != 0)
+        $auth->updateToken($_COOKIE['token']);
+}
 echo json_encode($resp);
 
 /**

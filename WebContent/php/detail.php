@@ -39,8 +39,10 @@ if(isset($_REQUEST['id']) && isset($_REQUEST['type'])) {
     $resp["detail"] = "<h1>加载出错</h1>";
 }
 
-if($auth->checkToken($_COOKIE['token']) != 0)
-    $auth->updateToken($_COOKIE['token']);
+if(isset($_COOKIE['token'])) {
+    if($auth->checkToken($_COOKIE['token']) != 0)
+        $auth->updateToken($_COOKIE['token']);
+}
 // 响应数据
 echo json_encode($resp);
 

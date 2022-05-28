@@ -35,7 +35,7 @@ function getArtSearchPage($set) {
  */
 function getArtToShowSearch($id, $name, $author, $price, $visit, $img, $description) {
     return "<li class='art-search' artID='{$id}'>
-                <img src='./static/img/works/small/{$img}.jpg'>
+                <img src='./static/img/works/large/{$img}.jpg'>
                     <h4>{$name} | {$author}</h4>
                     <div class='info'> {$description} </div>
                     <div class='info'>
