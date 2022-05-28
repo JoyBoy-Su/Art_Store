@@ -51,7 +51,7 @@
                 <td><span id="username-message"></span></td>
             </tr>
             <tr>
-                <td><label for="password">密码：</label></td>
+                <td><label for="password" id="password-label">密码：</label></td>
                 <td><input type="password" id="password" placeholder="请输入密码"></td>
                 <td><span id="password-message"></span></td>
             </tr>

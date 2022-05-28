@@ -1,6 +1,10 @@
 /**
  * 定义一些校验合法性的函数
  */
+// 密码强度枚举类型
+const PASSWORD_STRONG = 3;
+const PASSWORD_MEDIUM = 2;
+const PASSWORD_WEAK = 1;
 
 /**
  * 校验用户名是否符合规范
@@ -44,12 +48,13 @@ function validPassword(password, username) {
         let _charReg = /[!@#%^&_]+/;
         validResult.pass = true;
         // 弱类型密码
-        if(alphabetReg.test(password) || charReg.test(password)) validResult.strength = 1;
+        if(alphabetReg.test(password) || charReg.test(password))
+            validResult.strength = PASSWORD_WEAK;
         // 强类型密码
         else if(_alphabetReg.test(password) && _numReg.test(password) && _charReg.test(password))
-            validResult.strength = 3;
+            validResult.strength = PASSWORD_STRONG;
         // 中类型密码
-        else validResult.strength = 2;
+        else validResult.strength = PASSWORD_MEDIUM;
     }
     return validResult;
 }

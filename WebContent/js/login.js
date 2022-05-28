@@ -10,8 +10,9 @@ document.head.appendChild(newScript);
 //为登录页面绑定逻辑
 window.onload = function () {
     // 为每个输入项绑定校验函数
-    userinfoBlur();
-    loginPasswordBlur();
+    userinfoInput();
+    loginPasswordInput();
+    passwordClick();
     // 绑定注册的单击事件
     $("#login-btn").click(function () {
         submitLogin();
@@ -22,11 +23,25 @@ window.onload = function () {
     })
 }
 
+// 登录时用户名或电子邮箱校验
+function userinfoInput() {
+    // 当失去焦点时进行用户名或电子邮箱校验
+    let userinfoObj = document.getElementById("userinfo");
+    userinfoObj.oninput = function () {
+        // 首先判断是否符合用户名的规范
+        if(!validUserName(userinfoObj.value) && !validEmail(userinfoObj.value)) {
+            changeMessage("登录信息", "userinfo-message", false);
+        } else {
+            $("#userinfo-message").html("");
+        }
+    }
+}
+
 // 登录时密码校验
-function loginPasswordBlur() {
+function loginPasswordInput() {
     // 当失去焦点时进行密码校验
     let passwordObj = document.getElementById("password");
-    passwordObj.onblur = function () {
+    passwordObj.oninput = function () {
         if(passwordObj.value === "") {
             $("#password-message").html("密码不能为空");
             $("#password-message").css("color", "red");
