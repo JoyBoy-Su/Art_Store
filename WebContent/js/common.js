@@ -140,6 +140,27 @@ function insertNav(nav) {
 }
 
 /**
+ * 绑定退出登录选项
+ */
+function logout() {
+    $.ajax({
+        type: "POST",
+        url: "./php/common.php?type=logout",
+        dataType: "json",
+        success : function (resp) {
+            if(resp.success) {
+                // 退出登录成功，清除token，返回主页
+                removeCookie('token');
+                window.location.href = "index.php";
+            }
+        },
+        error: function (err) {
+            loginFail(err);
+        },
+    });
+}
+
+/**
  * 获得url参数key
  * @param key
  * @returns {string}

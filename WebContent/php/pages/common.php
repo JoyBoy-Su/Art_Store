@@ -13,7 +13,7 @@ function getNav($login) {
             <a href='index.php'>主页</a>
             <a href='detail.php'>详情</a>
             <a href='cart.php'>购物车</a> 
-            <a href='#'>登出</a>
+            <a href='#' onclick='logout();'>登出</a>
             <a href='login.php' onclick='beforeToLogin()'>重新登录</a>
         </div>";
     } else {

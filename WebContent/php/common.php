@@ -9,7 +9,9 @@ require_once ("./utils/DBUtil.php");
 $type = $_GET['type'];
 $resp = [
     "page" => "",                // 请求得到的页面
-    "userinfo" => []
+    "userinfo" => [],
+    "success" => false,
+    "message" => ""
 ];
 
 // 判断$type确定请求的是nav还是hot或new
@@ -20,6 +22,10 @@ switch ($type) {
         break;
     case "userinfo":
         $resp['userinfo'] = getUserInfo();
+        break;
+    case "logout":
+        logout($_COOKIE['token']);
+        $resp['success'] = true;
         break;
     default:
         $resp['page'] = "";
@@ -84,4 +90,14 @@ function getUserInfo() {
         }
     }
     return $resp;
+}
+
+/**
+ * @param $token
+ * @return void
+ * 根据token，将用户退出登录
+ */
+function logout($token) {
+    $auth = new Auth();
+    $auth->deleteToken($token);
 }
