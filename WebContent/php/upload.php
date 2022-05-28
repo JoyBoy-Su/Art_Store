@@ -27,7 +27,10 @@ if(isset($_REQUEST['type'])) {
             $result = validUploadAuth($_REQUEST['artID']);
             if(!$result['success']) {
                 $resp["message"] = $result['message'];
-            } else $resp["page"] = getUploadPage($_COOKIE['token'], $_REQUEST['artID']);
+            } else {
+                $resp["page"] = getUploadPage($_COOKIE['token'], $_REQUEST['artID']);
+                $resp["success"] = true;
+            }
             break;
         case "add" :
             $result = validUploadAuth($_REQUEST['artID']);
@@ -177,14 +180,20 @@ function updateArt($token, $artID) {
         $resp["message"] = "权限不足";
         return;
     }
-    // 3、按照id更新艺术品图片文件
+    // 3、判断是否需要修改
+    if(!isUpdate($artID, $_REQUEST)) {
+        echo "not change";
+        $resp['success'] = true;
+        return;
+    }
+    // 4、按照id更新艺术品图片文件
     $save = saveImg("../static/img/works/large/", $art['ImageFileName'].".jpg");
     if(!$save) {
         // 图片保存失败
         return;
     }
-    // 3、操作数据库添加艺术品
-    updateArtToDataBase($artID, $_REQUEST, $date);
+    // 5、操作数据库添加艺术品
+    updateArtToDataBase($artID, $_REQUEST, $art['VersionNumber'] + 1);
     $resp['success'] = true;
 }
 
@@ -228,18 +237,19 @@ function addArtToDataBase($info, $userID, $date, $img) {
 /**
  * @param $artID
  * @param $info
- * @param $date
+ * @param $newVersion
  * @return void
  * 根据艺术品id修改艺术品信息
  */
-function updateArtToDataBase($artID, $info, $date) {
+function updateArtToDataBase($artID, $info, $newVersion) {
     global $util;
-    $sql = "update arts set Description = ?, Year = ?, EraID = ?, 
-                GenreID = ?, Width = ?, Height = ?, Price = ?,AccessionDate = ?
-                where ArtID = ?";
+    $sql = "update arts 
+        set Description = ?, Year = ?, EraID = ?, GenreID = ?, 
+        Width = ?, Height = ?, Price = ?, VersionNumber = ?
+        where ArtID = ?";
     $util->update($sql,
         $info['description'], intval($info['year']), intval($info['era']), intval($info['genre']),
-        floatval($info['width']), floatval($info['height']), intval($info['price']), $date, $artID
+        floatval($info['width']), floatval($info['height']), intval($info['price']), $newVersion, $artID
     );
 }
 
@@ -261,7 +271,6 @@ function saveImg($path, $name) {
         if(($_FILES["picFile"]["size"] < 1048576 * 5)) {
             // 判断是否出错
             if ($_FILES["picFile"]["error"] > 0) {
-//            echo "Return Code: " . $_FILES["picFile"]["error"] . "<br />";
                 // TODO：设置不同的错误码译码
                 return false;
             }
@@ -282,4 +291,40 @@ function saveImg($path, $name) {
         $resp["message"] = "文件类型不合法";
         return false;
     }
+}
+
+/**
+ * @param $artID
+ * @param $info
+ * @return bool
+ * 校验是否出现修改项
+ */
+function isUpdate($artID, $info) {
+    global $util;
+    // 1、查找旧的信息
+    $sql = "select * from arts where ArtID = ?";
+    $art = $util->query($sql, $artID)[0];
+    // 2、比较除图片外的信息
+    if(strcmp($info['description'], $art['Description']) != 0) return true;
+    echo "description <br>";
+    if($art['Year'] != intval($info['year'])) return true;
+    echo "year <br>";
+    if($art['EraID'] != intval($info['era'])) return true;
+    echo "era <br>";
+    if($art['GenreID'] != intval($info['genre'])) return true;
+    echo "genre <br>";
+    if($art['Width'] != floatval($info['width'])) return true;
+    echo "width <br>";
+    if($art['Height'] != floatval($info['height'])) return true;
+    echo "height <br>";
+    if($art['Price'] != floatval($info['price'])) return true;
+    echo "price <br>";
+    // 3、比较图片
+    $file1 = "../static/img/works/large/".$art['ImageFileName'].".jpg";
+    $file2 = $_FILES["picFile"]["tmp_name"];
+    $gg = sha1_file($file1);
+    $aa = sha1_file($file2);
+    if($aa != $gg) return true;
+    echo "img<br>";
+    return false;
 }

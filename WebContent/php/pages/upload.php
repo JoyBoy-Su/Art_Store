@@ -74,7 +74,7 @@ function getUploadInfoPage($artID, $upload, $userName, $art, $eras, $genres) {
                         <label for='art-year'>年份：</label>
                     </div>
                     <div class='item-input'>
-                        <input type='number' min='-2020' max='202' id='art-year' value='{$art['Year']}'>
+                        <input type='number' min='-2020' max='2022' id='art-year' value='{$art['Year']}'>
                     </div>
                     <div class='item-message' id='year-message'></div>
                 </div>
@@ -169,7 +169,7 @@ function getErasSelectPage($set, $eraID) {
 function getGenresSelectPage($set, $genreID) {
     $page = "";
     foreach ($set as $genre) {
-        if($genreID == $genre['GenreID'])
+        if($genreID != $genre['GenreID'])
             $page = $page."<option value ='{$genre['GenreID']}'>{$genre['GenreName']}</option>";
         else $page = $page."<option value ='{$genre['GenreID']}' selected='selected'>{$genre['GenreName']}</option>";
     }
