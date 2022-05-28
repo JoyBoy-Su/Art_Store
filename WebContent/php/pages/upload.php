@@ -4,6 +4,7 @@
  */
 
 /**
+ * @param $artID
  * @param $upload
  * @param $userName
  * @param $art
@@ -12,7 +13,7 @@
  * @return string
  * 获得发布/修改的表单页面
  */
-function getUploadInfoPage($upload, $userName, $art, $eras, $genres) {
+function getUploadInfoPage($artID, $upload, $userName, $art, $eras, $genres) {
     // 修改时，艺术品名称和作者名称不可修改
     $img = ($art['ImageFileName'] == null) ? "" : "./static/img/works/large/{$art['ImageFileName']}.jpg";
     return "<!-- 发布/修改基本信息 -->
@@ -20,7 +21,7 @@ function getUploadInfoPage($upload, $userName, $art, $eras, $genres) {
             <h3> <span> {$userName} </span> 发布 / 修改</h3>
         </div>
         <!-- 发布/修改的表单内容 -->
-        <div class='form-div'>
+        <div class='form-div' artID='{$artID}'>
             <!--  除图片外的元素   -->
             <div class='form-info'>
                 <!--  艺术品名称    -->

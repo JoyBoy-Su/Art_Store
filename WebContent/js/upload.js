@@ -101,18 +101,23 @@ function bindConfirmBtn() {
             formFile.append("genre", genre);
             // ***注意此处为附件数据
             formFile.append("picFile", picFile);
+            // 判断artID
+            let artID = $(".form-div").attr("artID");
+            let type = (artID === "0") ? "add" : "update";
+            console.log("artID = " + artID);
+            formFile.append("artID", artID);
             // 使用ajax进行传递
             $.ajax({
                 type: "POST",
-                url: "./php/upload.php?type=add",
+                url: "./php/upload.php?type=" + type,
                 data: formFile,
                 processData: false,  // ！！！重要必须有该字段
                 contentType: false,   // ！！！重要必须有该字段
                 dataType: "json",
                 success: function (resp) {
                     // 若上传成功，提示
-                    if(resp.success) alert("发布成功!");
-                    else alert("发布失败!\n" + resp.message);
+                    if(resp.success) alert("操作成功!");
+                    else alert("操作失败!\n" + resp.message);
                 },
                 error: function (err) {
                     console.log(err);

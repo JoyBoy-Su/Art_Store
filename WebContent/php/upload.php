@@ -28,7 +28,7 @@ if(isset($_REQUEST['type'])) {
             addArt($_COOKIE['token']);
             break;
         case "update":
-            $resp = paymentCart($_REQUEST['cartArr']);
+            updateArt($_COOKIE['token'], $_REQUEST['artID']);
             break;
     }
 } else {
@@ -81,7 +81,7 @@ function getUploadPage($token, $artID) {
     $sql = "select GenreID, GenreName from genres";
     $genres = $util->query($sql);
     // 4、根据以上信息得到页面
-    return getUploadInfoPage(($artID == 0), $userName, $art, $eras, $genres);
+    return getUploadInfoPage($artID, ($artID == 0), $userName, $art, $eras, $genres);
 }
 
 /**
@@ -103,6 +103,42 @@ function addArt($token) {
     }
     // 3、操作数据库添加艺术品
     addArtToDataBase($_REQUEST, $userID, $date, $imgFileName);
+    $resp['success'] = true;
+}
+
+/**
+ * @param $token
+ * @param $artID
+ * @return void
+ * 根据信息，更新一个艺术品
+ */
+function updateArt($token, $artID) {
+    global $resp;
+    // 1、确定添加的用户id添加时间
+    global $auth;
+    $userID = $auth->checkToken($token);
+    $date = date('Y-m-d H:i:s', time());
+    // 2、判断权限
+    global $util;
+    $sql = "select * from arts where ArtID = ?";
+    $set = $util->query($sql, $artID);
+    if(count($set) == 0) {
+        $resp["message"] = "该艺术品不存在";
+        return;
+    }
+    $art = $set[0];
+    if($art["AccessionUserID"] != $userID) {
+        $resp["message"] = "权限不足";
+        return;
+    }
+    // 3、按照id更新艺术品图片文件
+    $save = saveImg("../static/img/works/large/", $art['ImageFileName'].".jpg");
+    if(!$save) {
+        // 图片保存失败
+        return;
+    }
+    // 3、操作数据库添加艺术品
+    updateArtToDataBase($artID, $_REQUEST, $date);
     $resp['success'] = true;
 }
 
@@ -140,6 +176,24 @@ function addArtToDataBase($info, $userID, $date, $img) {
         intval($info['year']), intval($info['era']), intval($info['genre']),
         floatval($info['width']), floatval($info['height']),
         intval($info['price']), $userID, $date
+    );
+}
+
+/**
+ * @param $artID
+ * @param $info
+ * @param $date
+ * @return void
+ * 根据艺术品id修改艺术品信息
+ */
+function updateArtToDataBase($artID, $info, $date) {
+    global $util;
+    $sql = "update arts set Description = ?, Year = ?, EraID = ?, 
+                GenreID = ?, Width = ?, Height = ?, Price = ?,AccessionDate = ?
+                where ArtID = ?";
+    $util->update($sql,
+        $info['description'], intval($info['year']), intval($info['era']), intval($info['genre']),
+        floatval($info['width']), floatval($info['height']), intval($info['price']), $date, $artID
     );
 }
 
