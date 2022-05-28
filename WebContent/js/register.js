@@ -102,7 +102,7 @@ function registerSuccess(resp) {
         $("#register-message").css("font-weight", "200");
     } else {
         // 注册失败，用户名已重复
-        $("#register-message").html("该用户名已存在");
+        $("#register-message").html(resp.message);
         $("#register-message").css("color", "red");
         $("#register-message").css("font-weight", "200");
     }
