@@ -121,7 +121,11 @@ function bindSearchBtnInOtherPage() {
         // 如果input的输入内容不为空
         let keyword = document.getElementById("search-input").value;
         // 如果有搜索内容，则跳转到搜索界面
-        if(keyword !== "") window.location.href = "search.php?keyword=" + keyword;
+        if(keyword !== "") {
+            // 存储当前选择的attribute
+            window.sessionStorage.setItem("attribute", $("#select-attribute option:selected").val());
+            window.location.href = "search.php?keyword=" + keyword;
+        }
     }
 }
 

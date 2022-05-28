@@ -67,12 +67,9 @@ function getSearchPage($keyword, $attribute, $sortAttr, $pageNumber, $pageSize) 
  * 搜索符合条件的所有艺术品
  */
 function searchArt($keyword, $attribute) {
-    // TODO : 先查找缓存文件
-
     // 查找所有艺术品
     global $util;
-    $sql = "select ArtID, Title, ImageFileName, Author, Price, Description, VisitTimes
-        from arts join artists on arts.ArtistID = artists.ArtistID";
+    $sql = "select ArtID, Title, ImageFileName, Author, Price, Description, VisitTimes from arts";
     $set = $util->query($sql);
     // 查找到所有艺术品，进行搜索匹配
     $precision = 0.7;
@@ -84,14 +81,10 @@ function searchArt($keyword, $attribute) {
             $art['MatchDegree'] = $sim;
             array_push($filterResult, $art);
         } else if(strcmp($attribute, "author") == 0 &&
-            ($sim = ArtMatch::getSimulation($art['Title'], $keyword)) >= $precision) {
-            // 添加一个degree字段
-            $art['MatchDegree'] = $sim;
+            stristr($art['Author'], $keyword) != FALSE) {
             array_push($filterResult, $art);
         }
     }
-    // TODO : 把搜索到的艺术品存入缓存
-
     return $filterResult;
 }
 

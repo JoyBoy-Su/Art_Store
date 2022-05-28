@@ -16,6 +16,9 @@ window.onload = function () {
     keyword = keyword.replace(/%20/g, ' ');
     $("#keyword-span").html(keyword);
     $("#search-input").val(keyword);
+    let attr = window.sessionStorage.getItem("attribute");
+    console.log(attr);
+    $("#select-attribute").val(attr);
     // 为搜索按钮绑定单击事件
     bindSearchBtnInSearchPage();
     // 发请求获取页面
@@ -88,7 +91,7 @@ function bindSearchBtnInSearchPage() {
 function getSearchPage() {
     // 获取url参数
     let keyword = getUrlParam('keyword');
-    let attribute = "title";
+    let attribute = $("#select-attribute option:selected").val();
     let sortAttr = "price";
     let pageNumber = parseInt($("#currentPage").val());
     let pageSize = 10;

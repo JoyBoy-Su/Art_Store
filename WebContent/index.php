@@ -47,6 +47,10 @@
     <div class="search">
         <input type="text" placeholder="请输入关键词" id="search-input">
         <button id="search-btn"></button>
+        <select id="select-attribute">
+            <option value="title"selected="selected">艺术品名称</option>
+            <option value="author">作者名称</option>
+        </select>
     </div>
 </div>
 <!-- 广告栏 -->

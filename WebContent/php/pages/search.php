@@ -39,7 +39,7 @@ function getArtToShowSearch($id, $name, $author, $price, $visit, $img, $descript
                     <h4>{$name} | {$author}</h4>
                     <div class='info'> {$description} </div>
                     <div class='info'>
-                        <span>{$price}</span> • {$visit}次访问
+                        <span>￥{$price}</span> • {$visit}次访问
                     </div>
             </li>";
 }
