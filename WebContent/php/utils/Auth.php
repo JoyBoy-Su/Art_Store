@@ -36,7 +36,7 @@ class Auth {
         // 对userid和时间戳进行加密得到token
         $token = encrypt($userid.salt());
         // 设置有效期为3天，并转换格式
-        $expiration = date( 'Y-m-d H:i:s', time() + $this->VALIDITY );
+        $expiration = date( 'Y-m-d H:i:s', time() + 6 * 60 * 60 + $this->VALIDITY );
         if($this->existToken($userid)) {
             // 存在旧的token，根据userid设置新的token
             $sql = "update userlogon set Token = ?, ExpirationTime = ? where UserID = ?";
@@ -62,7 +62,7 @@ class Auth {
         $sql = "select * from userlogon where Token = ?";
         $set = $this->util->query($sql, $token);
         // 如果token存在并且当前token未过期，则通过
-        if(count($set) != 0 && strtotime($set[0]['ExpirationTime']) > time())
+        if(count($set) != 0 && strtotime($set[0]['ExpirationTime']) > time() + 6 * 60 * 60)
             $user = $set[0]['UserID'];
         return $user;
     }
@@ -85,7 +85,7 @@ class Auth {
      */
     public function updateToken($token) {
         // 设置有效期为3天，并转换格式
-        $expiration = date( 'Y-m-d H:i:s', time() + $this->VALIDITY );
+        $expiration = date( 'Y-m-d H:i:s', time() + 6 * 60 * 60 + $this->VALIDITY );
         // 更新有效期
         $sql = "update userlogon set ExpirationTime = ? where Token = ?";
         $this->util->update($sql, $expiration, $token);

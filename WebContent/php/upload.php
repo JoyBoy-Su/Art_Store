@@ -51,6 +51,8 @@ if(isset($_REQUEST['type'])) {
     $resp["page"] = "<h1>加载出错</h1>";
 }
 
+if($auth->checkToken($_COOKIE['token']) != 0)
+    $auth->updateToken($_COOKIE['token']);
 echo json_encode($resp);
 
 /**
@@ -143,7 +145,7 @@ function addArt($token) {
     // 1、确定添加的用户id与添加时间
     global $auth;
     $userID = $auth->checkToken($token);
-    $date = date('Y-m-d H:i:s', time());
+    $date = date('Y-m-d H:i:s', time() + 6*60*60);
     // 2、保存艺术品图片，得到ImageFileName
     $imgFileName = saveImageFile($userID);
     if(strcmp($imgFileName, "") == 0) {
@@ -166,7 +168,7 @@ function updateArt($token, $artID) {
     // 1、确定添加的用户id添加时间
     global $auth;
     $userID = $auth->checkToken($token);
-    $date = date('Y-m-d H:i:s', time());
+    $date = date('Y-m-d H:i:s', time() + 6*60*60);
     // 2、判断权限
     global $util;
     $sql = "select * from arts where ArtID = ?";
@@ -204,7 +206,7 @@ function updateArt($token, $artID) {
  */
 function saveImageFile($userID) {
     // 1、时间戳和userid生成文件名
-    $fileName = "user_".strval($userID)."_".strval(time());
+    $fileName = "user_".strval($userID)."_".strval(time() + 6*60*60);
     // 2、保存文件
     if(saveImg("../static/img/works/large/", $fileName.".jpg"))
         return $fileName;

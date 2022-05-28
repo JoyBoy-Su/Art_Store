@@ -65,6 +65,8 @@ if(isset($_REQUEST['type'])) {
     }
 }
 
+if($auth->checkToken($_COOKIE['token']) != 0)
+    $auth->updateToken($_COOKIE['token']);
 echo json_encode($resp);
 
 /**

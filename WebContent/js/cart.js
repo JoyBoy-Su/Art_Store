@@ -63,6 +63,8 @@ function getCartPage() {
             bindCheckAll();
             // 绑定结算按钮
             bindPayment();
+            // 绑定更新
+            bindUpdateClick();
         },
         error: function (err) {
             console.log(err);
@@ -174,6 +176,17 @@ function bindPayment() {
 }
 
 /**
+ * 绑定更新的点击事件
+ */
+function bindUpdateClick() {
+    let updateObjs = $("#update-cart-info");
+    updateObjs.click(function () {
+        let cartID = parseInt(updateObjs.attr("cartID"));
+        updateCart(cartID);
+    });
+}
+
+/**
  * 按cartID发请求删除购物车信息
  * @param cartID
  */
@@ -201,6 +214,37 @@ function deleteCart(cartID) {
                 updateAfterDelete(cartID);
             }
             else alert("删除失败" + resp.message);
+        },
+        error: function (err) {
+            console.log(err);
+        },
+    });
+}
+
+/**
+ * 绑定update，将版本号低的购物车修改
+ */
+function updateCart(cartID) {
+    $.ajax({
+        type: "POST",
+        url: "./php/cart.php",
+        data: {
+            type: "update",
+            cartID,
+        },
+        dataType: "json",
+        success : function (resp) {
+            if(!resp.success & resp.message === "login") {
+                // 跳转到login
+                beforeToLogin();
+                window.location.href = "login.php";
+                return;
+            }
+            // 判断响应做出提示
+            if(resp.success) {
+                // 更新页面
+                $("#cart-" + cartID).html(resp.page);
+            }
         },
         error: function (err) {
             console.log(err);

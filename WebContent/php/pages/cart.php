@@ -76,7 +76,7 @@ function getCartArtInfoPage($cartID, $artID, $img, $artName, $author, $descripti
                 <div style='margin-top: 5px'> {$description} </div>
             </div>
             <div class='tips'>"
-                .getTipsInfoPage($state).
+                .getTipsInfoPage($state, $cartID).
             "</div>
             <div class='price' id='cart-price-{$cartID}' price='{$price}'> ￥{$price} </div>
             <div class='operation'>
@@ -88,16 +88,53 @@ function getCartArtInfoPage($cartID, $artID, $img, $artName, $author, $descripti
 
 /**
  * @param $state
+ * @param $cartID
  * @return string
  * 获得购物车中提示的界面（已售出/信息待更新）
  */
-function getTipsInfoPage($state) {
+function getTipsInfoPage($state, $cartID) {
     $tips = "";
     if($state == SOLD) {
         $tips = "该艺术品已售出，请删除";
     } else if($state == MODIFIED) {
         $tips = "该艺术品信息存在变动<br>
-                <span class='update'>点击更新</span>";
+                <span class='update' id='update-cart-info' cartID='{$cartID}'>点击更新</span>";
     }
     return $tips;
+}
+
+/**
+ * @param $cartID
+ * @param $artID
+ * @param $img
+ * @param $artName
+ * @param $author
+ * @param $description
+ * @param $price
+ * @param $state
+ * @return string
+ * 获取一条购物车信息
+ */
+function getACartInfo($cartID, $artID, $img, $artName, $author, $description, $price, $state) {
+    $description = (strlen($description) >= 270) ?
+        (substr($description, 0, 270)."......") :
+        ($description == null ? "该艺术品暂无描述" : $description);
+    return "<div class='check'>
+                <input type='checkbox' class='cart-checkbox' id='checkbox-{$cartID}' cartID='{$cartID}'>
+            </div>
+            <div class='image'>
+                <img src='./static/img/works/large/{$img}.jpg'>
+            </div>
+            <div class='art-info'>
+                <h3> {$artName} • {$author}</h3>
+                <div style='margin-top: 5px'> {$description} </div>
+            </div>
+            <div class='tips'>"
+        .getTipsInfoPage($state, $cartID).
+        "</div>
+            <div class='price' id='cart-price-{$cartID}' price='{$price}'> ￥{$price} </div>
+            <div class='operation'>
+                <div class='delete-cart' cartID='{$cartID}'>从购物车中删除</div>
+                <div class='detail' artID='{$artID}'>查看详情</div>
+            </div>";
 }

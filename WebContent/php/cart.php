@@ -51,11 +51,21 @@ if(isset($_REQUEST['type'])) {
                 $resp["message"] = "login";
             } else $resp = paymentCart($_REQUEST['cartArr']);
             break;
+        case "update":
+            // 判断token
+            if($auth->checkToken($_COOKIE['token']) == 0) {
+                $resp["message"] = "login";
+            } else {
+                $resp["success"] = true;
+                $resp["page"] = updateCart($_REQUEST["cartID"]);
+            }
     }
 } else {
     $resp["detail"] = "<h1>加载出错</h1>";
 }
 
+if($auth->checkToken($_COOKIE['token']) != 0)
+    $auth->updateToken($_COOKIE['token']);
 echo json_encode($resp);
 
 /**
@@ -239,8 +249,28 @@ function generateOrders($set) {
     $sql = "insert into orders (PayUserID, ReceiveUserID, ArtID, Date, Price) value (?, ?, ?, ?, ?)";
     foreach ($set as $item) {
         // 生成订单
-        $date = date('Y-m-d H:i:s', time());
+        $date = date('Y-m-d H:i:s', time() + 6*60*60);
         // 如果存在出售者
         $util->update($sql, $item['UserID'], $item['AccessionUserID'], $item['ArtID'], $date, $item['Price']);
     }
+}
+
+/**
+ * @param $cartID
+ * @return string
+ * 更新购物车信息并返回新的界面
+ */
+function updateCart($cartID) {
+    // 1、根据cart查到完整的艺术品信息
+    global $util;
+    $sql = "select * from arts
+        join carts c on arts.ArtID = c.ArtID
+        where c.CartID = ?";
+    $art = $util->query($sql, $cartID)[0];
+    // 2、更新cart的版本号
+    $sql = "update carts set ArtVersion = ? where CartID = ?";
+    $util->update($sql, $art['VersionNumber'], $cartID);
+    // 3、生成新的界面返回
+    return getACartInfo($cartID, $art["ArtID"], $art["ImageFileName"], $art["Title"],
+        $art["Author"], $art["Description"], $art["Price"], $art["State"]);
 }

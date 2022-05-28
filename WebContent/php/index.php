@@ -37,6 +37,8 @@ if(isset($_COOKIE['token']) && $auth->checkToken($_COOKIE['token'])) {
     $auth->updateToken($_COOKIE['token']);
 }
 
+if($auth->checkToken($_COOKIE['token']) != 0)
+    $auth->updateToken($_COOKIE['token']);
 // 响应
 echo json_encode($resp);
 
