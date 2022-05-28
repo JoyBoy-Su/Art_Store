@@ -4,6 +4,7 @@
  */
 require_once ("./utils/DBUtil.php");
 require_once ("./pages/detail.php");
+require_once ("./pages/search.php");
 require_once ("./utils/Auth.php");
 require_once ("./Enum/AddCartState.php");
 
@@ -61,8 +62,18 @@ function getArtInfoPage($artID) {
         // 根据art信息，生成展示信息
         return getDetailPage($art);
     } else {
-        // 没有具体的艺术品，返回所有艺术品界面
-        return "<h1>all arts</h1>";
+        // 没有具体的艺术品，随机查找一个页面
+        $count = 1;
+        $sql = "select Title, Author, ImageFileName, arts.Year, Width, Height,
+        EraName, GenreName, AccessionDate, users.UserName,
+        Price, VisitTimes, State, arts.Description, VersionNumber
+        from arts
+        left join eras on arts.EraID = eras.EraID
+        left join genres on arts.GenreID = genres.GenreID
+        left join users on arts.AccessionUserID = users.UserID
+        where arts.ArtID >= (rand() * (select max(ArtID) from arts)) limit {$count}";
+        global $util;
+        return getDetailPage($util->query($sql)[0]);
     }
 }
 
