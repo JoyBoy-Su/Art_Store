@@ -84,6 +84,9 @@
             <p>
                 艺术品交易网站……
             </p>
+            <p>
+                Art Store ©2022JoyBoy Su
+            </p>
         </div>
         <div class="links">
             <dl>
