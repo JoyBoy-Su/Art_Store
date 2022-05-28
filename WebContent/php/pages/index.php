@@ -16,7 +16,7 @@ function getArtShowPage($type, $hots) {
     foreach ($hots as $hot) {
         // 把hot中的信息生成html
         $page = $page.getArtToShow(
-            $type, $hot['ArtID'], $hot['Title'], $hot['ArtistName'], $hot['Price'],
+            $type, $hot['ArtID'], $hot['Title'], $hot['Author'], $hot['Price'],
             $hot['VisitTimes'], $hot['ImageFileName'], $hot['AccessionDate']
         );
     }

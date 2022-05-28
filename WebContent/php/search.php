@@ -71,7 +71,7 @@ function searchArt($keyword, $attribute) {
 
     // 查找所有艺术品
     global $util;
-    $sql = "select ArtID, Title, ImageFileName, ArtistName, Price, Description, VisitTimes
+    $sql = "select ArtID, Title, ImageFileName, Author, Price, Description, VisitTimes
         from arts join artists on arts.ArtistID = artists.ArtistID";
     $set = $util->query($sql);
     // 查找到所有艺术品，进行搜索匹配

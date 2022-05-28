@@ -67,9 +67,9 @@ function getUserInfoPage($userName, $phone, $address, $email, $balance) {
 function getUploadPageBySet($set) {
     $page = "";
     foreach ($set as $art) {
-        $description = strlen($art['Description']) >= 30 ?
-            substr($art['Description'], 0, 30)."..." :
-            $art['Description'] == null ? "该艺术品暂无描述" : $art['Description'];
+        $description = (strlen($art['Description']) >= 30) ?
+            (substr($art['Description'], 0, 30)."......") :
+            ($art['Description'] == null ? "该艺术品暂无描述" : $art['Description']);
         $page = $page.getUploadArt(
             $art['ArtID'], $art['ImageFileName'], $art['Title'], $art['Author'],
             $description, $art['AccessionDate'], $art['Price']
@@ -122,9 +122,9 @@ function getUploadArt($artID, $img, $artName, $author, $description, $date, $pri
 function getOrderPageBySet($set) {
     $page = "";
     foreach ($set as $art) {
-        $description = strlen($art['Description']) >= 30 ?
-            substr($art['Description'], 0, 30)."..." :
-            $art['Description'] == null ? "该艺术品暂无描述" : $art['Description'];
+        $description = (strlen($art['Description']) >= 30) ?
+            (substr($art['Description'], 0, 30)."......") :
+            ($art['Description'] == null ? "该艺术品暂无描述" : $art['Description']);
         $page = $page.getOrderPage(
                 $art['ArtID'], $art['ImageFileName'], $art['Title'], $art['Author'],
                 $description, $art['OrderID'], $art['Date'], $art['Price']

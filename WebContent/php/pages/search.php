@@ -15,7 +15,7 @@ function getArtSearchPage($set) {
             substr($art['Description'], 0, 50)."..." :
             $art['Description'] == null ? "该艺术品暂无描述" : $art['Description'];
         $page = $page.getArtToShowSearch(
-            $art['ArtID'], $art['Title'], $art['ArtistName'], $art['Price'],
+            $art['ArtID'], $art['Title'], $art['Author'], $art['Price'],
             $art['VisitTimes'], $art['ImageFileName'], $description
         );
     }

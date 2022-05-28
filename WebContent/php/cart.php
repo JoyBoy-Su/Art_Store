@@ -60,9 +60,8 @@ function getCartPage($token) {
     $userName = $util->query($sql, $userID)[0]['UserName'];
     // 根据userID查找其购物车的artID，并查找对应的art信息
     $sql = "select CartID, c.UserID, c.ArtID, ImageFileName, Title,
-        Description, Price, State, ArtistName, VersionNumber, ArtVersion
+        Description, Price, State, Author, VersionNumber, ArtVersion
         from carts c left join arts a on c.ArtID = a.ArtID
-        left join artists a2 on a.ArtistID = a2.ArtistID
         where c.UserID = ?";
     $set = $util->query($sql, $userID);
     // 获得购物车头部信息页面
@@ -120,7 +119,6 @@ function paymentCart($cartArr) {
         a.Price, a.State, a.AccessionUserID, u2.Balance ReceiveUserBalance
         from carts c
         left join arts a on c.ArtID = a.ArtID
-        left join artists a2 on a.ArtistID = a2.ArtistID
         left join users u on c.UserID = u.UserID
         left join users u2 on a.AccessionUserID = u2.UserID
         where c.CartID in (".$placeholder.")";
@@ -221,11 +219,11 @@ function manageArtState($set) {
 function generateOrders($set) {
     // 为每件艺术品生成订单，包括交易双方id，交易时间与交易金额
     global $util;
-    $sql = "insert into orders (PayUserID, ReceiveUserID, Date, Price) value (?, ?, ?, ?)";
+    $sql = "insert into orders (PayUserID, ReceiveUserID, ArtID, Date, Price) value (?, ?, ?, ?, ?)";
     foreach ($set as $item) {
         // 生成订单
         $date = date('Y-m-d H:i:s', time());
         // 如果存在出售者
-        $util->update($sql, $item['UserID'], $item['AccessionUserID'], $date, $item['Price']);
+        $util->update($sql, $item['UserID'], $item['AccessionUserID'], $item['ArtID'], $date, $item['Price']);
     }
 }

@@ -45,10 +45,10 @@ echo json_encode($resp);
  * 根据id生成页面返回
  */
 function getArtInfoPage($artID) {
-    $sql = "select Title, ArtistName, ImageFileName, arts.Year, Width, Height,
+    $sql = "select Title, Author, ImageFileName, arts.Year, Width, Height,
         EraName, GenreName, AccessionDate, users.UserName,
         Price, VisitTimes, State, arts.Description, VersionNumber
-        from arts join artists on arts.ArtistID = artists.ArtistID
+        from arts
         left join eras on arts.EraID = eras.EraID
         left join genres on arts.GenreID = genres.GenreID
         left join users on arts.AccessionUserID = users.UserID

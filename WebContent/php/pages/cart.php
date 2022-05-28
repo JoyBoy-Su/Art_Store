@@ -14,7 +14,7 @@ const MODIFIED = 2;
 function getCartArtPageBySet($set) {
     $page = "";
     foreach ($set as $art) {
-        $description = strlen($art['Description']) >= 270 ?
+        $description = (strlen($art['Description']) >= 270) ?
             (substr($art['Description'], 0, 270)."......") :
             ($art['Description'] == null ? "该艺术品暂无描述" : $art['Description']);
         // 判断state是已售出还是信息有变动还是无误，优先级从左至右降低
@@ -22,7 +22,7 @@ function getCartArtPageBySet($set) {
             (($art['VersionNumber'] > $art['ArtVersion']) ? MODIFIED : NORMAL);
         $page = $page.getCartArtInfoPage(
             $art['CartID'], $art['ArtID'],
-            $art['ImageFileName'], $art['Title'], $art['ArtistName'],
+            $art['ImageFileName'], $art['Title'], $art['Author'],
             $description, $art['Price'], $state
         );
     }

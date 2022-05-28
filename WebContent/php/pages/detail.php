@@ -22,7 +22,7 @@ function getDetailPage($art) {
  * 处理艺术品信息生成basic界面
  */
 function getBasicInfoPage($art) {
-    return getBasicInfo($art['Title'], $art['ArtistName'], $art['ImageFileName']);
+    return getBasicInfo($art['Title'], $art['Author'], $art['ImageFileName']);
 }
 
 /**
