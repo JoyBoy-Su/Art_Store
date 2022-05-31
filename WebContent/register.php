@@ -57,7 +57,7 @@
                 <td><span id="password-message"></span></td>
             </tr>
             <tr>
-                <td><label for="confirm">确定密码:</label></td>
+                <td><label for="confirm" id="confirm-label">确定密码:</label></td>
                 <td><input type="password" id="confirm" placeholder="请确定密码"></td>
                 <td><span id="confirm-message"></span></td>
             </tr>

@@ -48,6 +48,22 @@ function passwordClick() {
 }
 
 /**
+ * 为password-label绑定单击事件，显示隐藏密码
+ */
+function confirmClick() {
+    let labelObj = document.getElementById("confirm-label");
+    labelObj.onclick = function () {
+        // 判断当前密码的状态
+        let confirmObj = document.getElementById("confirm");
+        if(confirmObj.getAttribute("type") === "password") {
+            confirmObj.setAttribute("type", "text");
+        } else {
+            confirmObj.setAttribute("type", "password");
+        }
+    }
+}
+
+/**
  * 发请求获取右侧导航栏
  */
 function getNav() {

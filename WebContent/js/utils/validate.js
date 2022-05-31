@@ -99,3 +99,8 @@ function validPositiveNumber(cont) {
     if(isNaN(par)) return false;
     return par > 0;
 }
+
+function validInteger(cont) {
+    let reg =  /^\+?[1-9][0-9]*$/;
+    return reg.test(cont);
+}

@@ -14,6 +14,7 @@ window.onload = function () {
     passwordInput();
     passwordClick();
     confirmInput();
+    confirmClick();
     phoneInput();
     emailInput();
     addressInput();

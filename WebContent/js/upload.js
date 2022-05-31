@@ -218,7 +218,7 @@ function validForm() {
 
     // 校验年份是否为整数，
     let year = $("#art-year").val();
-    if(isNaN(parseInt(year))) {
+    if(!validInteger(year)) {
         $("#year-message").html("年份应为整数");
         valid = false;
     } else $("#year-message").html("");
