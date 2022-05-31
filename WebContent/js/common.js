@@ -17,6 +17,20 @@ newScript3.setAttribute("type","text/javascript");
 newScript3.setAttribute("src","js/utils/cookie.js");
 document.head.appendChild(newScript3);
 
+// 修改每个input的message
+function changeMessage(message ,messageId, valid) {
+    let messageObj = document.getElementById(messageId);
+    if(valid) {
+        // 如果合法，输出绿色合法
+        messageObj.innerHTML = "合法";
+        messageObj.style.cssText = "color : green; font-weight : 200";
+    } else {
+        // 如果不合法，输出红色不合法
+        messageObj.innerHTML = message + "不合法";
+        messageObj.style.cssText = "color : red; font-weight : 200";
+    }
+}
+
 /**
  * 为password-label绑定单击事件，显示隐藏密码
  */
