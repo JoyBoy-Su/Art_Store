@@ -213,22 +213,59 @@ package "数据库操作层" {
 ' 实体类
 package "实体类" {
     class Art {
-        +getter()
-        +setter()
+        -ArtID
+        -ImageFileName
+        -Title
+        -AccessionDate
+        -AccessionUserID
+        -Description
+        -Year
+        -Width
+        -Height
+        -Price
+        -State
+        -VersionNumber
+        -VisitTimes
+        -EraID
+        -GenreID
+        -Author
+        +getters()
+        +setters()
     }
     class User {
+        -UserID
+        -UserName
+        -Address
+        -Phone
+        -Email
+        -Password
+        -Salt
+        -Balance
         +getter()
         +setter()
     }
     class UserLogon {
+        -UserID
+        -Token
+        -ExpirationTime
         +getter()
         +setter()
     }
     class Cart {
+        -CartID
+        -UserID
+        -ArtID
+        -ArtVersion
         +getter()
         +setter()
     }
     class Order {
+        -OrderID
+        -PayUserID
+        -ReceiveUserID
+        -Date
+        -Price
+        -ArtID
         +getter()
         +setter()
     }

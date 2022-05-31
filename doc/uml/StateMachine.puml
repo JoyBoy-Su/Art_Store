@@ -1,0 +1,185 @@
+@startuml
+'https://plantuml.com/state-diagram
+
+left to right direction
+
+[*] --> IDLE
+IDLE : 无请求空转状态
+IDLE --> IDLE
+
+ValidToken : 校验token权限
+
+' 购物车的状态逻辑
+IDLE --> Cart
+Cart : 购物车状态机逻辑
+Cart --> IDLE
+
+state Cart {
+    [*] --> ValidToken
+    ValidToken --> CartParse : valid
+    CartParse: 判断购物车请求类型
+    CartParse --> DeleteCart : Req
+    DeleteCart : 删除购物车中的内容
+    state DeleteCart {
+        [*] --> Exist
+        Exist : 判断艺术品是否存在
+        Exist --> Delete : isExist
+        Delete : 删除该艺术品
+    }
+    CartParse --> PayCart : Req
+    PayCart : 结算选中的艺术品
+    state PayCart {
+        [*] --> Info
+        Info : 查询要结算的艺术品信息
+        Info --> ValidPayment
+        ValidPayment : 校验支付是否合法（是否存在已售出的艺术品）
+        ValidPayment --> ValidBalance : valid
+        ValidBalance : 校验余额是否充足
+        ValidBalance --> ManageBalance : valid
+        ManageBalance : 处理双方余额
+        ManageBalance --> ManageArt
+        ManageArt : 处理艺术品的状态
+        ManageArt --> GenerateOrder
+        GenerateOrder : 生成艺术品订单
+    }
+    CartParse --> UpdateCart : Req
+    UpdateCart : 结算选中的艺术品
+    state UpdateCart {
+        [*] --> ArtInfo
+        ArtInfo : 拉取最新的艺术品信息
+        ArtInfo --> Update
+        Update : 更新信息
+    }
+}
+
+' 艺术品详情状态逻辑
+IDLE --> Detail
+Detail : 详情状态机逻辑
+Detail --> IDLE
+
+state Detail {
+    [*] --> DetailParse
+    DetailParse : 判断请求类型
+    DetailParse --> VisitArt
+    VisitArt : 访问艺术品详情
+    state VisitArt {
+        [*] --> GetArtDetail
+        GetArtDetail : 获得艺术品详情信息
+        GetArtDetail --> IncreaseVisit
+        IncreaseVisit : 为该艺术品增加访问次数
+    }
+    DetailParse --> AddToCart
+    AddToCart : 将艺术品加入购物车
+    state AddToCart {
+        [*] --> ValidToken
+        ValidToken --> ValidAddCart : valid
+        ValidCart : 校验是否能够加入购物车（即是否已售出）
+        ValidCart --> AddArt : valid
+        AddArt : 将艺术品加入购物车
+    }
+}
+
+' 登录状态逻辑
+IDLE --> Login
+Login : 登录状态机逻辑
+Login --> IDLE
+
+state Login {
+    [*] --> ValidLoginInfo
+    ValidLoginInfo : 前端校验登录信息
+    ValidLoginInfo --> VisitPassword : valid
+    VisitPassword : 后端校验密码
+    VisitPassword --> Token : valid
+    Token : 登录成功派发并存储token
+}
+
+' 注册状态机逻辑
+IDLE --> Register
+Register : 注册状态机逻辑
+Register --> IDLE
+
+state Register {
+    [*] --> ValidRegisterInfo
+    ValidRegisterInfo : 前端校验登录信息
+    ValidRegisterInfo --> VisitExist : valid
+    VisitExist : 后端校验注册信息是否重复
+    VisitExist --> RegisterUser : valid
+    RegisterUser : 注册成功，设置用户信息
+}
+
+' 搜索状态机逻辑
+IDLE --> Search
+Search : 搜索状态机逻辑
+Search --> IDLE
+
+state Search {
+    [*] --> GetAllArts
+    GetAllArts : 查询所有艺术品
+    GetAllArts --> MatchArt
+    MatchArt : 对艺术品按搜索条件进行模糊匹配
+    MatchArt --> SortLimitArt
+    SortLimitArt : 对艺术品排序分页
+}
+
+' 上传/修改状态机逻辑
+IDLE --> Upload
+Upload : 上传状态机逻辑
+Upload --> IDLE
+
+state Upload {
+    [*] --> ValidToken
+    ValidToken --> UploadParse : valid
+    UploadParse : 判断请求类型
+
+    UploadParse --> UploadArt
+    UploadArt : 上传新的艺术品
+    BasicUploadInfo : 获得上传的基本信息（包括上传用户、上传时间）
+    SaveImage : 保存上传的文件
+    state UploadArt {
+        [*] --> BasicUploadInfo
+        BasicUploadInfo --> SaveImage
+        SaveImage --> AddArtToDataBase : success
+        AddArtToDataBase : 将艺术品信息添加到数据库
+    }
+
+    UploadParse --> ModifyArt
+    ModifyArt : 修改已有的艺术品
+    state ModifyArt {
+        [*] --> BasicUploadInfo
+        BasicUploadInfo --> ValidAuth
+        ValidAuth : 判断是否具有修改权限
+        ValidAuth --> isUpdate
+        ValidAuth : 判断是否需要修改
+        isUpdate --> SaveImage : update
+        SaveImage --> UpdateArtToDataBase : success
+        UpdateArtToDataBase : 更新数据库的艺术品信息
+    }
+}
+
+' 个人中心状态机逻辑
+IDLE --> Profile
+Profile : 个人中心状态机逻辑
+Profile --> IDLE
+
+state Profile {
+    [*] --> ValidToken
+    ValidToken --> ProfileParse : valid
+    ProfileParse : 判断请求类型
+
+    ProfileParse --> PersonalInfo
+    PersonalInfo : 获得个人信息
+
+    ProfileParse --> UploadInfo
+    UploadInfo --> 获得已发布的艺术品信息
+
+    ProfileParse --> BuyInfo
+    BuyInfo --> 获得已买入的艺术品信息
+
+    ProfileParse --> SellInfo
+    SellInfo --> 获得已卖出的艺术品信息
+
+    ProfileParse --> Charge
+    Charge --> 充值余额
+}
+
+@enduml
