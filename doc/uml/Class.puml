@@ -1,0 +1,250 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+"控制层" <.. "业务层"
+"业务层" <.. "数据库操作层"
+"数据库操作层" <.. "实体类"
+
+' 用户权限校验
+class Auth {
+    -userLogonDao
+    -userDao
+    +setToken()
+    +checkToken()
+    +deleteToken()
+    +updateToken()
+}
+
+' 控制层
+package "控制层" {
+    interface Controller {
+        -auth
+        +validAuth()
+        +getPage()
+    }
+    Auth <.. Controller
+    class CartController implements Controller{
+        -cartService
+        +deleteCart()
+        +paymentCart()
+        +updateCart()
+    }
+    class CommonController implements Controller {
+        +getUserInfo()
+        +logout()
+    }
+    class DetailController implements Controller {
+        -detailService
+        +addArtToCart
+    }
+    class IndexController implements Controller {
+        -indexService
+    }
+    class LoginController implements Controller {
+        -loginService
+        +login()
+    }
+    class ProfileController implements Controller {
+        -profileService
+        +chargeMoney()
+        +modifyInfo()
+        +deleteArt()
+    }
+    class RegisterController implements Controller {
+        -registerService
+        +register()
+    }
+    class SearchController implements Controller {
+        -searchService
+        +search()
+    }
+    SearchController <.. ArtMatch
+    SearchController <.. ArtSort
+    class UploadController implements Controller {
+        -uploadService
+        +add()
+        +update()
+    }
+}
+
+' 业务层
+package "业务层" {
+    interface IndexService {
+        +getHotArtPage()
+        +getNewArtPage()
+        +getRandomArtPage()
+    }
+    interface DetailService {
+        +getDetailPage()
+        +addToCart()
+    }
+    interface SearchService {
+        +getSearchPage()
+    }
+    interface CartService {
+        +getCartPage()
+        +deleteCart()
+        +paymentCart()
+        +updateCart()
+    }
+    interface LoginService {
+        +login()
+    }
+    interface RegisterService {
+        +register()
+    }
+    interface UploadService {
+        +getUploadPage()
+        +addArt()
+        +updateArt()
+    }
+    interface ProfileService {
+        +getPersonalPage()
+        +getUploadPage()
+        +getBuyPage()
+        +getSellPage()
+        +charge()
+        +modify()
+        +deleteArt()
+    }
+    class IndexServiceImpl implements IndexService {
+        -artDao
+        #getHotArtInfo()
+        #getNewArtInfo()
+        #getRandomArtInfo()
+    }
+'    ArtDao <.. IndexServiceImpl
+    class DetailServiceImpl implements DetailService {
+        -artDao
+        -cartDao
+        #getRandomArtID()
+        #increaseVisit()
+        #getArtInfo()
+        #validCart()
+    }
+'    ArtDao <.. DetailServiceImpl
+'    CartDao <.. DetailServiceImpl
+    class SearchServiceImpl implements SearchService {
+        -artDao
+        #searchArt()
+        #sortLimitArt()
+    }
+'    ArtDao <.. SearchServiceImpl
+    class CartServiceImpl implements CartService {
+        -cartDao
+        -artDao
+        #getCartArts()
+        #validPayment()
+        #validBalance()
+        #manageBalance()
+        #manageArtState()
+        #generateOrders()
+    }
+'    ArtDao <.. CartServiceImpl
+'    CartDao <.. CartServiceImpl
+    class LoginServiceImpl implements LoginService {
+        -userDao
+        #validUserInfo()
+        #validPassword()
+    }
+'    UserDao <.. LoginServiceImpl
+    class RegisterServiceImpl implements RegisterService {
+        -userDao
+        #validRegisterInfo()
+        #encrypt()
+    }
+'    UserDao <.. RegisterServiceImpl
+    class UploadServiceImpl implements UploadService {
+        -artDao
+        -userDao
+        #isUpdate()
+        #validUploadAuth()
+        #saveImageFile()
+        #addArtToDataBase()
+        #updateArtToDataBase()
+    }
+'    ArtDao <.. UploadServiceImpl
+'    UserDao <.. UploadServiceImpl
+    class ProfileServiceImpl implements ProfileService {
+        -userDao
+        -artDao
+        -orderDao
+    }
+'    UserDao <.. ProfileServiceImpl
+'    ArtDao <.. ProfileServiceImpl
+'    OrderDao <.. ProfileServiceImpl
+}
+
+' 数据库操作
+package "数据库操作层" {
+    class DBUtil {
+          -connection
+          +update()
+          +query()
+    }
+    ' 封装DBUtil的Dao
+    interface Dao{
+        +query()
+        +queryById()
+        +insert()
+        +update()
+        +updateById()
+        +deleteById()
+    }
+    DBUtil <.. Dao
+    ' 各类dao
+    class ArtDao implements Dao {
+        ...
+    }
+    class UserDao implements Dao {
+        ...
+    }
+    class UserLogonDao implements Dao {
+        ...
+    }
+    class CartDao implements Dao {
+        ...
+    }
+    class OrderDao implements Dao {
+        ...
+    }
+}
+
+' 实体类
+package "实体类" {
+    class Art {
+        +getter()
+        +setter()
+    }
+    class User {
+        +getter()
+        +setter()
+    }
+    class UserLogon {
+        +getter()
+        +setter()
+    }
+    class Cart {
+        +getter()
+        +setter()
+    }
+    class Order {
+        +getter()
+        +setter()
+    }
+}
+
+class ArtMatch {
+    +getSimulation()
+    #getLevenshteinDistance()
+}
+class ArtSort {
+    +sort()
+    #sortID()
+    #sortHot()
+    #sortDate()
+    #sortTitle()
+    #sortDegree()
+}
+
+@enduml
