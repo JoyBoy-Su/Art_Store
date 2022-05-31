@@ -1,0 +1,60 @@
+@startuml
+' https://plantuml.com/use-case-diagram
+' 两种用户：普通用户和会员 user and member，二者是继承关系
+' 三种大的用例：查看艺术品、维护艺术品、购买艺术品
+' 其中查看艺术品包括
+
+left to right direction
+
+' 定义用户种类
+actor "用户" as user
+actor "会员" as member
+
+'' 用户的继承关系
+user <|-- member
+
+' 三种用例
+package 艺术品交易网站 {
+    usecase "查看艺术品" as view
+    usecase "维护艺术品" as preserve
+    usecase "交易艺术品" as trade
+    usecase "个人信息维护" as profile
+
+    ' 查看art包括查看艺术品列表（热门、最新、搜索）
+    ' 和查看单独某一艺术品，二者都包括在view中
+    (view) <|-- (查看艺术品列表)
+    (view) <|-- (查看艺术品详情)
+
+    (查看艺术品列表) <|-- (查看热门艺术品)
+    (查看艺术品列表) <|-- (查看最新发布艺术品)
+    (查看艺术品列表) <|-- (查看搜索的艺术品)
+
+    ' 维护艺术品包括发布和修改艺术品，二者都包括在preserve中
+    (preserve) <|-- (发布新的艺术品)
+    (preserve) <|-- (修改已发布艺术品)
+
+    ' 交易艺术品包括卖出和买入，二者都包括在trade中
+    (trade) <|-- (买入艺术品)
+    (trade) <|-- (卖出艺术品)
+
+    ' 个人信息维护包括修改个人基本信息，修改密码和充值
+    (profile) <|-- (修改基本信息)
+    (profile) <|-- (修改密码)
+    (profile) <|-- (充值余额)
+}
+' 普通用户可以查看艺术品
+user --> view
+'' 会员用户可以维护和交易艺术品
+member --> preserve
+member --> trade
+member --> profile
+
+note left of user
+    所有网站用户
+end note
+
+note left of member
+    已登录用户
+end note
+
+@enduml
